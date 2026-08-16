@@ -3,191 +3,174 @@ snapshot:
   date: 2026-08-16
   scope: software-development
   mode: passive-only
+  language: zh-CN
   note: >-
-    This sample intentionally uses public GitHub evidence only. It does not use
-    private conversation history or calibration answers.
+    这份样本只使用公开 GitHub 证据，不使用私有聊天记录、额外自述或校准答案。
+    它用于测试：在完全不询问用户的情况下，系统最多能安全地认识到什么程度。
 
 nodes:
-  - id: open-source-collaboration
-    label: Open-source Collaboration
+  - id: open-source-participation
+    label: 开源参与 / Open-source Participation
     state: established
     confidence: high
+    summary: >-
+      存在持续、真实的外部开源贡献活动，并有多次合并和维护者反馈记录。
     signals:
       exposure: high
-      capability: meaningful-participation-supported
-    evidence:
-      - E1
-      - E2
+      capability: participation-supported
+    evidence: [E1, E2]
     limits:
-      - Does not imply independent mastery of all technologies touched by contributions.
+      - 只能较强地证明持续参与，不能据此判断具体技术工作是否由本人独立完成。
+      - 不能自动推出对相关底层技术的掌握程度。
 
-  - id: git-pr-workflow
-    label: Git / Pull Request Workflow
+  - id: github-pr-workflow
+    label: GitHub / PR 工作流
     state: established
     confidence: high
+    summary: >-
+      GitHub、Pull Request、CI、Review、修改与合并等流程反复出现在公开活动中。
     signals:
       exposure: high
-      capability: repeated-workflow-participation-supported
-    evidence:
-      - E1
-      - E2
-      - E3
+      capability: workflow-participation-supported
+    evidence: [E1, E2, E3]
     limits:
-      - Does not yet measure depth of Git internals or independent conflict-resolution skill.
+      - 能确认流程暴露和参与，但独立操作、复杂 Git 使用和流程理解深度尚未确认。
 
   - id: testing-validation
-    label: Testing & Validation
-    state: developing
+    label: 测试与验证 / Testing & Validation
+    state: observed
     confidence: medium
+    summary: >-
+      测试、回归、CI 和真实环境验证反复出现在项目与 PR 中，因此它们明确属于当前工程经历的一部分。
     signals:
       exposure: high
-      capability: partial
-    evidence:
-      - E3
-      - E4
+      capability: unresolved
+    evidence: [E3, E4]
     limits:
-      - Public traces show repeated testing/regression activity, but independent test-design depth is unresolved.
+      - 公开资料无法确认测试方案是否由本人设计。
+      - 无法确认本人是否能独立判断测试覆盖和结果正确性。
 
   - id: product-iteration
-    label: Product Iteration
+    label: 产品迭代 / Product Iteration
     state: developing
     confidence: medium
+    summary: >-
+      存在持续维护的真实个人产品，包含功能演进、限制、测试、隐私和发布等长期迭代痕迹。
     signals:
       exposure: high
       capability: partial
-    evidence:
-      - E4
+    evidence: [E4]
     limits:
-      - The product is strongly associated with the subject, but implementation attribution is unresolved.
+      - 能确认长期参与产品推进，但具体实现、设计和判断分别由谁完成仍未解析。
 
   - id: web-network-fundamentals
-    label: Web / Network Fundamentals
+    label: Web / 网络基础
     state: developing
     confidence: medium
+    summary: >-
+      学习仓库中存在较系统的 Web、HTTP、网络与安全基础学习记录，并明确保留错误纠正和待复习项。
     signals:
       exposure: medium
       capability: structured-learning-evidence
-    evidence:
-      - E5
+    evidence: [E5]
     limits:
-      - Based primarily on structured learning records rather than fresh independent assessment.
+      - 主要来自结构化学习记录，不等同于本次独立测评。
+      - 长期记忆和迁移能力仍未确认。
 
   - id: browser-rendering
-    label: Browser Rendering
+    label: 浏览器渲染 / Browser Rendering
     state: developing
     confidence: medium
+    summary: >-
+      存在 DOM、CSSOM、Layout、Paint、Composite、script/defer/async 等主干学习与纠错记录。
     signals:
       exposure: medium
       capability: structured-learning-evidence
-    evidence:
-      - E5
+    evidence: [E5]
     limits:
-      - Retention and transfer to new problems remain unverified.
+      - 术语稳定性和脱离提示后的长期解释能力仍需要后续证据。
 
-  - id: javascript
-    label: JavaScript
+  - id: javascript-dom
+    label: JavaScript / DOM
     state: developing
-    confidence: medium
+    confidence: high
+    summary: >-
+      学习记录明确把 JavaScript 基础与 DOM 标记为当前正在学习，而不是已经掌握。
     signals:
       exposure: medium
       capability: early-learning
-    evidence:
-      - E4
-      - E6
+    evidence: [E6]
     limits:
-      - Project exposure is stronger than independently verified language capability.
-
-  - id: dom
-    label: DOM
-    state: developing
-    confidence: medium
-    signals:
-      exposure: medium
-      capability: early-learning
-    evidence:
-      - E6
-    limits:
-      - Explicitly recorded as currently learning.
+      - 当前不能表示为成熟能力。
 
   - id: rust
     label: Rust
     state: observed
     confidence: low
+    summary: >-
+      Rust 明确存在于个人项目技术栈和外部贡献环境中，但独立开发能力无法从公开资料确认。
     signals:
       exposure: high
       capability: unresolved
-    evidence:
-      - E4
+    evidence: [E4]
     limits:
-      - Repository stack proves exposure, not independent implementation capability.
+      - 项目使用 Rust 不等于本人能独立使用 Rust 实现或调试。
 
   - id: typescript
     label: TypeScript
     state: observed
     confidence: low
+    summary: >-
+      TypeScript 高频出现在项目环境中，但公开证据不足以确认独立实现深度。
     signals:
       exposure: high
       capability: unresolved
-    evidence:
-      - E4
-    limits:
-      - Repository stack proves exposure, not independent implementation capability.
+    evidence: [E4]
 
   - id: tauri
     label: Tauri
     state: observed
     confidence: low
+    summary: >-
+      Tauri 是持续维护项目的重要技术环境，但当前只能确认真实接触和项目关联。
     signals:
       exposure: high
       capability: unresolved
-    evidence:
-      - E4
-    limits:
-      - Real project use is visible; independent framework knowledge is not established.
+    evidence: [E4]
 
   - id: concurrency
-    label: Concurrency
+    label: 并发 / Concurrency
     state: observed
     confidence: low
+    summary: >-
+      外部贡献中出现过 CAS、并发读取和多进程测试等问题，但不能据此判断本人掌握这些概念。
     signals:
       exposure: medium
       capability: unresolved
-    evidence:
-      - E2
-    limits:
-      - A sophisticated accepted contribution involved concurrency, but passive evidence cannot determine independent reasoning depth.
+    evidence: [E2]
 
   - id: sqlite
     label: SQLite
     state: observed
     confidence: low
+    summary: >-
+      SQLite / WAL 等内容曾出现在真实贡献场景中，但个人理解和独立实践深度未知。
     signals:
       exposure: medium
       capability: unresolved
-    evidence:
-      - E2
-    limits:
-      - Exposure through a real contribution is visible; database depth is unverified.
+    evidence: [E2]
 
 unresolved:
-  - id: independent-implementation-depth
-    reason: Public artifacts do not reveal how independently code was produced.
+  - id: ai-assisted-development
+    label: AI 辅助开发 / AI-assisted Development
+    reason: >-
+      公开 GitHub 痕迹不足以判断 AI 在项目中的真实参与程度，因此 Passive-only 模型不应自行把它设为核心能力。
 
-  - id: ai-assistance-level
-    reason: Public GitHub evidence alone does not reliably reveal AI contribution to implementation.
+  - id: independent-implementation
+    label: 独立实现能力 / Independent Implementation
+    reason: >-
+      仅凭仓库、PR 作者和合并结果，无法可靠判断具体代码和方案由谁完成。
 
-  - id: durable-retention
-    reason: Learning records do not independently verify later recall or transfer.
-
-  - id: framework-depth
-    reason: Technologies in repositories should not be promoted to capability without stronger evidence.
-
-candidate_calibration_targets:
-  - target: testing-validation
-    why: Clarifying the subject's role in designing tests could materially change a central engineering node.
-
-  - target: rust-typescript-tauri
-    why: A single low-cost attribution question could resolve several high-exposure but low-confidence nodes.
-
-  - target: web-network-fundamentals
-    why: A few fresh explanation questions could distinguish retained understanding from stale learning records.
+model_note: >-
+  这不是技能评分表。Established / Developing / Observed 描述的是现有证据支持到什么程度，
+  不表示传统意义上的熟练度等级。
