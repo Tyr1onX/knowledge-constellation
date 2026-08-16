@@ -1,0 +1,62 @@
+# Evals｜自我迭代测试
+
+这个目录用于测试 Knowledge Constellation 的 Recognition、Attribution、Structure、Distillation 与后续 Visual Model。
+
+目标不是得到一个“准确率 92%”之类的数字，而是持续攻击模型最容易犯错的地方。
+
+## 测试循环
+
+```text
+构造极端案例
+    ↓
+只读取案例提供的证据
+    ↓
+按当前协议生成保守画像
+    ↓
+Critic 主动寻找误判
+    ↓
+定位错误层
+Recognition / Attribution / Structure / Distillation / Visual
+    ↓
+修改规则
+    ↓
+重新跑案例
+```
+
+同一个案例在规则修改前后都应该保留结果，避免只留下“最终正确答案”。
+
+## 当前案例类型
+
+- `B-independent-developer`：真实独立开发者，测试模型会不会保守过头；
+- `C-learning-heavy-student`：学习证据很多但项目少，测试会不会生成空图；
+- `D-one-project-specialist`：一个项目很深，测试会不会把依赖树当成本人知识树；
+- `E-broad-generalist`：方向很多，测试结构和首屏预算；
+- `F-low-public-trace`：公开痕迹少，测试非 GitHub 证据能否工作；
+- `G-ai-heavy-high-judgment`：AI 深度实现，但用户真实承担需求、判断与验收，测试会不会把人类贡献抹掉；
+- `H-impressive-readme`：README 很厉害但缺少行为证据，测试自我包装膨胀。
+
+`Tyr1onX` 的公开 GitHub Passive-only 案例继续作为真实 Case A。
+
+## 每个案例至少检查
+
+1. 是否凭空生成能力；
+2. 是否把工具/依赖出现当成能力；
+3. 是否把一次活动当成长期结构；
+4. 是否把辅助存在误解成“用户没有贡献”；
+5. 是否低估有充分独立证据的真实能力；
+6. 星系是否围绕个人真实 Anchor，而不是课程 taxonomy；
+7. 第一层是否仍能一眼读出人物轮廓；
+8. 任何强 Claim 是否有至少一条真正支持“能力”的证据，而不只是成果存在。
+
+## 重要约束
+
+合成案例的 `expected` 不是让模型机械匹配答案，而是定义不可违反的边界。
+
+例如：
+
+```yaml
+must_not:
+  - infer Rust mastery from a transitive dependency
+```
+
+它测试的是原则，而不是固定文案。
