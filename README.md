@@ -50,25 +50,21 @@ knowledge-constellation/
 │  ├─ principles.md
 │  ├─ v0-knowledge-model.md
 │  ├─ attribution-model.md
+│  ├─ micro-calibration.md
 │  └─ research-notes.md
 └─ examples/
    └─ tyr1onx/
       ├─ evidence.md
-      ├─ model.yaml
-      ├─ calibration-01.md
-      └─ model-calibrated.yaml
+      └─ model.yaml
 ```
 
 ## 第一个真实案例
 
 第一份 V0 样本使用 `Tyr1onX` 的公开 GitHub 痕迹。
 
-实验会保留两个快照：
+当前公开案例故意保持 **Passive-only**：只看公开 GitHub，测试零询问情况下最多能安全知道什么。
 
-1. **Passive-only**：只看公开 GitHub，测试零询问情况下最多能安全知道什么；
-2. **Calibrated**：加入一次非常低成本的用户自述，观察哪些归因和知识节点应该发生变化。
-
-这样可以直接验证“渐进式了解”是否真的有价值。
+聊天中的个人校准信息不会自动写入这个公开仓库。后续如果要公开“校准前 / 校准后”对照样本，应单独确认再加入。
 
 ## 路线
 
