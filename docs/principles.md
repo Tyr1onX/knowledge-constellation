@@ -1,92 +1,163 @@
-# Product Principles
+# 产品原则｜Product Principles
 
-Knowledge Constellation is not a skill-score dashboard and not a standardized knowledge checklist.
+Knowledge Constellation 不是技能打分面板，也不是标准知识清单。
 
-It is an evidence-driven attempt to answer a narrower question:
+它只尝试回答一个更窄的问题：
 
-> Given the traces currently available, what are we justified in believing about this person's knowledge and practice?
+> **根据目前能够观察到的痕迹，我们有理由相信这个人的知识、实践和学习状态是什么样？**
 
-## 1. Evidence before inference
+## 1. 证据先于推断｜Evidence before inference
 
-Observed artifacts, activity, learning records, reviews, and external validation come before conclusions.
+先观察项目、活动、学习记录、Review、第三方接受结果等证据，再形成判断。
 
-Inference may suggest where to look next, but an inference must not silently become a fact.
+推断可以用来寻找下一步值得确认的方向，但推断不能悄悄升级成事实。
 
-## 2. Artifact does not equal mastery
+## 2. 成果不等于掌握｜Artifact ≠ mastery
 
-A repository using Rust does not prove that its owner can independently develop in Rust.
+仓库使用 Rust，不代表仓库所有者能够独立使用 Rust 开发。
 
-A merged pull request proves that a contribution existed and was accepted. It does not automatically prove independent mastery of every underlying concept.
+PR 被合并，可以证明某个贡献真实存在并被接受，但不能自动证明提交者独立掌握其中所有底层概念。
 
-The system must preserve this distinction.
+## 3. 参与不等于执行｜Participation ≠ execution
 
-## 3. Unknown is a first-class state
+一个人可以真实参与某项活动，但其中的分析、设计、实现、测试、解释可能主要由 AI、协作者或其他工具完成。
 
-Missing information is not an error to be filled with optimistic guesses.
+因此：
 
-The model may know that a technology is part of someone's experience while still leaving depth, independence, or understanding unresolved.
+```text
+参与过开源贡献
+≠ 独立完成开源贡献
 
-## 4. Passive evidence first
+参与过测试流程
+≠ 独立设计测试
 
-The default experience should require as little work from the user as possible.
+拥有项目
+≠ 独立实现项目
+```
 
-Start from existing traces such as:
+系统应该尽量描述**人在活动中承担了什么角色**，而不是只判断“这个成果是不是他的”。
 
-- GitHub profiles, repositories, issues, pull requests, reviews, and commits;
-- resumes and portfolios;
-- learning notes and project documentation;
-- other user-provided artifacts.
+## 4. 未知是一等状态｜Unknown is a first-class state
 
-A useful first result should be possible without an interview.
+信息缺失不是需要被乐观猜测填满的错误。
 
-## 5. Conservative but complete
+系统可以知道某项技术确实属于一个人的经历，同时仍然不知道他的理解深度、独立程度或迁移能力。
 
-"Conservative" does not mean "empty".
+## 5. 被动证据优先｜Passive evidence first
 
-The first result should still form a coherent picture, but each visible claim must stay within the boundary of its evidence.
+默认体验应该尽量减少用户工作量。
 
-When capability is uncertain, represent exposure or participation rather than inventing mastery.
+优先从已经存在的资料开始：
 
-## 6. Attribution matters
+- GitHub Profile、Repository、Issue、PR、Review、Commit；
+- 简历与作品集；
+- 学习笔记和项目文档；
+- 用户主动提供的其他已有资料。
 
-Modern artifacts may be produced by a mixture of the user, AI tools, collaborators, templates, and automation.
+在不做访谈的情况下，也应该先得到一份有意义的第一版结果。
 
-Where authorship or contribution depth cannot be determined, mark attribution as uncertain instead of assigning the full artifact to the user.
+## 6. 保守，但不能空｜Conservative but complete
 
-Attribution is part of the knowledge model, not an afterthought.
+“保守”不等于“什么都不说”。
 
-## 7. Assessment and experience have different goals
+第一版仍然应该形成一个连贯的画像，只是每个判断必须停在证据边界内。
 
-The assessment layer optimizes for calibration, honesty, and explainability.
+当能力无法确认时，可以表达：
 
-The experience layer optimizes for low friction, clarity, beauty, curiosity, and the feeling that the result belongs to the user.
+- 接触过（Exposure）；
+- 参与过（Participation）；
+- 正在学习（Developing）；
+- 深度未解析（Unresolved）。
 
-User satisfaction must come from the usefulness and experience of the product, not inflated assessments.
+而不是发明一个熟练度。
 
-## 8. Progressive resolution
+## 7. 归因是核心问题｜Attribution matters
 
-The first constellation is a low-friction snapshot, not the final truth.
+现代软件成果通常可能由以下角色共同产生：
 
-Optional calibration may later improve resolution through:
+```text
+用户
+AI Agent
+协作者
+模板
+自动化工具
+现有代码
+```
 
-1. low-cost multiple-choice self-report;
-2. a few high-information adaptive questions;
-3. small tasks or repeated evidence over time.
+因此归因不能只是一个“是否本人完成”的二元判断。
 
-The user should never be forced to complete these steps before seeing a result.
+系统应该尽量区分人在活动中的角色，例如：发起、选择、定义需求、实现、审阅、验证、操作、授权、调试和解释。
 
-## 9. Internal detail, external restraint
+当无法判断时，应该保留 `unknown / uncertain`。
 
-The internal knowledge model may contain fine-grained evidence and unresolved hypotheses.
+## 8. 评估层与体验层目标不同｜Assessment vs Experience
 
-The visual constellation should show only what best describes the person at the current zoom level.
+**评估层**追求：
 
-Assessment can be detailed. Presentation must be distilled.
+- 保守；
+- 可解释；
+- 可校准；
+- 不讨好用户。
 
-## 10. The person is the subject
+**体验层**追求：
 
-The product is not asking, "How much of computer science does this person cover?"
+- 低门槛；
+- 清晰；
+- 美观；
+- 有探索感；
+- 让用户觉得“这是我的”。
 
-It is asking, "What knowledge, practice, and learning trajectories currently make up this person?"
+用户满意应该来自产品本身，而不是来自被高估。
 
-The map is a representation of the person, not a completion percentage against a universal syllabus.
+## 9. 渐进式解析｜Progressive resolution
+
+第一张星图是低成本快照，不是假装完整的最终真相。
+
+后续可以逐步提高解析度：
+
+1. **Micro Calibration**：几道低成本选择题；
+2. **Adaptive Calibration**：少量高信息量问题；
+3. **Behavioral Evidence**：解释、小任务或真实行为；
+4. **Repeated Evidence**：随时间积累的新证据。
+
+用户不应该在看到第一份结果之前被迫完成这些步骤。
+
+## 10. 一个问题应该尽量改变一片区域｜High information gain
+
+校准不能变成逐颗星确认。
+
+应该优先询问那些**一个答案就能重新解释多个节点**的问题。
+
+例如：
+
+> “你在这些开源 PR 中通常承担什么角色？”
+
+可能同时改变：
+
+- 开源技术能力；
+- Git / PR 独立能力；
+- 测试能力；
+- AI Agent 使用；
+- 项目参与方式。
+
+而不是分别追问几十项技术。
+
+## 11. 内部详细，外部克制｜Internal detail, external restraint
+
+内部模型可以保存细粒度证据、角色归因、不确定项和假设。
+
+最终星图只展示当前尺度下最能描述这个人的结构。
+
+> **评估可以细，展示必须粗。**
+
+## 12. 人是主体｜The person is the subject
+
+项目不问：
+
+> “这个人覆盖了多少计算机科学知识？”
+
+而问：
+
+> “哪些知识、实践、经历和学习轨迹构成了现在的这个人？”
+
+星图是人的映射，不是标准课程完成度。
