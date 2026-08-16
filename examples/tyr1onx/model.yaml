@@ -1,0 +1,193 @@
+snapshot:
+  subject: Tyr1onX
+  date: 2026-08-16
+  scope: software-development
+  mode: passive-only
+  note: >-
+    This sample intentionally uses public GitHub evidence only. It does not use
+    private conversation history or calibration answers.
+
+nodes:
+  - id: open-source-collaboration
+    label: Open-source Collaboration
+    state: established
+    confidence: high
+    signals:
+      exposure: high
+      capability: meaningful-participation-supported
+    evidence:
+      - E1
+      - E2
+    limits:
+      - Does not imply independent mastery of all technologies touched by contributions.
+
+  - id: git-pr-workflow
+    label: Git / Pull Request Workflow
+    state: established
+    confidence: high
+    signals:
+      exposure: high
+      capability: repeated-workflow-participation-supported
+    evidence:
+      - E1
+      - E2
+      - E3
+    limits:
+      - Does not yet measure depth of Git internals or independent conflict-resolution skill.
+
+  - id: testing-validation
+    label: Testing & Validation
+    state: developing
+    confidence: medium
+    signals:
+      exposure: high
+      capability: partial
+    evidence:
+      - E3
+      - E4
+    limits:
+      - Public traces show repeated testing/regression activity, but independent test-design depth is unresolved.
+
+  - id: product-iteration
+    label: Product Iteration
+    state: developing
+    confidence: medium
+    signals:
+      exposure: high
+      capability: partial
+    evidence:
+      - E4
+    limits:
+      - The product is strongly associated with the subject, but implementation attribution is unresolved.
+
+  - id: web-network-fundamentals
+    label: Web / Network Fundamentals
+    state: developing
+    confidence: medium
+    signals:
+      exposure: medium
+      capability: structured-learning-evidence
+    evidence:
+      - E5
+    limits:
+      - Based primarily on structured learning records rather than fresh independent assessment.
+
+  - id: browser-rendering
+    label: Browser Rendering
+    state: developing
+    confidence: medium
+    signals:
+      exposure: medium
+      capability: structured-learning-evidence
+    evidence:
+      - E5
+    limits:
+      - Retention and transfer to new problems remain unverified.
+
+  - id: javascript
+    label: JavaScript
+    state: developing
+    confidence: medium
+    signals:
+      exposure: medium
+      capability: early-learning
+    evidence:
+      - E4
+      - E6
+    limits:
+      - Project exposure is stronger than independently verified language capability.
+
+  - id: dom
+    label: DOM
+    state: developing
+    confidence: medium
+    signals:
+      exposure: medium
+      capability: early-learning
+    evidence:
+      - E6
+    limits:
+      - Explicitly recorded as currently learning.
+
+  - id: rust
+    label: Rust
+    state: observed
+    confidence: low
+    signals:
+      exposure: high
+      capability: unresolved
+    evidence:
+      - E4
+    limits:
+      - Repository stack proves exposure, not independent implementation capability.
+
+  - id: typescript
+    label: TypeScript
+    state: observed
+    confidence: low
+    signals:
+      exposure: high
+      capability: unresolved
+    evidence:
+      - E4
+    limits:
+      - Repository stack proves exposure, not independent implementation capability.
+
+  - id: tauri
+    label: Tauri
+    state: observed
+    confidence: low
+    signals:
+      exposure: high
+      capability: unresolved
+    evidence:
+      - E4
+    limits:
+      - Real project use is visible; independent framework knowledge is not established.
+
+  - id: concurrency
+    label: Concurrency
+    state: observed
+    confidence: low
+    signals:
+      exposure: medium
+      capability: unresolved
+    evidence:
+      - E2
+    limits:
+      - A sophisticated accepted contribution involved concurrency, but passive evidence cannot determine independent reasoning depth.
+
+  - id: sqlite
+    label: SQLite
+    state: observed
+    confidence: low
+    signals:
+      exposure: medium
+      capability: unresolved
+    evidence:
+      - E2
+    limits:
+      - Exposure through a real contribution is visible; database depth is unverified.
+
+unresolved:
+  - id: independent-implementation-depth
+    reason: Public artifacts do not reveal how independently code was produced.
+
+  - id: ai-assistance-level
+    reason: Public GitHub evidence alone does not reliably reveal AI contribution to implementation.
+
+  - id: durable-retention
+    reason: Learning records do not independently verify later recall or transfer.
+
+  - id: framework-depth
+    reason: Technologies in repositories should not be promoted to capability without stronger evidence.
+
+candidate_calibration_targets:
+  - target: testing-validation
+    why: Clarifying the subject's role in designing tests could materially change a central engineering node.
+
+  - target: rust-typescript-tauri
+    why: A single low-cost attribution question could resolve several high-exposure but low-confidence nodes.
+
+  - target: web-network-fundamentals
+    why: A few fresh explanation questions could distinguish retained understanding from stale learning records.
