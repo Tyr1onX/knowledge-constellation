@@ -35,6 +35,8 @@ Galaxy / 星系
     ↓
 Distillation / 蒸馏
     ↓
+Visual Semantics / 视觉语义
+    ↓
 Constellation / 知识星图
 ```
 
@@ -66,7 +68,9 @@ knowledge-constellation/
 │  ├─ attribution-model.md
 │  ├─ structure-model.md
 │  ├─ distillation.md
+│  ├─ visual-semantics.md
 │  ├─ micro-calibration.md
+│  ├─ evaluation.md
 │  └─ research-notes.md
 └─ examples/
    └─ tyr1onx/
@@ -97,6 +101,16 @@ knowledge-constellation/
 
 聊天中的个人校准信息不会自动写入这个公开仓库。后续如果要公开“校准前 / 校准后”对照样本，应单独确认再加入。
 
+## 研究中的两个校准通道
+
+### Truth Calibration｜事实 / 归因校准
+
+改善我们对“实际发生了什么、用户本人承担了什么”的认识，可以更新 Attribution 和 Capability Claim。
+
+### Identity Calibration｜个人重要性校准
+
+改善“哪些真实存在的部分更能代表用户本人”的展示判断，只调整 representativeness 和视觉重心，不反向篡改能力结论。
+
 ## 路线
 
 ### V0 — Passive Constellation｜被动画像
@@ -109,7 +123,7 @@ knowledge-constellation/
 
 ### V0.2 — Micro Calibration｜微校准
 
-用少量、低成本、尽量高信息量的选择题改善归因、解析度，必要时允许星系结构本身发生变化。
+用少量、低成本、尽量高信息量的选择题改善归因、解析度和个人展示重心，必要时允许星系结构本身发生变化。
 
 ### V0.3 — Adaptive Calibration｜自适应校准
 
@@ -118,6 +132,21 @@ knowledge-constellation/
 ### Later — Longitudinal Constellation｜长期变化
 
 让多次快照体现成长、遗忘、新方向和知识结构的变化。
+
+## 在正式视觉原型之前
+
+当前不会只因为 Tyr1onX 一个案例成立就开始做漂亮皮肤。
+
+`docs/evaluation.md` 定义了需要继续测试的多类用户，包括：
+
+- AI-heavy builder；
+- independent developer；
+- learning-heavy student；
+- one-project specialist；
+- broad generalist；
+- low-public-trace user。
+
+目标是避免把模型过拟合成“只适合第一个案例”。
 
 ## 当前两个成功标准
 
