@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knowledge Constellation V0</title>
+<style>
+:root{color-scheme:dark;--bg:#07090d;--fg:#edf2f8;--muted:#7f8998;--line:#ffffff16}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--fg)}
+body{background:radial-gradient(circle at 22% 25%,#4b66851a,transparent 34%),radial-gradient(circle at 78% 25%,#745c7e18,transparent 34%),radial-gradient(circle at 50% 80%,#4d777217,transparent 35%),#07090d}
+.app{display:grid;grid-template-columns:1fr 330px;height:100vh}.main{position:relative;min-width:0}.panel{border-left:1px solid var(--line);background:#0a0d13e8;padding:26px 22px;overflow:auto}
+header{position:absolute;z-index:5;top:22px;left:26px;right:26px;display:flex;justify-content:space-between;gap:20px;pointer-events:none}
+header>div,header button{pointer-events:auto}.kicker{font-size:10px;letter-spacing:.15em;color:#687384;text-transform:uppercase}.title{font-size:20px;margin-top:7px}.sub{font-size:11px;color:#798494;margin-top:6px}
+.controls{display:flex;gap:8px}button{border:1px solid #ffffff18;border-radius:999px;background:#10151dbc;color:#aeb8c6;padding:8px 11px;font-size:11px;cursor:pointer}button:hover,button.active{color:#fff;border-color:#ffffff33;background:#ffffff10}
+svg{width:100%;height:100%;display:block}.halo{fill-opacity:.02;stroke-opacity:.16;stroke-dasharray:2 8}.gtitle{font-size:14px;fill:#d8e0ea;font-weight:560;cursor:pointer}.gsub{font-size:9px;fill:#606b7b;letter-spacing:.08em}
+.rel{stroke:#d8e4f01f;stroke-width:1}.rel.cross{stroke-dasharray:4 7}.star{cursor:pointer;transition:opacity .18s}.core{filter:url(#glow)}.ring{fill:none;stroke-width:.8}.label{font-size:11px;fill:#cbd3df;paint-order:stroke;stroke:#07090d;stroke-width:4px;pointer-events:none}.detail{display:none;opacity:.65}.show-detail .detail{display:block}.dim{opacity:.13}.hot .label{fill:#fff}.hot .core{filter:url(#strong)}
+.legend{position:absolute;left:27px;bottom:20px;font-size:10px;color:#697586;line-height:1.7}.legend b{color:#a6b0bd;font-weight:500}
+.panel .pk{font-size:10px;letter-spacing:.14em;color:#677386;text-transform:uppercase}.panel h2{font-size:21px;margin:11px 0 5px;font-weight:570}.en{font-size:11px;color:#697586}.pills{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}.pill{border:1px solid #ffffff12;border-radius:99px;padding:5px 7px;font-size:10px;color:#9aa6b5}.summary{font-size:13px;line-height:1.75;color:#c0c9d5}.section{border-top:1px solid #ffffff12;margin-top:18px;padding-top:15px}.section h3{font-size:10px;letter-spacing:.12em;color:#758194;text-transform:uppercase;margin:0 0 9px}.section li,.section p{font-size:12px;line-height:1.7;color:#96a1b0}.chips{display:flex;gap:5px;flex-wrap:wrap}.chip{font-size:10px;background:#ffffff0b;border-radius:6px;padding:4px 6px;color:#8f9aa9}.card{border:1px solid #ffffff10;border-radius:10px;padding:11px;margin-top:9px;background:#ffffff05}.card b{font-size:12px;font-weight:520}.card span{display:block;font-size:10px;color:#778292;line-height:1.55;margin-top:5px}.note{font-size:10px;color:#5e6877;line-height:1.65;margin-top:20px}
+@media(max-width:900px){.app{display:block}.panel{position:absolute;z-index:8;left:12px;right:12px;bottom:12px;height:40vh;border:1px solid #ffffff16;border-radius:16px}.legend{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<main class="main">
+<header><div><div class="kicker">Knowledge Constellation · V0 visual prototype</div><div class="title">Tyr1onX 的知识星图</div><div class="sub">Passive-only · 仅依据公开 GitHub 痕迹 · 2026-08-16</div></div>
+<div class="controls"><button id="details">显示第二层</button><button id="reset">重置</button></div></header>
+<svg id="sky" viewBox="0 0 1200 760">
+<defs><filter id="glow"><feGaussianBlur stdDeviation="2.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="strong"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<g id="bg"></g><g id="gal"></g><g id="rels"></g><g id="stars"></g>
+</svg>
+<div class="legend"><b>大小</b> = 当前人物轮廓中的代表性　·　<b>清晰度</b> = 当前解析程度　·　<b>距离</b> = 真实经历中的结构关系<br>概览层不把“星越大”解释成“能力越强”。</div>
+</main>
+<aside class="panel" id="panel"></aside>
+</div>
+<script>
+const G=[
+{id:'oss',name:'开源参与与工程流转',en:'Open-source & Engineering Flow',cx:315,cy:290,rx:225,ry:155,c:'#91b7ef',d:'持续的外部贡献、PR 流程与测试/回归活动形成的实践主题。'},
+{id:'desktop',name:'课刻与桌面产品',en:'Desktop Product · 课刻',cx:880,cy:292,rx:230,ry:158,c:'#b69acb',d:'围绕长期维护的桌面课表产品形成的项目主题，技术栈深度仍有未解析区域。'},
+{id:'web',name:'Web 基础补全',en:'Web Foundations in Progress',cx:600,cy:590,rx:238,ry:128,c:'#8bbfb7',d:'来自结构化学习记录的 Web、网络、浏览器与 JavaScript / DOM 学习轨迹。'}];
+const N=[
+{id:'oss-p',g:'oss',x:275,y:255,r:15,l:'开源参与',en:'Open-source Participation',s:'较明确',cf:'高',rs:'清晰',c:'#dcecff',sum:'存在持续、真实的外部开源贡献活动，并有多次合并和维护者反馈记录。',k:['可以确认持续参与真实开源贡献流程。','存在外部项目接受与反馈。'],u:['不能判断每个 PR 的分析、实现和测试是否由本人独立完成。','不能自动推出相关底层技术掌握程度。'],e:['E1','E2']},
+{id:'pr',g:'oss',x:390,y:315,r:11,l:'GitHub / PR',en:'GitHub / Pull Request Workflow',s:'较明确',cf:'高',rs:'清晰',c:'#c9ddfb',sum:'PR、CI、Review、修改与合并反复出现在公开活动中。',k:['真实接触并参与过完整 PR 流程。'],u:['复杂 Git 操作和流程理解深度尚未确认。'],e:['E1','E2','E3']},
+{id:'test',g:'oss',x:205,y:340,r:9,l:'测试与验证',en:'Testing & Validation',s:'已观察',cf:'中',rs:'部分',c:'#a8c7ef',sum:'测试、回归、CI 和真实环境验证反复出现在项目与 PR 中。',k:['测试与验证明确属于当前工程经历。'],u:['测试方案是否由本人设计仍未知。','独立判断覆盖与结果的能力仍未知。'],e:['E3','E4']},
+{id:'conc',g:'oss',x:420,y:225,r:5,l:'并发',en:'Concurrency',s:'已观察',cf:'低',rs:'模糊',c:'#8eacd0',detail:1,sum:'贡献中出现过 CAS、并发读取和多进程测试。',k:['这些概念进入过真实场景。'],u:['不能据此判断本人掌握并发机制。'],e:['E2']},
+{id:'sqlite',g:'oss',x:458,y:256,r:4.5,l:'SQLite / WAL',en:'SQLite / WAL',s:'已观察',cf:'低',rs:'模糊',c:'#829dbf',detail:1,sum:'SQLite / WAL 曾出现在真实贡献场景。',k:['存在真实场景关联。'],u:['个人理解和独立实践深度未知。'],e:['E2']},
+{id:'product',g:'desktop',x:830,y:252,r:15,l:'产品迭代',en:'Product Iteration',s:'正在形成',cf:'中',rs:'部分',c:'#eadcf4',sum:'存在持续维护的真实个人产品，包含功能演进、测试、限制和发布痕迹。',k:['长期产品推进与持续迭代是真实存在的。'],u:['具体实现、设计与判断分别由谁完成仍未完全解析。'],e:['E4']},
+{id:'tauri',g:'desktop',x:968,y:244,r:9.5,l:'Tauri',en:'Tauri',s:'已观察',cf:'低',rs:'模糊',c:'#c9b2d8',sum:'Tauri 是长期项目的重要技术环境。',k:['与核心项目存在稳定关联。'],u:['独立使用 Tauri 的能力深度未确认。'],e:['E4']},
+{id:'ts',g:'desktop',x:936,y:350,r:9,l:'TypeScript',en:'TypeScript',s:'已观察',cf:'低',rs:'模糊',c:'#c2aacd',sum:'TypeScript 高频出现在项目环境中。',k:['真实存在于长期项目技术环境。'],u:['独立实现与理解深度未确认。'],e:['E4']},
+{id:'rust',g:'desktop',x:790,y:354,r:11,l:'Rust',en:'Rust',s:'已观察',cf:'低',rs:'模糊',c:'#d3b9dc',sum:'Rust 明确存在于个人项目技术栈与外部贡献环境。',k:['Rust 是当前经历中的真实技术环境。'],u:['项目使用 Rust 不等于能独立实现、调试或解释 Rust。'],e:['E4']},
+{id:'webn',g:'web',x:520,y:574,r:14,l:'Web / 网络基础',en:'Web / Network Fundamentals',s:'正在形成',cf:'中',rs:'部分',c:'#d5eee9',sum:'学习仓库中存在较系统的 Web、HTTP、网络与安全基础学习记录。',k:['存在持续、结构化的学习和纠错痕迹。'],u:['长期迁移能力仍未确认。'],e:['E5']},
+{id:'browser',g:'web',x:664,y:552,r:11,l:'浏览器渲染',en:'Browser Rendering',s:'正在形成',cf:'中',rs:'部分',c:'#b8dcd5',sum:'DOM、CSSOM、Layout、Paint、Composite 与脚本加载主干已有学习记录。',k:['学习轨迹和概念纠错记录明确存在。'],u:['脱离提示后的长期稳定解释能力仍需证据。'],e:['E5']},
+{id:'js',g:'web',x:615,y:650,r:12,l:'JavaScript / DOM',en:'JavaScript / DOM',s:'正在形成',cf:'高',rs:'部分',c:'#c7e4de',sum:'公开记录明确把 JavaScript 基础与 DOM 标记为当前正在学习。',k:['它明确属于当前学习主线。','“仍在学习”本身是高置信事实。'],u:['不能表示为成熟能力。'],e:['E6']}];
+const R=[['oss-p','pr'],['oss-p','test'],['pr','test'],['pr','conc'],['conc','sqlite'],['product','tauri'],['product','ts'],['product','rust'],['tauri','rust'],['webn','browser'],['browser','js'],['test','product','cross']];
+const NS='http://www.w3.org/2000/svg',q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
+function E(n,a={}){let x=document.createElementNS(NS,n);Object.entries(a).forEach(([k,v])=>x.setAttribute(k,v));return x}
+for(let i=0;i<140;i++){let c=E('circle',{cx:(i*83%1180)+10,cy:(i*137%730)+15,r:i%9?'.42':'1',fill:'#d9e3ef',opacity:.06+(i%5)*.015});q('#bg').append(c)}
+G.forEach(g=>{let h=E('ellipse',{cx:g.cx,cy:g.cy,rx:g.rx,ry:g.ry,fill:g.c,stroke:g.c,class:'halo'});q('#gal').append(h);let t=E('text',{x:g.cx-g.rx+20,y:g.cy-g.ry+26,class:'gtitle'});t.textContent=g.name;t.onclick=()=>focus(g.id);q('#gal').append(t);let s=E('text',{x:g.cx-g.rx+20,y:g.cy-g.ry+43,class:'gsub'});s.textContent=g.en;q('#gal').append(s)});
+R.forEach(([a,b,t])=>{let A=N.find(n=>n.id==a),B=N.find(n=>n.id==b),l=E('line',{x1:A.x,y1:A.y,x2:B.x,y2:B.y,class:'rel '+(t?'cross':''),'data-a':a,'data-b':b});q('#rels').append(l)});
+N.forEach(n=>{let g=E('g',{transform:`translate(${n.x} ${n.y})`,class:'star '+(n.detail?'detail':''),'data-id':n.id});let h=E('circle',{r:n.r*2.1,fill:n.c,opacity:n.rs==='模糊'?.025:.05});g.append(h);let c=E('circle',{r:n.r,fill:n.c,opacity:n.rs==='清晰'?.92:n.rs==='部分'?.7:.45,class:'core'});g.append(c);let rg=E('circle',{r:n.r+4,stroke:n.c,opacity:n.rs==='模糊'?.18:.38,class:'ring'});if(n.rs==='模糊')rg.setAttribute('stroke-dasharray','2 4');g.append(rg);let tx=E('text',{x:n.r+9,y:4,class:'label'});tx.textContent=n.l;g.append(tx);g.onmouseenter=()=>hot(n.id);g.onmouseleave=clearHot;g.onclick=()=>show(n);q('#stars').append(g)});
+function hot(id){let conn=new Set([id]);R.forEach(([a,b])=>{if(a==id)conn.add(b);if(b==id)conn.add(a)});qa('.star').forEach(x=>{x.classList.toggle('dim',!conn.has(x.dataset.id));x.classList.toggle('hot',conn.has(x.dataset.id))});qa('.rel').forEach(x=>x.classList.toggle('dim',x.dataset.a!=id&&x.dataset.b!=id))}
+function clearHot(){qa('.star,.rel').forEach(x=>x.classList.remove('dim','hot'))}
+function show(n){let g=G.find(x=>x.id==n.g);q('#panel').innerHTML=`<div class="pk">${g.name}</div><h2>${n.l}</h2><div class="en">${n.en}</div><div class="pills"><span class="pill">证据状态 · ${n.s}</span><span class="pill">置信度 · ${n.cf}</span><span class="pill">解析度 · ${n.rs}</span></div><p class="summary">${n.sum}</p><div class="section"><h3>我们现在知道</h3><ul>${n.k.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="section"><h3>我们还不知道</h3><ul>${n.u.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="section"><h3>Evidence</h3><div class="chips">${n.e.map(x=>`<span class="chip">${x}</span>`).join('')}</div></div><button style="width:100%;margin-top:18px;border-radius:10px" onclick="focus('${n.g}')">聚焦这个星系</button><div class="note">这不是熟练度评分。节点大小表达“它多能代表当前可观察到的人物轮廓”，而不是能力等级。</div>`}
+function overview(){q('#panel').innerHTML=`<div class="pk">Passive snapshot</div><h2>目前看到的你</h2><div class="en">Same person, current resolution.</div><p class="summary">只根据公开 GitHub 痕迹，当前比较稳定地看见三个主题。第一眼故意不展示所有技术名，也不把“项目里出现过”解释成“已经掌握”。</p>${G.map(g=>`<div class="card"><b>${g.name}</b><span>${g.d}</span></div>`).join('')}<div class="section"><h3>当前暗区</h3><p>AI 在真实开发流程中的参与程度、独立实现能力，以及若干技术的理解深度，仅凭公开 GitHub 仍无法可靠判断。</p></div><div class="note">“暗区”不是系统失败，而是当前证据边界的一部分。</div>`}
+window.focus=id=>{let g=G.find(x=>x.id==id),p=60;q('#sky').setAttribute('viewBox',[g.cx-g.rx-p,g.cy-g.ry-p,(g.rx+p)*2,(g.ry+p)*2].join(' '))}
+q('#reset').onclick=()=>{q('#sky').setAttribute('viewBox','0 0 1200 760');overview();clearHot()}
+q('#details').onclick=e=>{document.body.classList.toggle('show-detail');let on=document.body.classList.contains('show-detail');e.target.classList.toggle('active',on);e.target.textContent=on?'隐藏第二层':'显示第二层'}
+overview();
+</script>
+</body></html>
