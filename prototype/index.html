@@ -1,68 +1,255 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Knowledge Constellation V0</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Knowledge Constellation</title>
 <style>
-:root{color-scheme:dark;--bg:#07090d;--fg:#edf2f8;--muted:#7f8998;--line:#ffffff16}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--fg)}
-body{background:radial-gradient(circle at 22% 25%,#4b66851a,transparent 34%),radial-gradient(circle at 78% 25%,#745c7e18,transparent 34%),radial-gradient(circle at 50% 80%,#4d777217,transparent 35%),#07090d}
-.app{display:grid;grid-template-columns:1fr 330px;height:100vh}.main{position:relative;min-width:0}.panel{border-left:1px solid var(--line);background:#0a0d13e8;padding:26px 22px;overflow:auto}
-header{position:absolute;z-index:5;top:22px;left:26px;right:26px;display:flex;justify-content:space-between;gap:20px;pointer-events:none}
-header>div,header button{pointer-events:auto}.kicker{font-size:10px;letter-spacing:.15em;color:#687384;text-transform:uppercase}.title{font-size:20px;margin-top:7px}.sub{font-size:11px;color:#798494;margin-top:6px}
-.controls{display:flex;gap:8px}button{border:1px solid #ffffff18;border-radius:999px;background:#10151dbc;color:#aeb8c6;padding:8px 11px;font-size:11px;cursor:pointer}button:hover,button.active{color:#fff;border-color:#ffffff33;background:#ffffff10}
-svg{width:100%;height:100%;display:block}.halo{fill-opacity:.02;stroke-opacity:.16;stroke-dasharray:2 8}.gtitle{font-size:14px;fill:#d8e0ea;font-weight:560;cursor:pointer}.gsub{font-size:9px;fill:#606b7b;letter-spacing:.08em}
-.rel{stroke:#d8e4f01f;stroke-width:1}.rel.cross{stroke-dasharray:4 7}.star{cursor:pointer;transition:opacity .18s}.core{filter:url(#glow)}.ring{fill:none;stroke-width:.8}.label{font-size:11px;fill:#cbd3df;paint-order:stroke;stroke:#07090d;stroke-width:4px;pointer-events:none}.detail{display:none;opacity:.65}.show-detail .detail{display:block}.dim{opacity:.13}.hot .label{fill:#fff}.hot .core{filter:url(#strong)}
-.legend{position:absolute;left:27px;bottom:20px;font-size:10px;color:#697586;line-height:1.7}.legend b{color:#a6b0bd;font-weight:500}
-.panel .pk{font-size:10px;letter-spacing:.14em;color:#677386;text-transform:uppercase}.panel h2{font-size:21px;margin:11px 0 5px;font-weight:570}.en{font-size:11px;color:#697586}.pills{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}.pill{border:1px solid #ffffff12;border-radius:99px;padding:5px 7px;font-size:10px;color:#9aa6b5}.summary{font-size:13px;line-height:1.75;color:#c0c9d5}.section{border-top:1px solid #ffffff12;margin-top:18px;padding-top:15px}.section h3{font-size:10px;letter-spacing:.12em;color:#758194;text-transform:uppercase;margin:0 0 9px}.section li,.section p{font-size:12px;line-height:1.7;color:#96a1b0}.chips{display:flex;gap:5px;flex-wrap:wrap}.chip{font-size:10px;background:#ffffff0b;border-radius:6px;padding:4px 6px;color:#8f9aa9}.card{border:1px solid #ffffff10;border-radius:10px;padding:11px;margin-top:9px;background:#ffffff05}.card b{font-size:12px;font-weight:520}.card span{display:block;font-size:10px;color:#778292;line-height:1.55;margin-top:5px}.note{font-size:10px;color:#5e6877;line-height:1.65;margin-top:20px}
-@media(max-width:900px){.app{display:block}.panel{position:absolute;z-index:8;left:12px;right:12px;bottom:12px;height:40vh;border:1px solid #ffffff16;border-radius:16px}.legend{display:none}}
+:root{color-scheme:dark;--bg:#03050a;--fg:#eef4fb;--muted:#7b8798;--glass:rgba(8,12,19,.74);--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--fg)}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:grab}
+canvas.dragging{cursor:grabbing}
+.identity{position:fixed;z-index:5;left:26px;top:22px;pointer-events:none;user-select:none}
+.identity b{display:block;font-size:12px;font-weight:560;letter-spacing:.13em;color:rgba(235,242,250,.68)}
+.identity span{display:block;margin-top:5px;font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:rgba(165,176,192,.28)}
+.hint{position:fixed;z-index:4;left:27px;bottom:21px;font-size:9px;letter-spacing:.05em;color:rgba(154,165,181,.28);pointer-events:none;transition:opacity .35s}
+.tooltip{position:fixed;z-index:8;pointer-events:none;opacity:0;transform:translate(-50%,-125%);transition:opacity .12s ease;padding:7px 9px;border-radius:10px;border:1px solid rgba(255,255,255,.07);background:rgba(7,11,17,.82);backdrop-filter:blur(12px);box-shadow:0 14px 45px rgba(0,0,0,.3)}
+.tooltip.show{opacity:1}.tooltip strong{font-size:11px;font-weight:570}.tooltip small{display:block;margin-top:3px;font-size:9px;color:#7a8698}
+.card{position:fixed;z-index:9;right:22px;top:22px;width:min(330px,calc(100vw - 44px));padding:19px 19px 17px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(12,17,26,.84),rgba(7,11,17,.88));box-shadow:0 24px 80px rgba(0,0,0,.35);backdrop-filter:blur(24px);opacity:0;transform:translateY(-8px) scale(.985);pointer-events:none;transition:.2s ease}
+.card.show{opacity:1;transform:none;pointer-events:auto}
+.card .close{position:absolute;right:13px;top:10px;border:0;background:transparent;color:#647082;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:15px}
+.card .close:hover{background:rgba(255,255,255,.05);color:#dfe7f0}
+.card .galaxy{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#697587}
+.card h2{margin:9px 0 3px;font-size:20px;font-weight:580}
+.card .en{font-size:10px;color:#6f7a8b}
+.card .state{display:inline-flex;margin-top:13px;border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:5px 8px;font-size:10px;color:#9aa6b6;background:rgba(255,255,255,.025)}
+.card p{font-size:12px;line-height:1.8;color:#bcc6d3}
+.card .explain{display:none;margin-top:15px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07)}
+.card .explain.show{display:block}
+.card h3{margin:0 0 7px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#6d798c}
+.card .explain p{font-size:11px;color:#8894a5;margin:0 0 11px}
+.card .toggle{border:0;background:transparent;color:#788496;font-size:10px;padding:0;margin-top:5px;cursor:pointer}
+.card .toggle:hover{color:#c9d2de}
+@media(max-width:720px){.identity{left:17px;top:16px}.hint{left:18px;bottom:15px}.card{left:13px;right:13px;top:auto;bottom:13px;width:auto}}
 </style>
 </head>
 <body>
-<div class="app">
-<main class="main">
-<header><div><div class="kicker">Knowledge Constellation · V0 visual prototype</div><div class="title">Tyr1onX 的知识星图</div><div class="sub">Passive-only · 仅依据公开 GitHub 痕迹 · 2026-08-16</div></div>
-<div class="controls"><button id="details">显示第二层</button><button id="reset">重置</button></div></header>
-<svg id="sky" viewBox="0 0 1200 760">
-<defs><filter id="glow"><feGaussianBlur stdDeviation="2.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="strong"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-<g id="bg"></g><g id="gal"></g><g id="rels"></g><g id="stars"></g>
-</svg>
-<div class="legend"><b>大小</b> = 当前人物轮廓中的代表性　·　<b>清晰度</b> = 当前解析程度　·　<b>距离</b> = 真实经历中的结构关系<br>概览层不把“星越大”解释成“能力越强”。</div>
-</main>
-<aside class="panel" id="panel"></aside>
+<canvas id="sky"></canvas>
+<div class="identity"><b>KNOWLEDGE CONSTELLATION</b><span>qibai</span></div>
+<div class="hint" id="hint">移动 · 滚轮缩放 · 点击星体</div>
+<div class="tooltip" id="tooltip"><strong></strong><small></small></div>
+<aside class="card" id="card">
+<button class="close" id="close">×</button>
+<div class="galaxy" id="galaxy"></div>
+<h2 id="title"></h2><div class="en" id="en"></div><div class="state" id="state"></div>
+<p id="summary"></p>
+<button class="toggle" id="toggle">查看这颗星为什么是这样</button>
+<div class="explain" id="explain">
+<h3>现在能确认</h3><p id="known"></p>
+<h3>仍然模糊</h3><p id="unknown"></p>
 </div>
+</aside>
 <script>
-const G=[
-{id:'oss',name:'开源参与与工程流转',en:'Open-source & Engineering Flow',cx:315,cy:290,rx:225,ry:155,c:'#91b7ef',d:'持续的外部贡献、PR 流程与测试/回归活动形成的实践主题。'},
-{id:'desktop',name:'课刻与桌面产品',en:'Desktop Product · 课刻',cx:880,cy:292,rx:230,ry:158,c:'#b69acb',d:'围绕长期维护的桌面课表产品形成的项目主题，技术栈深度仍有未解析区域。'},
-{id:'web',name:'Web 基础补全',en:'Web Foundations in Progress',cx:600,cy:590,rx:238,ry:128,c:'#8bbfb7',d:'来自结构化学习记录的 Web、网络、浏览器与 JavaScript / DOM 学习轨迹。'}];
-const N=[
-{id:'oss-p',g:'oss',x:275,y:255,r:15,l:'开源参与',en:'Open-source Participation',s:'较明确',cf:'高',rs:'清晰',c:'#dcecff',sum:'存在持续、真实的外部开源贡献活动，并有多次合并和维护者反馈记录。',k:['可以确认持续参与真实开源贡献流程。','存在外部项目接受与反馈。'],u:['不能判断每个 PR 的分析、实现和测试是否由本人独立完成。','不能自动推出相关底层技术掌握程度。'],e:['E1','E2']},
-{id:'pr',g:'oss',x:390,y:315,r:11,l:'GitHub / PR',en:'GitHub / Pull Request Workflow',s:'较明确',cf:'高',rs:'清晰',c:'#c9ddfb',sum:'PR、CI、Review、修改与合并反复出现在公开活动中。',k:['真实接触并参与过完整 PR 流程。'],u:['复杂 Git 操作和流程理解深度尚未确认。'],e:['E1','E2','E3']},
-{id:'test',g:'oss',x:205,y:340,r:9,l:'测试与验证',en:'Testing & Validation',s:'已观察',cf:'中',rs:'部分',c:'#a8c7ef',sum:'测试、回归、CI 和真实环境验证反复出现在项目与 PR 中。',k:['测试与验证明确属于当前工程经历。'],u:['测试方案是否由本人设计仍未知。','独立判断覆盖与结果的能力仍未知。'],e:['E3','E4']},
-{id:'conc',g:'oss',x:420,y:225,r:5,l:'并发',en:'Concurrency',s:'已观察',cf:'低',rs:'模糊',c:'#8eacd0',detail:1,sum:'贡献中出现过 CAS、并发读取和多进程测试。',k:['这些概念进入过真实场景。'],u:['不能据此判断本人掌握并发机制。'],e:['E2']},
-{id:'sqlite',g:'oss',x:458,y:256,r:4.5,l:'SQLite / WAL',en:'SQLite / WAL',s:'已观察',cf:'低',rs:'模糊',c:'#829dbf',detail:1,sum:'SQLite / WAL 曾出现在真实贡献场景。',k:['存在真实场景关联。'],u:['个人理解和独立实践深度未知。'],e:['E2']},
-{id:'product',g:'desktop',x:830,y:252,r:15,l:'产品迭代',en:'Product Iteration',s:'正在形成',cf:'中',rs:'部分',c:'#eadcf4',sum:'存在持续维护的真实个人产品，包含功能演进、测试、限制和发布痕迹。',k:['长期产品推进与持续迭代是真实存在的。'],u:['具体实现、设计与判断分别由谁完成仍未完全解析。'],e:['E4']},
-{id:'tauri',g:'desktop',x:968,y:244,r:9.5,l:'Tauri',en:'Tauri',s:'已观察',cf:'低',rs:'模糊',c:'#c9b2d8',sum:'Tauri 是长期项目的重要技术环境。',k:['与核心项目存在稳定关联。'],u:['独立使用 Tauri 的能力深度未确认。'],e:['E4']},
-{id:'ts',g:'desktop',x:936,y:350,r:9,l:'TypeScript',en:'TypeScript',s:'已观察',cf:'低',rs:'模糊',c:'#c2aacd',sum:'TypeScript 高频出现在项目环境中。',k:['真实存在于长期项目技术环境。'],u:['独立实现与理解深度未确认。'],e:['E4']},
-{id:'rust',g:'desktop',x:790,y:354,r:11,l:'Rust',en:'Rust',s:'已观察',cf:'低',rs:'模糊',c:'#d3b9dc',sum:'Rust 明确存在于个人项目技术栈与外部贡献环境。',k:['Rust 是当前经历中的真实技术环境。'],u:['项目使用 Rust 不等于能独立实现、调试或解释 Rust。'],e:['E4']},
-{id:'webn',g:'web',x:520,y:574,r:14,l:'Web / 网络基础',en:'Web / Network Fundamentals',s:'正在形成',cf:'中',rs:'部分',c:'#d5eee9',sum:'学习仓库中存在较系统的 Web、HTTP、网络与安全基础学习记录。',k:['存在持续、结构化的学习和纠错痕迹。'],u:['长期迁移能力仍未确认。'],e:['E5']},
-{id:'browser',g:'web',x:664,y:552,r:11,l:'浏览器渲染',en:'Browser Rendering',s:'正在形成',cf:'中',rs:'部分',c:'#b8dcd5',sum:'DOM、CSSOM、Layout、Paint、Composite 与脚本加载主干已有学习记录。',k:['学习轨迹和概念纠错记录明确存在。'],u:['脱离提示后的长期稳定解释能力仍需证据。'],e:['E5']},
-{id:'js',g:'web',x:615,y:650,r:12,l:'JavaScript / DOM',en:'JavaScript / DOM',s:'正在形成',cf:'高',rs:'部分',c:'#c7e4de',sum:'公开记录明确把 JavaScript 基础与 DOM 标记为当前正在学习。',k:['它明确属于当前学习主线。','“仍在学习”本身是高置信事实。'],u:['不能表示为成熟能力。'],e:['E6']}];
-const R=[['oss-p','pr'],['oss-p','test'],['pr','test'],['pr','conc'],['conc','sqlite'],['product','tauri'],['product','ts'],['product','rust'],['tauri','rust'],['webn','browser'],['browser','js'],['test','product','cross']];
-const NS='http://www.w3.org/2000/svg',q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
-function E(n,a={}){let x=document.createElementNS(NS,n);Object.entries(a).forEach(([k,v])=>x.setAttribute(k,v));return x}
-for(let i=0;i<140;i++){let c=E('circle',{cx:(i*83%1180)+10,cy:(i*137%730)+15,r:i%9?'.42':'1',fill:'#d9e3ef',opacity:.06+(i%5)*.015});q('#bg').append(c)}
-G.forEach(g=>{let h=E('ellipse',{cx:g.cx,cy:g.cy,rx:g.rx,ry:g.ry,fill:g.c,stroke:g.c,class:'halo'});q('#gal').append(h);let t=E('text',{x:g.cx-g.rx+20,y:g.cy-g.ry+26,class:'gtitle'});t.textContent=g.name;t.onclick=()=>focus(g.id);q('#gal').append(t);let s=E('text',{x:g.cx-g.rx+20,y:g.cy-g.ry+43,class:'gsub'});s.textContent=g.en;q('#gal').append(s)});
-R.forEach(([a,b,t])=>{let A=N.find(n=>n.id==a),B=N.find(n=>n.id==b),l=E('line',{x1:A.x,y1:A.y,x2:B.x,y2:B.y,class:'rel '+(t?'cross':''),'data-a':a,'data-b':b});q('#rels').append(l)});
-N.forEach(n=>{let g=E('g',{transform:`translate(${n.x} ${n.y})`,class:'star '+(n.detail?'detail':''),'data-id':n.id});let h=E('circle',{r:n.r*2.1,fill:n.c,opacity:n.rs==='模糊'?.025:.05});g.append(h);let c=E('circle',{r:n.r,fill:n.c,opacity:n.rs==='清晰'?.92:n.rs==='部分'?.7:.45,class:'core'});g.append(c);let rg=E('circle',{r:n.r+4,stroke:n.c,opacity:n.rs==='模糊'?.18:.38,class:'ring'});if(n.rs==='模糊')rg.setAttribute('stroke-dasharray','2 4');g.append(rg);let tx=E('text',{x:n.r+9,y:4,class:'label'});tx.textContent=n.l;g.append(tx);g.onmouseenter=()=>hot(n.id);g.onmouseleave=clearHot;g.onclick=()=>show(n);q('#stars').append(g)});
-function hot(id){let conn=new Set([id]);R.forEach(([a,b])=>{if(a==id)conn.add(b);if(b==id)conn.add(a)});qa('.star').forEach(x=>{x.classList.toggle('dim',!conn.has(x.dataset.id));x.classList.toggle('hot',conn.has(x.dataset.id))});qa('.rel').forEach(x=>x.classList.toggle('dim',x.dataset.a!=id&&x.dataset.b!=id))}
-function clearHot(){qa('.star,.rel').forEach(x=>x.classList.remove('dim','hot'))}
-function show(n){let g=G.find(x=>x.id==n.g);q('#panel').innerHTML=`<div class="pk">${g.name}</div><h2>${n.l}</h2><div class="en">${n.en}</div><div class="pills"><span class="pill">证据状态 · ${n.s}</span><span class="pill">置信度 · ${n.cf}</span><span class="pill">解析度 · ${n.rs}</span></div><p class="summary">${n.sum}</p><div class="section"><h3>我们现在知道</h3><ul>${n.k.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="section"><h3>我们还不知道</h3><ul>${n.u.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="section"><h3>Evidence</h3><div class="chips">${n.e.map(x=>`<span class="chip">${x}</span>`).join('')}</div></div><button style="width:100%;margin-top:18px;border-radius:10px" onclick="focus('${n.g}')">聚焦这个星系</button><div class="note">这不是熟练度评分。节点大小表达“它多能代表当前可观察到的人物轮廓”，而不是能力等级。</div>`}
-function overview(){q('#panel').innerHTML=`<div class="pk">Passive snapshot</div><h2>目前看到的你</h2><div class="en">Same person, current resolution.</div><p class="summary">只根据公开 GitHub 痕迹，当前比较稳定地看见三个主题。第一眼故意不展示所有技术名，也不把“项目里出现过”解释成“已经掌握”。</p>${G.map(g=>`<div class="card"><b>${g.name}</b><span>${g.d}</span></div>`).join('')}<div class="section"><h3>当前暗区</h3><p>AI 在真实开发流程中的参与程度、独立实现能力，以及若干技术的理解深度，仅凭公开 GitHub 仍无法可靠判断。</p></div><div class="note">“暗区”不是系统失败，而是当前证据边界的一部分。</div>`}
-window.focus=id=>{let g=G.find(x=>x.id==id),p=60;q('#sky').setAttribute('viewBox',[g.cx-g.rx-p,g.cy-g.ry-p,(g.rx+p)*2,(g.ry+p)*2].join(' '))}
-q('#reset').onclick=()=>{q('#sky').setAttribute('viewBox','0 0 1200 760');overview();clearHot()}
-q('#details').onclick=e=>{document.body.classList.toggle('show-detail');let on=document.body.classList.contains('show-detail');e.target.classList.toggle('active',on);e.target.textContent=on?'隐藏第二层':'显示第二层'}
-overview();
+const canvas=document.getElementById('sky'),ctx=canvas.getContext('2d');
+const tooltip=document.getElementById('tooltip'),card=document.getElementById('card');
+const DPR=Math.min(window.devicePixelRatio||1,2);
+
+const galaxies=[
+{id:'oss',name:'开源参与与工程流转',cx:.255,cy:.38,spread:.205,color:[108,146,202]},
+{id:'desktop',name:'课刻与桌面产品',cx:.735,cy:.37,spread:.215,color:[156,119,179]},
+{id:'web',name:'Web 基础补全',cx:.49,cy:.765,spread:.20,color:[91,151,142]}
+];
+
+const nodes=[
+{id:'oss-p',g:'oss',x:.205,y:.325,size:18,type:'core',name:'开源参与',en:'Open-source Participation',state:'清晰',res:.95,color:'#dfeeff',summary:'持续进入真实开源项目并完成贡献流程，已经形成稳定痕迹。',known:'持续参与、外部接受与维护者反馈都能被确认。',unknown:'不同 PR 中具体由本人完成了多少分析、实现和测试，仍需额外信息。'},
+{id:'pr',g:'oss',x:.315,y:.415,size:13,type:'bridge',name:'GitHub / PR',en:'GitHub / Pull Request Workflow',state:'清晰',res:.92,color:'#c7ddfa',summary:'PR、CI、Review、修改与合并反复出现在实践中。',known:'完整 PR 流程是真实且重复出现的。',unknown:'复杂 Git 操作和独立处理能力还没有被充分证明。'},
+{id:'test',g:'oss',x:.145,y:.465,size:11,type:'forming',name:'测试与验证',en:'Testing & Validation',state:'正在形成',res:.63,color:'#a8c8ef',summary:'测试、回归、CI 与真实环境验证持续围绕项目与贡献出现。',known:'它明确属于当前工程经历的一部分。',unknown:'测试方案是否主要由本人设计、能否独立判断覆盖与正确性，还没有看清。'},
+{id:'conc',g:'oss',x:.36,y:.295,size:6,type:'trace',name:'并发',en:'Concurrency',state:'外围痕迹',res:.26,color:'#829dbf',summary:'并发、CAS 等概念进入过真实贡献场景。',known:'这些概念确实出现过。',unknown:'不能据此判断本人掌握并发机制。'},
+{id:'sqlite',g:'oss',x:.405,y:.33,size:5,type:'trace',name:'SQLite / WAL',en:'SQLite / WAL',state:'外围痕迹',res:.22,color:'#738aa9',summary:'SQLite / WAL 曾进入真实贡献场景。',known:'存在真实上下文关联。',unknown:'个人理解与独立实践深度未知。'},
+
+{id:'product',g:'desktop',x:.665,y:.315,size:19,type:'core',name:'产品迭代',en:'Product Iteration',state:'正在形成',res:.67,color:'#eadff4',summary:'长期维护的个人产品形成了一条持续迭代轨迹。',known:'功能演进、限制、测试和发布等持续推进是真实存在的。',unknown:'具体实现、设计与判断分别由谁完成，仍没有完全解析。'},
+{id:'tauri',g:'desktop',x:.845,y:.305,size:11,type:'veiled',name:'Tauri',en:'Tauri',state:'高关联 · 低解析',res:.31,color:'#cbb4d9',summary:'Tauri 是核心项目长期存在的技术环境。',known:'它与长期项目稳定关联。',unknown:'独立使用 Tauri 的能力深度尚未确认。'},
+{id:'rust',g:'desktop',x:.655,y:.475,size:14,type:'veiled',name:'Rust',en:'Rust',state:'高关联 · 低解析',res:.27,color:'#d7bbdf',summary:'Rust 在项目技术环境与部分贡献场景中反复出现。',known:'Rust 确实属于当前经历。',unknown:'项目中存在 Rust，不等于能独立实现、调试或解释 Rust。'},
+{id:'ts',g:'desktop',x:.825,y:.455,size:11,type:'veiled',name:'TypeScript',en:'TypeScript',state:'高关联 · 低解析',res:.30,color:'#c3a9cf',summary:'TypeScript 高频存在于项目环境中。',known:'它是长期项目中的真实技术环境。',unknown:'独立实现与理解深度尚未确认。'},
+
+{id:'webn',g:'web',x:.405,y:.745,size:17,type:'forming',name:'Web / 网络基础',en:'Web / Network Fundamentals',state:'正在形成',res:.70,color:'#d7eee9',summary:'Web、HTTP、网络和安全基础形成了一条持续学习主线。',known:'存在结构化学习与纠错痕迹。',unknown:'长期记忆和迁移能力还没有通过新的行为证据确认。'},
+{id:'browser',g:'web',x:.565,y:.705,size:14,type:'forming',name:'浏览器渲染',en:'Browser Rendering',state:'正在形成',res:.66,color:'#b8ddd6',summary:'浏览器渲染主干已经形成连续学习轨迹。',known:'DOM、CSSOM、Layout、Paint、Composite 等都有真实学习记录。',unknown:'脱离提示后的稳定解释能力仍需后续观察。'},
+{id:'js',g:'web',x:.515,y:.85,size:15,type:'forming',name:'JavaScript / DOM',en:'JavaScript / DOM',state:'正在形成',res:.72,color:'#c6e4de',summary:'JavaScript 与 DOM 明确处在当前学习主线。',known:'“正在学习”本身是高置信事实。',unknown:'目前不能把它表示成成熟能力。'}
+];
+
+const relations=[
+['oss-p','pr'],['oss-p','test'],['pr','test'],['pr','conc'],['conc','sqlite'],
+['product','tauri'],['product','rust'],['product','ts'],['tauri','rust'],
+['webn','browser'],['browser','js'],['test','product']
+];
+
+let W=0,H=0,view={x:0,y:0,scale:1},mouse={x:0,y:0,nx:0,ny:0},hover=null,selected=null;
+let drag=false,last={x:0,y:0},moved=false;
+let bgStars=[],dust=[],nebula=[];
+const hash=i=>{const x=Math.sin(i*127.1+311.7)*43758.5453123;return x-Math.floor(x)};
+const hex=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+const rgba=(c,a)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
+
+function rebuild(){
+  bgStars=[];dust=[];nebula=[];
+  for(let i=0;i<470;i++)bgStars.push({x:hash(i*2.3),y:hash(i*5.7),z:.15+hash(i*9.1)*.85,r:.25+hash(i*11.3)*1.25,a:.05+hash(i*17.9)*.42});
+  galaxies.forEach((g,gi)=>{
+    for(let i=0;i<100;i++){
+      const a=hash(gi*1000+i*3.1)*Math.PI*2;
+      const rr=Math.pow(hash(gi*2000+i*7.3),.72)*g.spread;
+      dust.push({g:g.id,x:g.cx+Math.cos(a)*rr,y:g.cy+Math.sin(a)*rr*(.42+.22*hash(i*9.7)),z:.35+hash(i*12.1)*.45,r:.25+hash(i*15.7)*1.05,a:.025+hash(i*18.4)*.11});
+    }
+    for(let k=0;k<9;k++){
+      const a=hash(gi*40+k*2.1)*Math.PI*2,rr=hash(gi*80+k*4.3)*g.spread*.58;
+      nebula.push({g:g.id,x:g.cx+Math.cos(a)*rr,y:g.cy+Math.sin(a)*rr*.55,rx:g.spread*(.34+.30*hash(k*3.4)),ry:g.spread*(.10+.12*hash(k*5.4)),rot:a*.65,alpha:.015+.022*hash(k*8.1)});
+    }
+  });
+}
+function resize(){
+  W=innerWidth;H=innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);rebuild();
+}
+function base(){return Math.min(W,H*1.18)}
+function world(x,y,z=1){
+  const B=base(),ox=(W-B)/2,oy=(H-B*.82)/2;
+  const px=(ox+x*B),py=(oy+y*B*.82);
+  const parX=(mouse.nx-.5)*16*(1-z),parY=(mouse.ny-.5)*11*(1-z);
+  return {x:(px*view.scale+view.x+(1-view.scale)*W/2)+parX,y:(py*view.scale+view.y+(1-view.scale)*H/2)+parY};
+}
+function drawBackground(t){
+  ctx.fillStyle='#03050a';ctx.fillRect(0,0,W,H);
+  const v=ctx.createRadialGradient(W*.49,H*.45,0,W*.49,H*.45,Math.max(W,H)*.78);
+  v.addColorStop(0,'rgba(11,17,27,.36)');v.addColorStop(.55,'rgba(6,9,15,.10)');v.addColorStop(1,'rgba(0,0,0,.72)');
+  ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
+
+  bgStars.forEach((s,i)=>{
+    const p=world(s.x,s.y,s.z),tw=.72+.28*Math.sin(t/1600+i*.73);
+    ctx.beginPath();ctx.arc(p.x,p.y,s.r*(.65+s.z*.55),0,Math.PI*2);
+    ctx.fillStyle=`rgba(210,222,238,${s.a*tw*(.45+s.z*.75)})`;ctx.fill();
+  })
+}
+function drawNebula(){
+  galaxies.forEach(g=>{
+    const c=g.color;
+    nebula.filter(n=>n.g===g.id).forEach(n=>{
+      const p=world(n.x,n.y,.42),B=base()*view.scale;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(n.rot);
+      const rx=n.rx*B,ry=n.ry*B;
+      const gr=ctx.createRadialGradient(0,0,0,0,0,rx);
+      gr.addColorStop(0,rgba(c,n.alpha*1.6));gr.addColorStop(.38,rgba(c,n.alpha));gr.addColorStop(1,rgba(c,0));
+      ctx.scale(1,Math.max(.12,ry/rx));ctx.fillStyle=gr;ctx.beginPath();ctx.arc(0,0,rx,0,Math.PI*2);ctx.fill();ctx.restore();
+    });
+  });
+  dust.forEach(d=>{
+    const g=galaxies.find(x=>x.id===d.g),p=world(d.x,d.y,d.z),c=g.color;
+    ctx.beginPath();ctx.arc(p.x,p.y,d.r,0,Math.PI*2);ctx.fillStyle=rgba(c,d.a);ctx.fill();
+  })
+}
+function starPos(n){return world(n.x,n.y,.9)}
+function drawRay(p,c,len,alpha,rot=0){
+  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(rot);ctx.strokeStyle=rgba(c,alpha);ctx.lineWidth=.55;
+  ctx.beginPath();ctx.moveTo(-len,0);ctx.lineTo(len,0);ctx.stroke();ctx.restore();
+}
+function drawCore(n,p,R,c,t){
+  const pulse=1+.025*Math.sin(t/1000+n.x*13);
+  const gr=ctx.createRadialGradient(p.x-R*.26,p.y-R*.26,0,p.x,p.y,R*pulse);
+  gr.addColorStop(0,'rgba(255,255,255,.99)');gr.addColorStop(.12,rgba(c,.98));gr.addColorStop(.55,rgba(c,.74));gr.addColorStop(1,rgba(c,.12));
+  ctx.fillStyle=gr;ctx.beginPath();ctx.arc(p.x,p.y,R*pulse,0,Math.PI*2);ctx.fill();
+}
+function drawCoreStar(n,p,R,c,t){
+  const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,R*5.8);g.addColorStop(0,rgba(c,.26));g.addColorStop(.22,rgba(c,.09));g.addColorStop(1,rgba(c,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,R*5.8,0,Math.PI*2);ctx.fill();
+  drawRay(p,c,R*4.2,.20,.08);drawRay(p,c,R*2.7,.14,Math.PI/2+.08);drawCore(n,p,R,c,t);
+  ctx.beginPath();ctx.arc(p.x,p.y,R+5,0,Math.PI*2);ctx.strokeStyle=rgba(c,.18);ctx.lineWidth=.7;ctx.stroke();
+}
+function drawForming(n,p,R,c,t){
+  const pulse=.5+.5*Math.sin(t/1350+n.y*9);
+  const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,R*4.8);g.addColorStop(0,rgba(c,.19));g.addColorStop(.25,rgba(c,.07));g.addColorStop(1,rgba(c,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,R*4.8,0,Math.PI*2);ctx.fill();
+  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(t/18000+n.x);
+  for(let k=0;k<3;k++){ctx.beginPath();ctx.ellipse(0,0,R*(1.7+k*.5),R*(.65+k*.18),k*.72,0,Math.PI*2);ctx.strokeStyle=rgba(c,.06+.035*pulse);ctx.lineWidth=.65;ctx.stroke()}
+  ctx.restore();drawCore(n,p,R,c,t);
+}
+function drawVeiled(n,p,R,c,t){
+  const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,R*6.2);g.addColorStop(0,rgba(c,.16));g.addColorStop(.20,rgba(c,.07));g.addColorStop(.55,rgba(c,.025));g.addColorStop(1,rgba(c,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,R*6.2,0,Math.PI*2);ctx.fill();
+  ctx.save();ctx.translate(p.x,p.y);ctx.globalAlpha=.7;
+  for(let k=0;k<5;k++){
+    const a=k*1.27+t/16000,rr=R*(1.0+k*.26);
+    ctx.beginPath();ctx.ellipse(Math.cos(a)*rr*.28,Math.sin(a)*rr*.18,R*(.9+k*.15),R*(.45+k*.08),a*.35,0,Math.PI*2);
+    ctx.fillStyle=rgba(c,.035);ctx.fill();
+  }
+  ctx.restore();drawCore(n,p,R*.92,c,t);
+  ctx.beginPath();ctx.arc(p.x,p.y,R+4,0,Math.PI*2);ctx.setLineDash([2,4]);ctx.strokeStyle=rgba(c,.18);ctx.lineWidth=.6;ctx.stroke();ctx.setLineDash([]);
+}
+function drawBridge(n,p,R,c,t){
+  const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,R*4.5);g.addColorStop(0,rgba(c,.21));g.addColorStop(.22,rgba(c,.08));g.addColorStop(1,rgba(c,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,R*4.5,0,Math.PI*2);ctx.fill();
+  drawRay(p,c,R*3.1,.16,-.25);drawCore(n,p,R,c,t);
+  ctx.beginPath();ctx.arc(p.x,p.y,R+4.5,0,Math.PI*2);ctx.strokeStyle=rgba(c,.24);ctx.lineWidth=.7;ctx.stroke();
+}
+function drawTrace(n,p,R,c,t){
+  const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,R*3.5);g.addColorStop(0,rgba(c,.11));g.addColorStop(1,rgba(c,0));
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,R*3.5,0,Math.PI*2);ctx.fill();
+  drawCore(n,p,R*.72,c,t);
+}
+function drawStar(n,t){
+  const p=starPos(n),R=(3.6+n.size*.39)*view.scale,c=hex(n.color);
+  ({core:drawCoreStar,forming:drawForming,veiled:drawVeiled,bridge:drawBridge,trace:drawTrace}[n.type]||drawTrace)(n,p,R,c,t);
+  const active=(hover&&hover.id===n.id)||(selected&&selected.id===n.id);
+  if(active){ctx.beginPath();ctx.arc(p.x,p.y,R+7,0,Math.PI*2);ctx.strokeStyle=rgba(c,.46);ctx.lineWidth=.8;ctx.stroke()}
+}
+function drawRelations(){
+  if(!hover&&!selected)return;
+  const focus=(hover||selected).id;
+  relations.forEach(([a,b])=>{
+    if(a!==focus&&b!==focus)return;
+    const A=nodes.find(n=>n.id===a),B=nodes.find(n=>n.id===b),pa=starPos(A),pb=starPos(B);
+    const gr=ctx.createLinearGradient(pa.x,pa.y,pb.x,pb.y);gr.addColorStop(0,'rgba(225,235,248,.24)');gr.addColorStop(1,'rgba(225,235,248,.055)');
+    ctx.strokeStyle=gr;ctx.lineWidth=.65;ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);ctx.stroke();
+  })
+}
+function drawGalaxyNames(){
+  galaxies.forEach(g=>{
+    const near=(hover&&hover.g===g.id)||(selected&&selected.g===g.id); if(!near)return;
+    const p=world(g.cx,g.cy-g.spread*.56,.55);
+    ctx.save();ctx.textAlign='center';ctx.font=`500 ${Math.max(10,11*view.scale)}px Inter,"PingFang SC",sans-serif`;ctx.fillStyle='rgba(214,224,237,.44)';ctx.fillText(g.name,p.x,p.y);ctx.restore();
+  })
+}
+function loop(t){
+  ctx.clearRect(0,0,W,H);drawBackground(t);drawNebula();drawRelations();drawGalaxyNames();nodes.forEach(n=>drawStar(n,t));requestAnimationFrame(loop)
+}
+function pick(x,y){
+  let best=null,bd=1e9;
+  nodes.forEach(n=>{const p=starPos(n),r=(8+n.size*.45)*view.scale+8,d=Math.hypot(x-p.x,y-p.y);if(d<r&&d<bd){best=n;bd=d}});
+  return best;
+}
+function setTooltip(n,x,y){
+  if(!n){tooltip.classList.remove('show');return}
+  tooltip.querySelector('strong').textContent=n.name;tooltip.querySelector('small').textContent=n.state;
+  tooltip.style.left=x+'px';tooltip.style.top=y+'px';tooltip.classList.add('show');
+}
+function selectNode(n){
+  selected=n||null;if(!n){card.classList.remove('show');return}
+  const g=galaxies.find(x=>x.id===n.g);
+  galaxy.textContent=g.name;title.textContent=n.name;en.textContent=n.en;state.textContent=n.state;
+  summary.textContent=n.summary;known.textContent=n.known;unknown.textContent=n.unknown;
+  explain.classList.remove('show');toggle.textContent='查看这颗星为什么是这样';card.classList.add('show');
+}
+canvas.addEventListener('mousemove',e=>{
+  mouse.x=e.clientX;mouse.y=e.clientY;mouse.nx=e.clientX/W;mouse.ny=e.clientY/H;
+  if(drag){const dx=e.clientX-last.x,dy=e.clientY-last.y;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;view.x+=dx;view.y+=dy;last={x:e.clientX,y:e.clientY};return}
+  hover=pick(e.clientX,e.clientY);setTooltip(hover,e.clientX,e.clientY);canvas.style.cursor=hover?'pointer':'grab';hint.style.opacity=.18;
+});
+canvas.addEventListener('mouseleave',()=>{hover=null;setTooltip(null)});
+canvas.addEventListener('mousedown',e=>{if(pick(e.clientX,e.clientY))return;drag=true;moved=false;last={x:e.clientX,y:e.clientY};canvas.classList.add('dragging')});
+addEventListener('mouseup',()=>{drag=false;canvas.classList.remove('dragging')});
+canvas.addEventListener('click',e=>{if(moved)return;selectNode(pick(e.clientX,e.clientY))});
+canvas.addEventListener('wheel',e=>{e.preventDefault();view.scale=Math.max(.72,Math.min(2.25,view.scale*(e.deltaY<0?1.09:.92)))},{passive:false});
+close.onclick=()=>selectNode(null);
+toggle.onclick=()=>{const on=explain.classList.toggle('show');toggle.textContent=on?'收起':'查看这颗星为什么是这样'};
+addEventListener('resize',resize);resize();requestAnimationFrame(loop);
 </script>
-</body></html>
+</body>
+</html>
