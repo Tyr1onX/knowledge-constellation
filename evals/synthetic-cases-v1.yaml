@@ -1,0 +1,87 @@
+version: v1
+language: zh-CN
+purpose: >-
+  Round 02 对抗测试：攻击证据冲突、时间衰减、团队角色和证书型证据。
+
+cases:
+  - id: I-contradictory-evidence
+    title: 证据互相矛盾
+    evidence:
+      - type: resume
+        observation: 简历写“熟练 React / TypeScript，可独立完成中型前端项目”。
+      - type: project
+        observation: 有两个 React 项目，但提交记录显示大量代码由 AI Agent 批量生成。
+      - type: learning_record
+        observation: 最近学习记录把 JavaScript scope、closure、prototype 标记为正在学习或未系统掌握。
+      - type: behavioral
+        observation: 在一次新问题解释中，可以说明组件状态和 props，但无法解释 closure 相关 bug。
+      - type: self_report
+        observation: 用户说“项目能做出来，但很多底层 JS 我确实还在补”。
+    expected:
+      must_support:
+        - React 项目 exposure 与产品实践可以存在。
+        - JavaScript 基础理解存在明确边界。
+        - 系统应保留“项目产出较强、底层理解较弱”的不对称状态。
+      must_not:
+        - 把简历和学习记录平均成一个“中级前端”。
+        - 因为简历写熟练就覆盖最新行为证据。
+        - 因为 closure 不会就否定所有 React 项目参与。
+
+  - id: J-stale-expertise
+    title: 历史深度但近期不用
+    evidence:
+      - type: historical_projects
+        observation: 2019—2021 连续维护 Java / Spring 服务，有大量本人实现、调试、Review 和线上故障复盘。
+      - type: external_validation
+        observation: 当时有维护者和同事对核心模块设计与故障处理的明确认可。
+      - type: recency
+        observation: 2022—2026 几乎没有 Java / Spring 活动，当前主要做 Python 数据分析。
+      - type: behavioral
+        observation: 2026 随机解释旧系统时仍能讲清主要架构，但部分 Spring API 和配置细节已经记不清。
+    expected:
+      must_support:
+        - Java / Spring 历史能力不能因为不近期使用就被删除。
+        - 当前活跃度与历史证据强度必须分开。
+        - Python 数据分析可以成为当前更靠近中心的主题。
+      must_not:
+        - 把 2020 年高强度证据当成 2026 年同等活跃状态。
+        - 把“不活跃”解释成“不会”。
+
+  - id: K-collaboration-heavy
+    title: 团队项目中的非编码核心角色
+    evidence:
+      - type: team_project
+        observation: 8 人项目持续一年，用户代码提交量只占约 8%。
+      - type: specs
+        observation: 用户主要维护需求文档、交互约束、验收标准和发布 checklist。
+      - type: review
+        observation: 多个 PR Review 中用户能指出与需求不一致、边界遗漏和回归风险，并要求修改。
+      - type: testing
+        observation: 用户组织真实用户测试，归纳失败场景并决定是否阻止发布。
+      - type: implementation
+        observation: 少量本人实现主要是配置和小型 UI 修复，没有核心架构代码。
+    expected:
+      must_support:
+        - Requirement Framing / Product Judgment / Acceptance & Validation 可以是强节点或强 Claim。
+        - 编码实现必须保持有限，不应被团队成果放大。
+        - 代码占比低不等于贡献低。
+      must_not:
+        - 用 commit 数量直接估计代表性或贡献价值。
+        - 把整个团队系统架构能力归给用户。
+
+  - id: L-certification-only
+    title: 证书强但实践少
+    evidence:
+      - type: certification
+        observation: 用户通过 AWS Solutions Architect Associate，并提供可验证证书。
+      - type: study_record
+        observation: 有系统学习 VPC、IAM、EC2、S3、RDS、负载均衡和高可用设计的记录。
+      - type: practice
+        observation: 实际只部署过一个个人静态网站，没有生产云系统经验。
+    expected:
+      must_support:
+        - AWS / Cloud Architecture 可以有结构化理解证据。
+        - 证书属于外部验证，但验证范围必须限定在考试覆盖的知识与当时状态。
+      must_not:
+        - 直接推出生产云架构实践能力。
+        - 把证书等级转换成星星大小。
