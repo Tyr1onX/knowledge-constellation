@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["evidence"],
+  "properties": {"evidence": {"type": "array", "items": {"type": "object", "required": ["id","source_ids","kind","observation","confidence","attribution","supports","does_not_support"], "properties": {"id":{"type":"string"},"source_ids":{"type":"array","minItems":1,"items":{"type":"string"}},"kind":{"type":"string"},"observation":{"type":"string"},"confidence":{"enum":["low","medium","high"]},"attribution":{"enum":["direct","external","uncertain","mixed"]},"supports":{"type":"array","items":{"type":"string"}},"does_not_support":{"type":"array","items":{"type":"string"}},"correlation_group":{"type":["string","null"]}}}}}
+}

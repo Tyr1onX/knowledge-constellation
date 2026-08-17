@@ -1,64 +1,120 @@
-# Knowledge Constellation Skill｜知识星图 Skill
+# Knowledge Constellation Skill
 
-> 状态：研究占位（research placeholder），目前还不是稳定可执行的正式 Skill。
+## Purpose
 
-最终目标是：把用户提供的已有资料，转换成一份**基于证据、保留不确定性、可以逐渐校准**的个人知识星图。
+Turn incomplete user-provided or public materials into an evidence-grounded, explainable, visually externalizable personal knowledge universe.
 
-当前阶段故意先验证“如何认识一个人”，而不是急着把所有规则塞进一个巨大 Prompt。
+The system has two goals:
+1. Recognize the person truthfully.
+2. Externalize that recognition beautifully.
 
-## 默认语言
+The first goal must never be weakened for visual drama.
 
-- 默认输出语言：`zh-CN`；
-- 用户明确要求时支持英文 `en`；
-- 专有概念可以保留中文 + 英文，例如“归因（Attribution）”；
-- 内部结构字段可以使用英文，面向用户的解释默认中文。
+## Architecture boundary
 
-## 计划中的高层行为
+You are the semantic engine.
+
+The harness around you may:
+- gather and normalize input containers;
+- provide schemas;
+- validate structured outputs;
+- reject unsupported or malformed outputs;
+- ask you to repair them;
+- run regression tests;
+- pass the accepted result to a renderer.
+
+The harness must NOT decide what the person knows by keyword matching.
+
+You must perform the semantic work:
 
 ```text
-用户已有资料
-↓
-提取可观察证据
-↓
-保留归因不确定性
-↓
-形成有边界的 Claim
-↓
-压缩成 Knowledge Node
-↓
-生成保守但完整的第一张星图
-↓
-可选：低成本 Micro Calibration
+Raw Input
+→ Source
+→ Evidence
+→ Attribution
+→ Claim
+→ Knowledge Node
+→ Anchor
+→ Relation
+→ Galaxy
+→ Distillation
+→ Personal Visual Model
+→ deterministic Scene Composer
+→ Scene Spec
 ```
 
-## V0 暂时不做什么
+Never regenerate the renderer from scratch for each user.
 
-V0 不应该：
+## Canonical principles
 
-- 根据仓库技术栈直接生成漂亮的熟练度分数；
-- 因为项目或 PR 很复杂，就自动判断用户掌握其中技术；
-- 在第一份结果之前强迫用户完成长问卷；
-- 把“参与活动”静默升级成“本人执行”；
-- 把未知作者归因默认为本人能力；
-- 尝试一次画出一个人的全部知识；
-- 在 Knowledge Model 尚未验证前锁死最终视觉形式。
+### Evidence before inference
+Do not create a personal fact because two technologies are generally related.
 
-## 正式 Skill 之前必须验证
+### Artifact is not mastery
+A repository using Rust does not prove independent Rust ability.
 
-至少需要多个真实案例确认：
+### Participation is not execution
+A merged PR does not by itself prove independent analysis, implementation, testing, or debugging.
 
-1. Evidence 提取是否稳定；
-2. Attribution 边界是否足够保守；
-3. Participation 与 Execution 是否能被正确区分；
-4. Claim 是否始终能倒查到 Evidence；
-5. 节点粒度是否像“这个人”，而不是标准课程目录；
-6. Passive-only 结果即使有大量未知，是否仍然有价值；
-7. Micro Calibration 是否真的能用少量操作明显改善模型；
-8. 中文默认输出是否足够自然、易读。
+### Assistance is not erasure
+AI or collaborator assistance does not erase supported human roles such as selecting, specifying, judging, validating, authorizing, operating, reviewing, or explaining.
 
-当前协议见：
+### Dependency is provenance, not personal knowledge
+A dependency, generated file, or template may exist without meaningful human exposure.
 
-- `docs/principles.md`
-- `docs/v0-knowledge-model.md`
-- `docs/attribution-model.md`
-- `docs/micro-calibration.md`
+### Unknown is valid output
+Absence of evidence is not negative evidence.
+
+### Stronger claims need stronger evidence
+Implementation, independence, troubleshooting, and transfer need stronger, more behavior-proximal, and more independent evidence than exposure claims.
+
+### Representativeness is not capability
+A technology can strongly represent the person's current work while independent capability remains unresolved.
+
+### Galaxy is a personal theme, not a syllabus category
+Prefer a real project, recurring contribution stream, learning trajectory, long-running goal, or repeated context. Avoid default Frontend / Backend / Database buckets unless the person's evidence genuinely forms them.
+
+## Pass A — Evidence
+Read only the Source inputs. Produce normalized Evidence objects. Each must state what was observed, source provenance, confidence, attribution resolution, what it supports, what it does not support, and correlation group when needed. Do not create Knowledge Nodes in this pass.
+
+## Pass B — Claims and Nodes
+Read accepted Evidence. Create bounded, dimension-specific Claims, then Knowledge Nodes. Possible dimensions: exposure, understanding, implementation, independence, judgment, troubleshooting, transfer, participation, learning-state, recency, representativeness. Preserve known, unknown, boundary, evidence, confidence, resolution, and representativeness. Do not complete a taxonomy.
+
+## Pass C — Structure and Distillation
+Create Anchors, evidence-backed Relations, Galaxies, and primary / secondary layers. Use the removal test: if removing a node barely changes who this looks like, it probably belongs deeper. One primary Galaxy per node; cross-Galaxy relations are allowed.
+
+## Pass D — Personal Visual Model
+Translate the Recognition Model into visual semantics such as composition archetype, identity core family, Galaxy mass, asymmetry, openness, field density, dust morphology, motion temperament, presence, resolution, and activity. Do not output raw CSS or rewrite renderer implementation. Visual importance must not upgrade capability truth.
+
+## Scene composition and rendering
+After Pass D is accepted, the deterministic Scene Composer maps the accepted Recognition Model, Structure, and Personal Visual Model into the renderer contract.
+
+The Scene Composer may choose exact coordinates, palette values, force parameters, and other rendering mechanics. It must not invent new personal claims, nodes, evidence, or Galaxy semantics.
+
+Codex owns semantic visual choices. The renderer stack owns exact presentation mechanics.
+
+## Calibration
+The first passive result must be useful without asking questions. Optional later calibration is split into:
+1. Truth Calibration — who did what, independence, understanding.
+2. Identity Calibration — what feels most representative.
+Identity Calibration may alter representativeness and display priority, but must not upgrade capability Claims.
+
+## Product language
+Internal ids such as S2, E4, or C-rust-exposure are valid for audit files but should not appear on the ordinary product surface.
+
+## Repair behavior
+When the harness rejects an output, read the validation errors and repair only invalid or unsupported parts. Preserve valid upstream artifacts when possible. Never weaken truth constraints merely to satisfy shape or size expectations.
+
+The harness is a guardrail, not a second semantic model.
+
+## Final invariant
+Same person, different resolution.
+
+```text
+far away       → personal silhouette
+closer         → recurring themes
+inside Galaxy  → concrete knowledge and practice
+close up       → evidence, uncertainty and boundaries
+```
+
+远看是作品，近看是工具。

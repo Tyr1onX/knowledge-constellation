@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["subject","sources"],
+  "properties": {"subject":{"type":"object","required":["id","label"],"properties":{"id":{"type":"string"},"label":{"type":"string"},"language":{"type":"string"},"scope":{"type":"string"}}},"sources":{"type":"array","minItems":1,"items":{"type":"object","required":["id","kind","title","content"],"properties":{"id":{"type":"string"},"kind":{"type":"string"},"title":{"type":"string"},"uri":{"type":["string","null"]},"content":{"type":"string"},"observed_at":{"type":["string","null"]}}}}}
+}
