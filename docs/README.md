@@ -6,13 +6,14 @@
 
 - `../SKILL.md` — Codex 语义总契约，当前最高优先级。
 - `model-spec-v1.md` — Recognition Model → Visual Model → Renderer 的正式边界。
+- `identity-core-visual-grammar.md` — Identity Core 当前视觉语法、支持 family、Codex / Renderer 边界。
 - `presentation-contract.md` — 面向产品表面的表达边界。
 - `repository-checkpoint-cadence.md` — 仓库 checkpoint 规则。
 - `skill-harness-v0.3.md` — Skill-first Harness 当前设计。
 - `milestones/v0.3-skill-first-harness.md` — v0.3 里程碑。
 - `unseen-eval-v0.3.md` — 当前 unseen-user gate。
 
-当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md` 和 `model-spec-v1.md` 为准。
+当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md`、`model-spec-v1.md` 和对应的当前专项 contract 为准。
 
 ## Research foundations｜仍然有效的研究基础
 

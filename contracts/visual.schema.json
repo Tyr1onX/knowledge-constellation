@@ -4,7 +4,7 @@
   "required": ["seed", "identity", "composition", "field", "stars", "motion", "galaxies"],
   "properties": {
     "seed":{"type":"string","minLength":1},
-    "identity":{"type":"object","required":["family","label"],"properties":{"family":{"enum":["avatar","monogram","name","quiet_star","eclipse","minimal_ring"]},"label":{"type":"string","minLength":1},"monogram":{"type":["string","null"]},"avatar":{"type":["string","null"]}}},
+    "identity":{"type":"object","required":["family","label"],"properties":{"family":{"enum":["monogram","eclipse","quiet_star","minimal_ring","black_hole","pulsar","binary_star","protostar_nebula"]},"label":{"type":"string","minLength":1},"monogram":{"type":["string","null"]},"avatar":{"type":["string","null"]}}},
     "composition":{"type":"object","required":["archetype","asymmetry","openness","dominant_axis"],"properties":{"archetype":{"enum":["dominant_core_satellites","dual_core","three_islands","stream","sparse_archipelago","compact_cluster","asymmetric_chain"]},"asymmetry":{"type":"number","minimum":0,"maximum":1},"openness":{"type":"number","minimum":0,"maximum":1},"dominant_axis":{"enum":["horizontal","vertical","diagonal","radial","none"]}}},
     "field":{"type":"object","required":["density","dust_family","temperature_bias"],"properties":{"density":{"enum":["very_sparse","sparse","medium","dense"]},"dust_family":{"enum":["almost_empty","cold_filament","soft_band","broken_cloud","warm_dust"]},"temperature_bias":{"enum":["cool","cool_neutral","neutral","warm_neutral","warm"]}}},
     "stars":{"type":"object","required":["family","temperature_variation"],"properties":{"family":{"const":"subtle_point"},"temperature_variation":{"enum":["low","medium"]}}},
