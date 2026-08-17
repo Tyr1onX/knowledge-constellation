@@ -1,163 +1,142 @@
 # Knowledge Constellation｜知识星图
 
-> 基于证据建立个人知识画像，并把不确定性保留下来。
+> 用证据认识一个人，再把这种认识变成一片可解释、可探索的个人知识宇宙。
 
-Knowledge Constellation 想回答一个简单但很难的问题：
-
-> **根据目前能够观察到的痕迹，我们有理由相信这个人知道什么、接触过什么、实践过什么？这些东西又是如何组成“这个人”的？**
-
-项目希望从 GitHub、简历、学习记录、项目、作品集等已经存在的资料出发，生成一份**保守但完整、可解释、可以逐渐校准**的个人知识画像，而不是看到某个技术出现在项目里，就直接把它当成“已掌握技能”。
+Knowledge Constellation 是一个 **Skill-first** 项目。它不把 GitHub 技术栈、简历关键词或项目依赖直接翻译成“技能等级”，而是让 Codex 在明确的 Recognition Contract 下完成语义判断，再由 Harness 负责隔离、验证和 repair。
 
 ## 当前状态
 
-仓库目前处于 **V0 研究阶段**。
+当前稳定主线是 **Codex-in-the-loop semantic harness**：
 
-现在还不是在急着发布一个完整 Skill，而是在验证它下面最重要的“认识协议（Recognition Protocol）”和“结构协议（Structure Protocol）”：
+- 根 `SKILL.md` 是 Codex 的统一语义契约；
+- Pass A/B/C/D 依次产生 Evidence → Model → Structure → Visual Model；
+- Harness 只负责 orchestration / schema / semantic validation / repair；
+- 每个 Pass 使用隔离 workspace，避免读取 tests、历史 examples 或其他人的 fixture；
+- 强 implementation / independence / troubleshooting / transfer Claim 需要多组独立证据，并要求多来源 provenance 或 external validation；
+- 早期研究文档、Tyr1onX Passive-only 样本和 unseen-evaluation 结论继续保留，作为设计 provenance。
+
+项目仍处于研究型产品阶段，不宣称存在一个可泛化到所有人的“准确率”。当前评估更关注可审计的错误：有没有吹高能力、把依赖当掌握、把学习中写成 established、把单份自述伪装成多份独立验证等。
+
+## 架构边界
 
 ```text
-Source / 来源
+Raw Sources
     ↓
-Evidence / 证据
+Codex + SKILL.md
     ↓
-Attribution / 归因
-    ↓
-Claim / 可支持的判断
-    ↓
-Knowledge Node / 知识节点
-    ↓
-Anchor / 真实经历锚点
-    ↓
-Relation / 个人关系
-    ↓
-Motif / 反复出现的个人主题
-    ↓
-Galaxy / 星系
-    ↓
-Distillation / 蒸馏
-    ↓
-Visual Semantics / 视觉语义
-    ↓
-Constellation / 知识星图
+Pass A — Evidence
+    ↓ validate / repair
+Pass B — Claims + Knowledge Nodes
+    ↓ validate / repair
+Pass C — Anchors + Relations + Galaxies + Distillation
+    ↓ validate / repair
+Pass D — Personal Visual Model
+    ↓ validate / repair
+accepted semantic artifacts
 ```
 
-第一阶段默认使用 **Passive Evidence（被动证据）**：不要求用户先做长问卷、不要求深度自述，也不因为信息不足就乐观补全。
+职责必须保持清晰：
+
+- **Codex**：理解、归因、Claim、Knowledge Node、Anchor、Relation、Galaxy、Distillation、Visual Model；
+- **Harness**：输入组织、Schema、状态机、隔离、验证、repair、持久化；
+- **Renderer**：Scene / Canvas / d3-force / Semantic Zoom / Identity Core / 产品表面。完整视觉执行层会作为独立 checkpoint 迁入，不让半套原型污染 main。
+
+如果 Python 开始通过关键词表自动创建 Rust / React / Database 节点，架构就退化了。
 
 ## 核心原则
 
-- **证据先于推断（Evidence before inference）**：结论必须能够追溯到实际证据。
-- **成果不等于掌握（Artifact ≠ mastery）**：项目用了 Rust，不等于用户能独立使用 Rust 开发。
-- **参与不等于执行（Participation ≠ execution）**：参与一个 PR，不等于其中的分析、实现、测试都由本人完成。
-- **归因很重要（Attribution matters）**：AI、协作者、模板与自动化都可能参与成果生产，需要区分人在其中真正承担的角色。
-- **未知是合法状态（Unknown is valid）**：不知道就保留不知道，而不是自动补全。
-- **接触不等于能力（Exposure ≠ capability）**：经常遇到一项技术，与能够独立使用它，是两种不同信号。
-- **结构来自个人经历，而不是课程目录**：星系优先围绕真实项目、活动和学习轨迹形成，而不是预设“前端 / 后端 / 数据库”。
-- **代表性不等于能力强弱（Representativeness ≠ proficiency）**：一个节点可以非常代表这个人，同时能力深度仍然没有解析清楚。
-- **被动证据优先（Passive first）**：用户应该只提供已有资料，就能先得到一份有意义的结果。
-- **渐进式解析（Progressive resolution）**：之后再通过少量选择题、自适应问题或长期证据，让画像逐渐变清晰。
-- **人是主体（The person is the subject）**：不是拿一套标准知识树计算“完成度”，而是描绘哪些知识、实践和经历构成了现在的这个人。
+- Evidence before inference；
+- Artifact ≠ mastery；
+- Participation ≠ execution；
+- Assistance ≠ erasure；
+- Dependency is provenance, not personal knowledge；
+- Unknown is valid；
+- stronger claims require stronger and more independent evidence；
+- representativeness ≠ capability；
+- Galaxy 描述个人真实主题，而不是默认课程目录。
+
+完整规则见 [`SKILL.md`](SKILL.md) 和 [`docs/model-spec-v1.md`](docs/model-spec-v1.md)。
+
+## 快速验证
+
+需要 Python 3.10+：
+
+```bash
+pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python -m py_compile harness/pipeline.py harness/validate.py
+```
+
+准备一份符合 `contracts/input.schema.json` 的输入。仓库提供最小例子：
+
+```bash
+cp examples/input.example.json input.json
+python harness/pipeline.py init --input input.json --run runs/demo
+python harness/pipeline.py next --run runs/demo
+```
+
+`next` 会生成一个隔离 workspace，只包含：
+
+- `SKILL.md`
+- `ORCHESTRATION.md`
+- 当前 Pass Prompt
+- 当前 Schema
+- 已验收上游结果
+- `TASK.md`
+
+Codex 在 workspace 中写 `output.json`，然后执行：
+
+```bash
+python harness/pipeline.py validate --run runs/demo
+```
+
+Validator 只能接受或拒绝，不能替 Codex 生成语义答案。失败后再次 `next` 会进入 repair 模式；默认每个 Pass 最多两次 repair。
+
+## 当前评估
+
+早期 Tyr1onX 样本保留在 `examples/tyr1onx/`，用于说明 Evidence / Model / Structure 是如何形成的。
+
+`docs/unseen-eval-v0.3.md` 记录了当前公开 unseen-user gate：单项目型、学习型学生、Android 工具链学习轨迹、职业型开发者等案例。它们用“不能错误推断什么”作为主要 guard，而不是假装存在唯一主观标准答案。
+
+## 视觉层状态
+
+旧的 `prototype/index.html` 已从当前树中移除，因为它不再代表产品。历史版本仍可从 Git 历史恢复。
+
+Scene / Renderer 的正式接口已经在：
+
+- `docs/model-spec-v1.md`
+- `docs/presentation-contract.md`
+- `docs/physics-engine.md`
+
+中定义。完整多文件 Renderer 将作为后续独立 checkpoint 迁入 main。
 
 ## 仓库结构
 
 ```text
-knowledge-constellation/
-├─ README.md
-├─ SKILL.md
-├─ docs/
-│  ├─ principles.md
-│  ├─ v0-knowledge-model.md
-│  ├─ attribution-model.md
-│  ├─ structure-model.md
-│  ├─ distillation.md
-│  ├─ visual-semantics.md
-│  ├─ micro-calibration.md
-│  ├─ evaluation.md
-│  └─ research-notes.md
-└─ examples/
-   └─ tyr1onx/
-      ├─ evidence.md
-      ├─ model.yaml
-      └─ structure.md
+SKILL.md                 Codex 语义入口
+contracts/               A/B/C/D JSON contracts
+prompts/                 各阶段任务提示
+skill/ORCHESTRATION.md   host state machine 约定
+harness/                 orchestration / validation
+tests/                   当前可运行的 Harness 回归
+docs/                    当前规范 + 历史研究
+evals/                   早期 synthetic / round reports
+examples/                研究样本与最小输入示例
+prototype/README.md      旧 prototype 的迁移说明
 ```
 
-## 第一个真实案例
+## 文档状态
 
-第一份 V0 样本使用 `Tyr1onX` 的公开 GitHub 痕迹。
+早期 V0 文档不会删除，因为它们记录 Attribution、Evidence、Distillation 和失败模式的形成过程；但它们不一定代表当前执行入口。先看 [`docs/README.md`](docs/README.md) 区分“当前规范”和“历史研究”。
 
-当前公开案例故意保持 **Passive-only**：只看公开 GitHub，测试零询问情况下最多能安全知道什么。
+## 项目不做什么
 
-目前已经形成三个层次：
+- 不生成假的统一 skill score；
+- 不把依赖树当知识树；
+- 不因为 PR 被合并就默认分析、实现和测试全部由本人独立完成；
+- 不为了视觉震撼把低解析节点画成成熟能力；
+- 不让 Harness 偷偷成为第二个语义模型。
 
-1. `evidence.md`：系统看到了什么；
-2. `model.yaml`：这些证据最多允许系统相信什么；
-3. `structure.md`：这些节点如何被压缩成更像个人的主题结构。
-
-当前 Passive-only 的结构草案形成三个主题：
-
-- **开源参与与工程流转**；
-- **课刻与桌面产品**；
-- **Web 基础补全**。
-
-并发、SQLite、CAS 等真实但低代表性的概念被主动降到第二层，而不是因为技术复杂就成为主星。
-
-聊天中的个人校准信息不会自动写入这个公开仓库。后续如果要公开“校准前 / 校准后”对照样本，应单独确认再加入。
-
-## 研究中的两个校准通道
-
-### Truth Calibration｜事实 / 归因校准
-
-改善我们对“实际发生了什么、用户本人承担了什么”的认识，可以更新 Attribution 和 Capability Claim。
-
-### Identity Calibration｜个人重要性校准
-
-改善“哪些真实存在的部分更能代表用户本人”的展示判断，只调整 representativeness 和视觉重心，不反向篡改能力结论。
-
-## 路线
-
-### V0 — Passive Constellation｜被动画像
-
-已有资料 → 保守建模 → 个人结构 → 蒸馏 → 第一张知识星图。
-
-### V0.1 — Explainability｜可解释
-
-每个节点都能回答：为什么它存在？为什么它这么显眼？证据在哪里停止？
-
-### V0.2 — Micro Calibration｜微校准
-
-用少量、低成本、尽量高信息量的选择题改善归因、解析度和个人展示重心，必要时允许星系结构本身发生变化。
-
-### V0.3 — Adaptive Calibration｜自适应校准
-
-只针对真正重要且不确定的区域，追加少量问题或小任务。
-
-### Later — Longitudinal Constellation｜长期变化
-
-让多次快照体现成长、遗忘、新方向和知识结构的变化。
-
-## 在正式视觉原型之前
-
-当前不会只因为 Tyr1onX 一个案例成立就开始做漂亮皮肤。
-
-`docs/evaluation.md` 定义了需要继续测试的多类用户，包括：
-
-- AI-heavy builder；
-- independent developer；
-- learning-heavy student；
-- one-project specialist；
-- broad generalist；
-- low-public-trace user。
-
-目标是避免把模型过拟合成“只适合第一个案例”。
-
-## 当前两个成功标准
-
-### 认识层
-
-> **在证据不完整时，依然形成一幅有意义的画像，但绝不假装知道得比证据更多。**
-
-### 展示层
-
-> **用尽可能少的可见结构，保留尽可能多的个人解释力。**
-
-最终希望做到：
+> **Same person, different resolution.**
 
 > **远看是作品，近看是工具。**
