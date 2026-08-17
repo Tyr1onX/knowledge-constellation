@@ -50,7 +50,13 @@ velocityDecay  0.24
 
 `stellar-color.js` 根据稳定 node id 产生 deterministic `temperatureK`，再近似转换为恒星色。
 
-它**绝不映射**能力强弱、熟练度、seniority、技术类别或 personality。
+它**绝不映射**：
+
+- 能力强弱；
+- 熟练度；
+- seniority；
+- 技术类别；
+- personality。
 
 大多数 Knowledge Star 必须留在暖白 / 白 / 冷白区域，只有少部分明显偏暖或蓝白。中心始终接近过曝白色，不能退化成彩色 UI 点。
 
@@ -85,7 +91,7 @@ maxReturnSpeed   2.6
 
 ```text
 monogram
-eclipse
+ eclipse
 quiet_star
 minimal_ring
 black_hole
