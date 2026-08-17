@@ -75,12 +75,11 @@ They must be visually distinct from interactive Knowledge Nodes:
 
 Optional large-scale astronomical structure may break the flatness of pure black.
 
-Current useful forms include:
+Current quality-gated forms are:
 
 - `almost_empty` — effectively pure black with distant stars;
 - `cold_filament` — faint silver / cool-gray filamentary structure;
-- `broken_cloud` — discontinuous low-contrast cloud fragments;
-- `soft_band` — a broad, very faint band when composition needs it.
+- `broken_cloud` — discontinuous low-contrast cloud fragments.
 
 The structure should contain gaps, irregularity, and dark interruption. It must not read as a pasted gradient or obvious galaxy photograph.
 
