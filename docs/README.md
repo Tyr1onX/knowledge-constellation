@@ -9,12 +9,21 @@
 - `identity-core-visual-grammar.md` — Identity Core 当前视觉语法、支持 family、Codex / Renderer 边界。
 - `background-field-visual-grammar.md` — 背景场当前视觉语法、负空间、环境形态与动态边界。
 - `presentation-contract.md` — 面向产品表面的表达边界。
+- `../renderer/README.md` — 当前 Renderer 实现基线与“禁止从零重写”连续性规则。
 - `repository-checkpoint-cadence.md` — 仓库 checkpoint 规则。
 - `skill-harness-v0.3.md` — Skill-first Harness 当前设计。
 - `milestones/v0.3-skill-first-harness.md` — v0.3 里程碑。
 - `unseen-eval-v0.3.md` — 当前 unseen-user gate。
 
-当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md`、`model-spec-v1.md` 和对应的当前专项 contract 为准。
+当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md`、`model-spec-v1.md`、`renderer/README.md` 和对应的当前专项 contract 为准。
+
+## Current implementation assets｜当前实现资产
+
+- `../renderer/physics.js` — d3-force 物理基线；
+- `../renderer/star-renderer.js` — Knowledge Star point-light 基线；
+- `../renderer/semantic-zoom.js` — Semantic Zoom / camera invariant 基线。
+
+这些文件不是实验快照。后续主页和 Renderer Runtime 必须复用 / 扩展它们。
 
 ## Research foundations｜仍然有效的研究基础
 

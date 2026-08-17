@@ -6,11 +6,12 @@ Knowledge Constellation 是一个 **Skill-first** 项目。它不把 GitHub 技�
 
 ## 当前状态
 
-当前稳定主线是 **Codex-in-the-loop semantic harness**：
+当前稳定主线是 **Codex-in-the-loop semantic harness + cumulative Renderer baseline**：
 
 - 根 `SKILL.md` 是 Codex 的统一语义契约；
 - Pass A/B/C/D 依次产生 Evidence → Model → Structure → Visual Model；
 - Harness 只负责 orchestration / schema / semantic validation / repair；
+- `renderer/` 保存已经验收的 d3-force、Knowledge Star 与 Semantic Zoom 实现基线；
 - 每个 Pass 使用隔离 workspace，避免读取 tests、历史 examples 或其他人的 fixture；
 - 强 implementation / independence / troubleshooting / transfer Claim 需要多组独立证据，并要求多来源 provenance 或 external validation；
 - 早期研究文档、Tyr1onX Passive-only 样本和 unseen-evaluation 结论继续保留，作为设计 provenance。
@@ -32,16 +33,20 @@ Pass C — Anchors + Relations + Galaxies + Distillation
     ↓ validate / repair
 Pass D — Personal Visual Model
     ↓ validate / repair
-accepted semantic artifacts
+Scene semantics
+    ↓
+Renderer baseline
+    ↓
+Knowledge Constellation
 ```
 
 职责必须保持清晰：
 
 - **Codex**：理解、归因、Claim、Knowledge Node、Anchor、Relation、Galaxy、Distillation、Visual Model；
 - **Harness**：输入组织、Schema、状态机、隔离、验证、repair、持久化；
-- **Renderer**：Scene / Canvas / d3-force / Semantic Zoom / Identity Core / 产品表面。完整视觉执行层会作为独立 checkpoint 迁入，不让半套原型污染 main。
+- **Renderer**：Scene / Canvas / d3-force / Knowledge Star / Semantic Zoom / Identity Core / 背景环境 / 产品表面。已验收的执行层必须累积在 `renderer/`，页面不得重新实现一套平行版本。
 
-如果 Python 开始通过关键词表自动创建 Rust / React / Database 节点，架构就退化了。
+如果 Python 开始通过关键词表自动创建 Rust / React / Database 节点，架构就退化了；如果每个新页面重新实现 stars / physics / zoom，视觉层同样退化了。
 
 ## 核心原则
 
@@ -102,13 +107,25 @@ Validator 只能接受或拒绝，不能替 Codex 生成语义答案。失败后
 
 旧的 `prototype/index.html` 已从当前树中移除，因为它不再代表产品。历史版本仍可从 Git 历史恢复。
 
-Scene / Renderer 的正式接口已经在：
+当前视觉层不再只存在于文档。首批正式 Renderer 基线已经迁入 `renderer/`：
+
+- `renderer/physics.js` — 已验收 d3-force 力模型与 drag/reheat 手感；
+- `renderer/star-renderer.js` — 已验收的小型 point-light Knowledge Star；
+- `renderer/semantic-zoom.js` — 已验收的层级显影与 camera invariants；
+- `renderer/README.md` — 后续前端开发的连续性规则。
+
+视觉 contract 继续由：
 
 - `docs/model-spec-v1.md`
 - `docs/presentation-contract.md`
 - `docs/physics-engine.md`
+- `docs/star-system.md`
+- `docs/identity-core-visual-grammar.md`
+- `docs/background-field-visual-grammar.md`
 
-中定义。完整多文件 Renderer 将作为后续独立 checkpoint 迁入 main。
+共同约束。
+
+新的主页、Scene Composer 或完整 Runtime 必须建立在 `renderer/` 上，而不是重新从空白 HTML 开始。
 
 ## 仓库结构
 
@@ -118,7 +135,8 @@ contracts/               A/B/C/D JSON contracts
 prompts/                 各阶段任务提示
 skill/ORCHESTRATION.md   host state machine 约定
 harness/                 orchestration / validation
-tests/                   当前可运行的 Harness 回归
+renderer/                累积式前端 Renderer 基线
+tests/                   Harness + Renderer contract 回归
 docs/                    当前规范 + 历史研究
 evals/                   早期 synthetic / round reports
 examples/                研究样本与最小输入示例
@@ -135,7 +153,8 @@ prototype/README.md      旧 prototype 的迁移说明
 - 不把依赖树当知识树；
 - 不因为 PR 被合并就默认分析、实现和测试全部由本人独立完成；
 - 不为了视觉震撼把低解析节点画成成熟能力；
-- 不让 Harness 偷偷成为第二个语义模型。
+- 不让 Harness 偷偷成为第二个语义模型；
+- 不把已验收的 Renderer 当一次性对话产物，在下一次页面开发里重新造一套。
 
 > **Same person, different resolution.**
 
