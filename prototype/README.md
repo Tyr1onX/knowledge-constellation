@@ -1,40 +1,16 @@
-# Prototype｜视觉实验
+# Prototype status｜旧视觉原型说明
 
-这里开始验证最终用户真正会看到的 Knowledge Constellation，而不再只验证内部模型。
+这里原先存放的是早期单文件视觉实验。它已经不再代表当前产品状态，因此 `prototype/index.html` 已从当前树中移除。
 
-## 第一版目标
+历史版本仍可从 Git 历史恢复；不会丢失研究记录。
 
-`index.html` 使用 Tyr1onX 的 Passive-only 样本，重点测试：
+当前请以：
 
-1. 第一眼是否能读出“这个人目前主要围绕什么”；
-2. Galaxy 是否像个人结构，而不是课程目录；
-3. 节点大小是否会被误读成技能等级；
-4. `Observed / Developing / Established` 的差异是否需要直接显示；
-5. 模糊 / 清晰能不能自然表达 Resolution；
-6. 第二层技术细节隐藏后，人物轮廓是否更清楚；
-7. 点击节点后，“知道什么 / 不知道什么 / Evidence”是否足够自然。
+- `../SKILL.md` — 当前语义入口；
+- `../docs/model-spec-v1.md` — Scene / Renderer 正式接口；
+- Git 历史 — 旧单文件 prototype；
+- 下一视觉 checkpoint — 完整多文件 Renderer。
 
-## 当前交互
+为准。
 
-- Hover：突出真实连接，降低其他节点存在感；
-- 点击星星：查看当前判断、证据边界和未知；
-- 点击 Galaxy 标题：聚焦该区域；
-- `显示第二层`：显示并发、SQLite / WAL 等不应占据首屏的细节；
-- `重置`：回到完整宇宙。
-
-## 当前视觉语义
-
-```text
-大小        → 代表性，而不是能力等级
-空间距离    → 真实 Anchor / Relation 形成的结构
-清晰 / 模糊 → 当前 Resolution
-第二层      → 真实存在但不应定义第一眼人物轮廓的细节
-```
-
-第一版故意没有使用“技能百分比”“等级条”“综合分”。
-
-## 重要说明
-
-这不是最终视觉设计。
-
-当前阶段最重要的是让真人直接看最终输出，并发现 Visual Model 是否会产生内部文档无法发现的误读。
+旧 prototype 只承担历史设计 provenance，不再作为 main 分支的可运行入口。
