@@ -109,6 +109,22 @@ The Scene Composer may choose exact coordinates, palette values, force parameter
 
 Codex owns semantic visual choices. The renderer stack owns exact presentation mechanics.
 
+## Completion behavior
+
+The normal user-facing result is the **interactive constellation**, not a folder of intermediate JSON files. Unless the user explicitly asks for analysis artifacts only, do not stop after Pass D.
+
+When the repository runtime is available:
+
+1. normalize the gathered material into `contracts/input.schema.json` without semantically filtering it into skills;
+2. drive Pass A/B/C/D through the isolated workspaces from `harness/pipeline.py`, performing the semantic work yourself and respecting validator repair feedback;
+3. after the accepted Visual Model exists, run the deterministic Scene Composer in `harness/compose_scene.py`;
+4. build the portable interactive site with `harness/build_site.py` and the canonical `renderer/` modules;
+5. deliver or preview the generated constellation, while keeping Evidence available only as secondary disclosure on the ordinary product surface.
+
+If the host exposes a separate semantic-runner process, `harness/e2e.py` may drive the entire loop through its runner adapter. If it does not, Codex itself remains the semantic Runner: use `pipeline.py next`, write the requested `output.json` inside that isolated workspace, then use `pipeline.py validate` until the Pass is accepted or its repair budget is exhausted.
+
+Never replace a failed semantic Pass with a handcrafted Scene or page-local inferred nodes just to finish rendering.
+
 ## Calibration
 The first passive result must be useful without asking questions. Optional later calibration is split into:
 1. Truth Calibration — who did what, independence, understanding.
