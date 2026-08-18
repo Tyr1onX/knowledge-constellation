@@ -36,7 +36,7 @@ Raw Input
 → Knowledge Node
 → Anchor
 → Relation
-→ Galaxy
+→ Motif / Galaxy
 → Distillation
 → Personal Visual Model
 → deterministic Scene Composer
@@ -59,6 +59,12 @@ A merged PR does not by itself prove independent analysis, implementation, testi
 ### Assistance is not erasure
 AI or collaborator assistance does not erase supported human roles such as selecting, specifying, judging, validating, authorizing, operating, reviewing, or explaining.
 
+### Attribution must survive compression
+Do not merge two activities into one public-facing node label when their attribution differs enough to change what the label implies about the human. If evidence strongly supports human reproduction/verification but reduction or drafting is explicitly AI-assisted, prefer a label such as `reproduction and verification`; keep reduction/drafting as mixed-attribution evidence, a bounded claim, or a cross-cutting motif unless separately supported.
+
+### Working mode is not automatically knowledge
+AI-assisted, collaborative, generated, templated, or automated are provenance/work-mode facts. They may shape attribution or become a cross-cutting Motif, but should not become a Knowledge Node or Galaxy merely because the mode recurs.
+
 ### Dependency is provenance, not personal knowledge
 A dependency, generated file, or template may exist without meaningful human exposure.
 
@@ -74,22 +80,28 @@ A technology can strongly represent the person's current work while independent 
 ### Galaxy is a personal theme, not a syllabus category
 Prefer a real project, recurring contribution stream, learning trajectory, long-running goal, or repeated context. Avoid default Frontend / Backend / Database buckets unless the person's evidence genuinely forms them.
 
+### Cross-cutting Motif is allowed
+Not every important idea should own a Galaxy. A repeated goal, provenance pattern, working mode, or cross-cutting theme may be represented as a Motif that references existing nodes without becoming a Knowledge Star or forcing unrelated nodes into a synthetic cluster.
+
+### Trajectory requires time evidence
+Use a `trajectory` Relation only when the allowed sources establish an ordered change: dated earlier/later evidence, an explicit migration, first/last occurrence, or another source-grounded temporal basis. Semantic plausibility is not chronology. Without temporal evidence, use another supported relation kind or omit the relation.
+
 ## Pass A — Evidence
 Read only the Source inputs. Produce normalized Evidence objects. Each must state what was observed, source provenance, confidence, attribution resolution, what it supports, what it does not support, and correlation group when needed. Do not create Knowledge Nodes in this pass.
 
 ## Pass B — Claims and Nodes
-Read accepted Evidence. Create bounded, dimension-specific Claims, then Knowledge Nodes. Possible dimensions: exposure, understanding, implementation, independence, judgment, troubleshooting, transfer, participation, learning-state, recency, representativeness. Preserve known, unknown, boundary, evidence, confidence, resolution, and representativeness. Do not complete a taxonomy.
+Read accepted Evidence. Create bounded, dimension-specific Claims, then Knowledge Nodes. Possible dimensions: exposure, understanding, implementation, independence, judgment, troubleshooting, transfer, participation, learning-state, recency, representativeness. Preserve known, unknown, boundary, evidence, confidence, resolution, and representativeness. Do not complete a taxonomy. Node labels themselves are claims about what belongs to the person: do not hide a mixed human/agent attribution problem inside an over-broad label.
 
 ## Pass C — Structure and Distillation
-Create Anchors, evidence-backed Relations, Galaxies, and primary / secondary layers. Use the removal test: if removing a node barely changes who this looks like, it probably belongs deeper. One primary Galaxy per node; cross-Galaxy relations are allowed.
+Create Anchors, evidence-backed Relations, optional cross-cutting Motifs, Galaxies, and primary / secondary layers. Use the removal test: if removing a node barely changes who this looks like, it probably belongs deeper. One primary Galaxy per accepted Knowledge Node; Motifs do not own nodes and may cross Galaxies. A `trajectory` Relation must carry explicit temporal evidence.
 
 ## Pass D — Personal Visual Model
-Translate the Recognition Model into visual semantics such as composition archetype, identity core family, Galaxy mass, asymmetry, openness, field density, dust morphology, motion temperament, presence, resolution, and activity. Do not output raw CSS or rewrite renderer implementation. Visual importance must not upgrade capability truth.
+Translate the accepted input identity, Recognition Model, and Structure into visual semantics such as composition archetype, identity core family, identity presence, Galaxy mass, Anchor presence, asymmetry, openness, field density, dust morphology, motion temperament, presence, resolution, and activity. Preserve every accepted Structure Anchor as visual provenance; do not recreate or rename Anchor semantics in this pass. Do not output raw CSS or rewrite renderer implementation. Visual importance must not upgrade capability truth.
 
 ## Scene composition and rendering
 After Pass D is accepted, the deterministic Scene Composer maps the accepted Recognition Model, Structure, and Personal Visual Model into the renderer contract.
 
-The Scene Composer may choose exact coordinates, palette values, force parameters, and other rendering mechanics. It must not invent new personal claims, nodes, evidence, or Galaxy semantics.
+The Scene Composer may choose exact coordinates, palette values, force parameters, and other rendering mechanics. It must not invent new personal claims, nodes, evidence, Anchor semantics, or Galaxy semantics.
 
 Codex owns semantic visual choices. The renderer stack owns exact presentation mechanics.
 
