@@ -13,6 +13,7 @@ except ImportError as exc:
     ) from exc
 
 STRONG_DIMS = {"implementation", "independence", "troubleshooting", "transfer"}
+ACTION_DIMS = {"implementation", "independence", "judgment", "troubleshooting", "participation", "transfer"}
 STRONG_VALUES = {"established", "high", "supported", "independent", "strong"}
 FORBIDDEN_VISUAL_TRUTH = {"known", "unknown", "evidence", "boundary", "claims", "confidence", "reason"}
 GENERIC_GALAXY_LABELS = {
@@ -74,11 +75,22 @@ def semantic_errors(stage, data, up):
         node_id_set = set(node_ids)
 
         for c in claims:
-            missing = set(c.get("evidence", [])) - evidence_ids
+            cited = set(c.get("evidence", []))
+            missing = cited - evidence_ids
             if missing:
                 errors.append(f"{c['id']}: unknown evidence {sorted(missing)}")
             if c.get("subject") not in node_id_set:
                 errors.append(f"{c['id']}: claim subject must resolve to a node id")
+
+            attribution_evidence = set(c.get("attribution_evidence", []))
+            missing_attr = attribution_evidence - evidence_ids
+            if missing_attr:
+                errors.append(f"{c['id']}: unknown attribution evidence {sorted(missing_attr)}")
+            if attribution_evidence - cited:
+                errors.append(f"{c['id']}: attribution_evidence must be a subset of claim evidence")
+            if c.get("dimension") in ACTION_DIMS and not attribution_evidence:
+                errors.append(f"{c['id']}: action-bearing claim requires explicit attribution_evidence")
+
             if c.get("dimension") in STRONG_DIMS and str(c.get("value")).lower() in STRONG_VALUES:
                 refs = [evidence[x] for x in c.get("evidence", []) if x in evidence]
                 groups = {

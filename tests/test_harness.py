@@ -68,17 +68,21 @@ class HarnessTests(unittest.TestCase):
         self.assertNotIn("cmd_render", pipeline)
 
     def test_recognition_hardening_contracts_are_executable(self):
+        model_schema = json.loads((ROOT / "contracts" / "model.schema.json").read_text(encoding="utf-8"))
         structure_schema = json.loads((ROOT / "contracts" / "structure.schema.json").read_text(encoding="utf-8"))
         visual_schema = json.loads((ROOT / "contracts" / "visual.schema.json").read_text(encoding="utf-8"))
         pipeline = (ROOT / "harness" / "pipeline.py").read_text(encoding="utf-8")
         validator = (ROOT / "harness" / "validate.py").read_text(encoding="utf-8")
 
+        claim_schema = model_schema["properties"]["claims"]["items"]
+        self.assertIn("attribution_evidence", claim_schema["properties"])
         self.assertIn("motifs", structure_schema["required"])
         relation_schema = structure_schema["properties"]["relations"]["items"]
         self.assertIn("temporal_basis", relation_schema["properties"])
         self.assertIn("anchors", visual_schema["required"])
         self.assertIn("presence", visual_schema["properties"]["identity"]["required"])
         self.assertIn('"needs": ["input", "model", "structure"]', pipeline)
+        self.assertIn("action-bearing claim requires explicit attribution_evidence", validator)
         self.assertIn("visual anchors must exactly match accepted structure anchors", validator)
         self.assertIn("trajectory requires earlier and later evidence", validator)
 

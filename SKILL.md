@@ -62,6 +62,8 @@ AI or collaborator assistance does not erase supported human roles such as selec
 ### Attribution must survive compression
 Do not merge two activities into one public-facing node label when their attribution differs enough to change what the label implies about the human. If evidence strongly supports human reproduction/verification but reduction or drafting is explicitly AI-assisted, prefer a label such as `reproduction and verification`; keep reduction/drafting as mixed-attribution evidence, a bounded claim, or a cross-cutting motif unless separately supported.
 
+For action-bearing Claims (`implementation`, `independence`, `judgment`, `troubleshooting`, `participation`, `transfer`), explicitly identify which cited Evidence attributes the action to the person. Evidence that merely describes an artifact may support that the behavior/system exists, but must not silently borrow authorship from another observation.
+
 ### Working mode is not automatically knowledge
 AI-assisted, collaborative, generated, templated, or automated are provenance/work-mode facts. They may shape attribution or become a cross-cutting Motif, but should not become a Knowledge Node or Galaxy merely because the mode recurs.
 
@@ -90,7 +92,7 @@ Use a `trajectory` Relation only when the allowed sources establish an ordered c
 Read only the Source inputs. Produce normalized Evidence objects. Each must state what was observed, source provenance, confidence, attribution resolution, what it supports, what it does not support, and correlation group when needed. Do not create Knowledge Nodes in this pass.
 
 ## Pass B — Claims and Nodes
-Read accepted Evidence. Create bounded, dimension-specific Claims, then Knowledge Nodes. Possible dimensions: exposure, understanding, implementation, independence, judgment, troubleshooting, transfer, participation, learning-state, recency, representativeness. Preserve known, unknown, boundary, evidence, confidence, resolution, and representativeness. Do not complete a taxonomy. Node labels themselves are claims about what belongs to the person: do not hide a mixed human/agent attribution problem inside an over-broad label.
+Read accepted Evidence. Create bounded, dimension-specific Claims, then Knowledge Nodes. Possible dimensions: exposure, understanding, implementation, independence, judgment, troubleshooting, transfer, participation, learning-state, recency, representativeness. Preserve known, unknown, boundary, evidence, confidence, resolution, and representativeness. Do not complete a taxonomy. Node labels themselves are claims about what belongs to the person: do not hide a mixed human/agent attribution problem inside an over-broad label. For action-bearing Claims, `attribution_evidence` must name the cited Evidence that justifies assigning the action to the person.
 
 ## Pass C — Structure and Distillation
 Create Anchors, evidence-backed Relations, optional cross-cutting Motifs, Galaxies, and primary / secondary layers. Use the removal test: if removing a node barely changes who this looks like, it probably belongs deeper. One primary Galaxy per accepted Knowledge Node; Motifs do not own nodes and may cross Galaxies. A `trajectory` Relation must carry explicit temporal evidence.
