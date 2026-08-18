@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from pathlib import Path
 
+from compose_scene import compose_scene, validate_scene_semantics
 from validate import schema_errors, semantic_errors
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +14,7 @@ SCHEMAS = {
     "model": ROOT / "contracts" / "model.schema.json",
     "structure": ROOT / "contracts" / "structure.schema.json",
     "visual": ROOT / "contracts" / "visual.schema.json",
+    "scene": ROOT / "contracts" / "scene.schema.json",
 }
 FILES = {
     "evidence": "pass-a.json",
@@ -85,6 +86,22 @@ def verify_case(case_dir: Path):
         stage_results[stage] = {"pass": not stage_errors, "errors": stage_errors}
         errors.extend(f"{stage}: {msg}" for msg in stage_errors)
 
+    if not errors:
+        scene = compose_scene(input_obj, data["evidence"], data["model"], data["structure"], data["visual"])
+        scene_errors = schema_errors(scene, SCHEMAS["scene"])
+        scene_errors += validate_scene_semantics(scene, input_obj, data["model"], data["structure"])
+        stage_results["scene"] = {
+            "pass": not scene_errors,
+            "errors": scene_errors,
+            "counts": {
+                "nodes": len(scene.get("nodes", [])),
+                "relations": len(scene.get("relations", [])),
+                "anchors": len(scene.get("anchors", [])),
+                "galaxies": len(scene.get("galaxies", [])),
+            },
+        }
+        errors.extend(f"scene: {msg}" for msg in scene_errors)
+
     proof = runner / "validation-proof.json"
     if not proof.exists():
         errors.append("missing runner/validation-proof.json")
@@ -99,7 +116,7 @@ def verify_case(case_dir: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Verify a kc.cleanroom.v2 case against active contracts")
+    parser = argparse.ArgumentParser(description="Verify a kc.cleanroom.v2 case against active contracts and Scene Composer")
     parser.add_argument("case_dir")
     args = parser.parse_args()
     try:
