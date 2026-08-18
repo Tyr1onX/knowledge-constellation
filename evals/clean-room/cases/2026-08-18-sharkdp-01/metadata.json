@@ -1,0 +1,1 @@
+{"case_id":"2026-08-18-sharkdp-01","protocol_version":"kc.cleanroom.v2","validation_mode":"harness","target":{"handle":"sharkdp","profile_url":"https://github.com/sharkdp"},"knowledge_constellation_sha":"691cb1a512141380e1256b3c995a54a5fbc0a40a","runner":{"model":"GPT-5.6 Sol","isolation_level":"emulated","status":"frozen_pending_audit"},"status":"runner_frozen_pending_audit"}
