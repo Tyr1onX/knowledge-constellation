@@ -21,6 +21,9 @@ jobs:
       - run: node --check renderer/overview-visibility.js
       - run: node --check renderer/identity-core-physics.js
       - run: node --check renderer/identity-core-renderer.js
+      - run: node --check renderer/identity-presence.js
+      - run: node --check renderer/project-anchor.js
+      - run: node --check renderer/presentation.js
       - run: node --check renderer/background-field.js
       - run: node --check renderer/semantic-zoom.js
       - run: node --check renderer/index.js

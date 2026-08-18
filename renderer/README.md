@@ -5,6 +5,8 @@
 > Accepted visual checkpoint: **Detail Polish v1 — 2026-08-17**
 >
 > Interaction checkpoint: **Growing Universe / Natural Reveal — 2026-08-18**
+>
+> Personalization checkpoint: **Personal Universe v3 — 2026-08-18**
 
 `renderer/` 保存已经通过视觉验收、后续开发不得绕开的前端执行层基础。它不是一次性的 Demo，也不是新的视觉实验目录。
 
@@ -16,6 +18,9 @@
 - `overview-visibility.js` — 随知识结构与 viewport 增长的首屏可见密度；
 - `identity-core-physics.js` — 有中心势阱、非线性阻力、回中与邻近星体扰动的 Core 物理；
 - `identity-core-renderer.js` — 8 个已验收 Identity Core family 的动态绘制；
+- `identity-presence.js` — Core 附近短暂出现身份信息，不把页面变成 Profile Card；
+- `project-anchor.js` — 把真实项目 / 经历作为空间 provenance anchor；
+- `presentation.js` — Product Surface 的节点详情数据整理，审计字段默认下沉；
 - `background-field.js` — Pure Black + Ambient Space 背景实现；
 - `semantic-zoom.js` — 自然显星、语义缩放阈值与“不自动回中”规则；
 - `index.js` — Renderer 公共入口。
@@ -125,7 +130,67 @@ protostar_nebula
 
 family 只能根据视觉结构 / 知识拓扑选择，不得使用 personality / competence stereotype。
 
-### 8. 背景是 atmosphere，不是第二个主题
+### 8. Identity Presence 只做最低限度的“主人感”
+
+一个陌生人第一次打开星图，应能在不出现大面积 Profile UI 的情况下理解“这是谁的宇宙”。
+
+正式规则：
+
+- 初次进入时，Core 附近可短暂出现名字 / handle 与一句极短说明；
+- 信息随后自然淡出；
+- hover / 靠近 Core 时可以重新出现；
+- 一旦用户开始探索，不常驻身份文字；
+- 不默认放头像卡、简历摘要、社交链接墙或操作说明。
+
+`identity-presence.js` 只负责这一层短暂身份存在感，不推断 personality。
+
+### 9. Project Anchor 是真实经历，不是另一种技能星
+
+Structure 的 Anchor 可以进入正式视觉层，用于回答：
+
+> 这些 Knowledge Star 是从哪些真实项目、课程、协作或长期实践里长出来的？
+
+`project-anchor.js` 的约束：
+
+- Anchor 不是 Knowledge Star；
+- Anchor 不映射 competence / seniority；
+- 它只能来自上游已经接受的真实 Anchor；
+- 默认存在感低于 Identity Core 与主要知识结构；
+- 靠近时可显示项目名；
+- 可用弱 provenance link 连接到它支撑的知识星；
+- 点击 Anchor 可以作为进入相关 Galaxy 的空间导航动作。
+
+### 10. 默认详情卡不是 Recognition 审计面板
+
+Product Surface 默认详情只回答：
+
+```text
+这是什么
+来自哪里
+和什么有关
+```
+
+`presentation.js` 默认下沉：
+
+- state / “已观察”；
+- confidence / reliability；
+- known / unknown；
+- “仍然模糊”；
+- “下一步”；
+- model version。
+
+这些信息仍然保留在 deeper Evidence / Inspector 中，但不得占据默认产品详情。
+
+如果中文标题与英文只是机械翻译，例如：
+
+```text
+多架构 CI
+Multi-arch CI
+```
+
+英文默认去重。证据通过低存在感的“查看依据”入口展开。
+
+### 11. 背景是 atmosphere，不是第二个主题
 
 当前 quality-gated family 只有 `almost_empty`、`cold_filament`、`broken_cloud`。Rare meteor 是 Renderer-owned ambient event，不是 `dust_family`。
 
@@ -157,6 +222,6 @@ Lab 可以独立存在，但一旦通过验收，结果必须回收到 Renderer�
 
 ## 与语义层的边界
 
-Renderer 不判断一个人会什么。它只消费已经接受的 Visual / Scene semantics，并稳定地把它们变成空间、交互和产品视觉。
+Renderer 不判断一个人会什么。Project Anchor 也不由 Renderer 发明。Renderer 只消费已经接受的 Visual / Scene / Anchor semantics，并稳定地把它们变成空间、交互和产品视觉。
 
 > **Renderer is cumulative product infrastructure, not disposable prompt output.**

@@ -9,6 +9,7 @@
 - `identity-core-visual-grammar.md` — Identity Core 当前视觉语法、支持 family、Codex / Renderer 边界。
 - `background-field-visual-grammar.md` — 背景场当前视觉语法、负空间、环境形态与动态边界。
 - `knowledge-growth.md` — 无固定节点数、adaptive overview density 与自然 Semantic Zoom 揭示规则。
+- `personal-universe.md` — Identity Presence、Project Anchor 与产品详情的个人化表达规则。
 - `presentation-contract.md` — 面向产品表面的表达边界。
 - `../renderer/README.md` — 当前 Renderer 实现基线与“禁止从零重写”连续性规则。
 - `repository-checkpoint-cadence.md` — 仓库 checkpoint 规则。
@@ -16,14 +17,17 @@
 - `milestones/v0.3-skill-first-harness.md` — v0.3 里程碑。
 - `unseen-eval-v0.3.md` — 当前 unseen-user gate。
 
-当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md`、`model-spec-v1.md`、`knowledge-growth.md`、`renderer/README.md` 和对应的当前专项 contract 为准。
+当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md`、`model-spec-v1.md`、`knowledge-growth.md`、`personal-universe.md`、`presentation-contract.md`、`renderer/README.md` 和对应的当前专项 contract 为准。
 
 ## Current implementation assets｜当前实现资产
 
 - `../renderer/physics.js` — d3-force 物理基线；
 - `../renderer/star-renderer.js` — Knowledge Star point-light 基线；
 - `../renderer/overview-visibility.js` — 首屏自适应星体密度；
-- `../renderer/semantic-zoom.js` — Semantic Zoom / camera invariant / global reveal 基线。
+- `../renderer/semantic-zoom.js` — Semantic Zoom / camera invariant / global reveal 基线；
+- `../renderer/identity-presence.js` — 短暂身份存在感；
+- `../renderer/project-anchor.js` — 真实项目 / 经历的空间 provenance；
+- `../renderer/presentation.js` — 默认详情去审计化与 evidence disclosure 数据模型。
 
 这些文件不是实验快照。后续主页和 Renderer Runtime 必须复用 / 扩展它们。
 

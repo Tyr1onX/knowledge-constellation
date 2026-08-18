@@ -15,6 +15,9 @@ class RendererContractTests(unittest.TestCase):
             "overview-visibility.js",
             "identity-core-physics.js",
             "identity-core-renderer.js",
+            "identity-presence.js",
+            "project-anchor.js",
+            "presentation.js",
             "background-field.js",
             "semantic-zoom.js",
             "index.js",
@@ -99,6 +102,44 @@ class RendererContractTests(unittest.TestCase):
             "Math.PI * 2 / 7200",
         ]:
             self.assertIn(token, text)
+
+    def test_identity_presence_is_ephemeral_not_profile_chrome(self):
+        text = (RENDERER / "identity-presence.js").read_text(encoding="utf-8")
+        for token in [
+            "identityPresenceOpacity",
+            "holdMs: 3600",
+            "fadeMs: 3600",
+            "hoveringCore",
+            "exploring",
+            "profile card",
+        ]:
+            self.assertIn(token, text)
+
+    def test_project_anchor_is_provenance_not_skill_score(self):
+        text = (RENDERER / "project-anchor.js").read_text(encoding="utf-8")
+        for token in [
+            "Project Anchors turn real experiences / projects into spatial provenance",
+            "They are not Knowledge Stars",
+            "projectAnchorVisibility",
+            "pickProjectAnchor",
+            "drawProjectProvenanceLinks",
+        ]:
+            self.assertIn(token, text)
+        self.assertNotIn("competenceScore", text)
+
+    def test_default_product_detail_hides_audit_fields(self):
+        text = (RENDERER / "presentation.js").read_text(encoding="utf-8")
+        for token in [
+            "buildNodeDetailModel",
+            "dedupeNodeSubtitle",
+            "查看依据",
+            "DEFAULT_DETAIL_EXCLUDES",
+            "reliability",
+            "modelVersion",
+        ]:
+            self.assertIn(token, text)
+        self.assertNotIn("state: node.state", text)
+        self.assertNotIn("confidence: node.confidence", text)
 
     def test_background_field_stays_inside_quality_gated_vocabulary(self):
         text = (RENDERER / "background-field.js").read_text(encoding="utf-8")
