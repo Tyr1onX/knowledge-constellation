@@ -150,7 +150,8 @@
           "dominance": {"type": "number"},
           "anchor": {"type": "string"},
           "primary_nodes": {"type": "array", "items": {"type": "string"}},
-          "secondary_nodes": {"type": "array", "items": {"type": "string"}}
+          "secondary_nodes": {"type": "array", "items": {"type": "string"}},
+          "color": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number", "minimum": 0, "maximum": 255}}
         }
       }
     },
