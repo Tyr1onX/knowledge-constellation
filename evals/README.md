@@ -28,6 +28,18 @@ Independent External Auditor
 
 重点不是 Runner 和 Auditor 是否生成完全一样的节点，而是：是否越界、是否漏掉代表性主题、归因是否可靠、Anchor 是否真实、Galaxy 是否具有个人结构。
 
+### Protocol v2：Runner 结果必须可执行验证
+
+从 `kc.cleanroom.v2` 开始，只有真正通过当前 schema + semantic validator 的 `pass-a/b/c/d` 才能计入 Recognition Hardening 用户数。Runner 的文字总结不能替代 Harness 验证。
+
+每个 v2 case 在进入 External Audit 前必须通过：
+
+```bash
+python harness/verify_eval_case.py evals/clean-room/cases/<case>
+```
+
+规则见 [`clean-room/protocol-v2.md`](clean-room/protocol-v2.md)。CI 会回归所有已经提交的 v2 case，避免规则更新后旧样本静默失效。
+
 ## 历史测试循环
 
 ```text
