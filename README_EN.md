@@ -6,17 +6,13 @@
 
 ### [Open the interactive preview →](https://tyr1onx.github.io/knowledge-constellation/)
 
-Knowledge Constellation is a **Codex Skill**.
-
-It reads real material such as your GitHub activity, projects, resume, learning notes, pull requests, and other records, then turns what it understands into a personal knowledge constellation.
+Knowledge Constellation is a **Codex Skill**. It reads real material such as GitHub activity, projects, resumes, learning notes, pull requests, and other records, then turns what it can justify into a personal knowledge constellation.
 
 ## Use it
 
-1. Install this repository's [`SKILL.md`](SKILL.md).
-2. Give Codex material about you.
-3. Tell Codex: **“Use Knowledge Constellation to generate my knowledge constellation.”**
+Send this repository URL to Codex and say: **“Install this Skill for me.”**
 
-Codex handles the rest.
+After installation, give Codex material about you and say: **“Use Knowledge Constellation to generate my knowledge constellation.”** Codex handles the rest.
 
 ## The constellation
 

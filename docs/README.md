@@ -1,71 +1,28 @@
-# Documentation Map｜文档状态导航
+# Documentation｜当前文档
 
-仓库同时保留“当前执行规范”和“历史研究过程”。阅读时优先按下面的状态区分。
+这里只保留**当前仍参与设计、实现或验收**的文档。已经被新契约取代的早期研究稿不再留在 `main`，需要时可直接从 Git 历史恢复。
 
-## Current contracts｜当前有效
+## 先看这些
 
-- `../SKILL.md` — Codex 语义总契约，当前最高优先级。
-- `model-spec-v1.md` — Recognition Model → Visual Model → Renderer 的正式边界。
-- `identity-core-visual-grammar.md` — Identity Core 当前视觉语法、支持 family、Codex / Renderer 边界。
-- `background-field-visual-grammar.md` — 背景场当前视觉语法、负空间、环境形态与动态边界。
-- `knowledge-growth.md` — 无固定节点数、adaptive overview density 与自然 Semantic Zoom 揭示规则。
-- `personal-universe.md` — Identity Presence、Project Anchor 与产品详情的个人化表达规则。
-- `presentation-contract.md` — 面向产品表面的表达边界。
-- `clean-room-evaluation.md` — Recognition Hardening 的隔离 Runner + External Auditor 正式评测协议。
-- `../renderer/README.md` — 当前 Renderer 实现基线与“禁止从零重写”连续性规则。
-- `repository-checkpoint-cadence.md` — 仓库 checkpoint 规则。
-- `skill-harness-v0.3.md` — Skill-first Harness 当前设计。
-- `milestones/v0.3-skill-first-harness.md` — v0.3 里程碑。
-- `unseen-eval-v0.3.md` — 早期 unseen-user gate。
+- [`../SKILL.md`](../SKILL.md) — Codex 的最高优先级语义契约。
+- [`model-spec-v1.md`](model-spec-v1.md) — Source → Evidence → Model → Structure → Visual Model → Scene → Renderer 的系统边界。
+- [`../renderer/README.md`](../renderer/README.md) — 当前正式 Renderer 与不可回退的交互/视觉基线。
 
-当这些文档与更早 V0 文档产生语义冲突时，以 `SKILL.md`、`model-spec-v1.md`、`knowledge-growth.md`、`personal-universe.md`、`presentation-contract.md`、`clean-room-evaluation.md`、`renderer/README.md` 和对应的当前专项 contract 为准。
+## Recognition
 
-## Current implementation assets｜当前实现资产
+- [`clean-room-evaluation.md`](clean-room-evaluation.md) — clean-room Runner + External Auditor 评测协议。
+- [`knowledge-growth.md`](knowledge-growth.md) — 节点数量、overview density 与自然 Semantic Zoom 规则。
 
-- `../renderer/physics.js` — d3-force 物理基线；
-- `../renderer/star-renderer.js` — Knowledge Star point-light 基线；
-- `../renderer/overview-visibility.js` — 首屏自适应星体密度；
-- `../renderer/semantic-zoom.js` — Semantic Zoom / camera invariant / global reveal 基线；
-- `../renderer/identity-presence.js` — 短暂身份存在感；
-- `../renderer/project-anchor.js` — 真实项目 / 经历的空间 provenance；
-- `../renderer/presentation.js` — 默认详情去审计化与 evidence disclosure 数据模型。
+## Product / Visual
 
-这些文件不是实验快照。后续主页和 Renderer Runtime 必须复用 / 扩展它们。
+- [`personal-universe.md`](personal-universe.md) — Identity Presence、Project Anchor 与个人宇宙产品规则。
+- [`presentation-contract.md`](presentation-contract.md) — Product Surface / Evidence / Developer Inspector 的表达边界。
+- [`identity-core-visual-grammar.md`](identity-core-visual-grammar.md) — Identity Core 视觉语法。
+- [`background-field-visual-grammar.md`](background-field-visual-grammar.md) — 背景场与负空间视觉语法。
 
-## Recognition Hardening evals
+## Milestones
 
-- `../evals/clean-room/` — 真实陌生用户 clean-room cases；
-- `../evals/README.md` — 评测入口；
-- `unseen-eval-v0.3.md` — 早期 unseen guard 记录。
+- [`milestones/v0.4-recognition-hardening-10-user.md`](milestones/v0.4-recognition-hardening-10-user.md) — 10-user Recognition Hardening gate。
+- [`milestones/v0.5-e2e-runtime-foundation.md`](milestones/v0.5-e2e-runtime-foundation.md) — E2E Runner / Scene / Runtime 基础。
 
-新规则优先通过 frozen-source clean-room case 验证，而不是只在已知人物或 synthetic expected 上证明自己。
-
-## Research foundations｜仍然有效的研究基础
-
-这些文档包含当前系统仍在使用的重要原则，但写作时间早于可执行 Harness：
-
-- `principles.md`
-- `attribution-model.md`
-- `evidence-and-claims.md`
-- `structure-model.md`
-- `distillation.md`
-- `visual-semantics.md`
-- `uncertainty-and-time.md`
-- `living-graph.md`
-- `physics-engine.md`
-- `star-system.md`
-- `micro-calibration.md`
-
-## Historical V0 research｜历史阶段
-
-- `v0-knowledge-model.md`
-- `evaluation.md`
-- `research-notes.md`
-- `../evals/round-01-report.md`
-- `../evals/round-02-report.md`
-
-这些文件记录“在正式视觉原型之前”“V0 应先验证什么”等当时正确的研究决策。它们保留作为设计 provenance，不应被理解为当前项目仍停留在那个阶段。
-
-## Examples
-
-- `../examples/tyr1onx/` — 早期 Passive-only 人工研究样本。
+> 当文档与代码或契约发生冲突时，优先级为：`SKILL.md` → `contracts/` / `prompts/` → 当前 Harness / Renderer → 本目录说明文档。
