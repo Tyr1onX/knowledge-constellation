@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "version",
+    "seed",
+    "subject",
+    "viewport",
+    "identity",
+    "composition",
+    "field",
+    "stars",
+    "motion",
+    "nodes",
+    "relations",
+    "anchors",
+    "galaxies",
+    "motifs"
+  ],
+  "properties": {
+    "version": {"const": "kc.scene.v1"},
+    "seed": {"type": "string", "minLength": 1},
+    "subject": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"},
+        "language": {"type": ["string", "null"]},
+        "scope": {"type": ["string", "null"]}
+      }
+    },
+    "viewport": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": {"type": "number", "exclusiveMinimum": 0},
+        "height": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": ["family", "label", "title", "x", "y"],
+      "properties": {
+        "family": {"type": "string"},
+        "label": {"type": "string"},
+        "title": {"type": "string"},
+        "subtitle": {"type": ["string", "null"]},
+        "source": {"type": ["string", "null"]},
+        "monogram": {"type": ["string", "null"]},
+        "x": {"type": "number"},
+        "y": {"type": "number"},
+        "presence": {"type": "object"}
+      }
+    },
+    "composition": {"type": "object"},
+    "field": {"type": "object"},
+    "stars": {"type": "object"},
+    "motion": {"type": "object"},
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "g", "layer", "kind", "size", "x", "y", "summary", "anchor_id", "evidence", "sources"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "en": {"type": ["string", "null"]},
+          "g": {"type": "string"},
+          "layer": {"enum": ["primary", "secondary"]},
+          "kind": {"enum": ["core", "normal", "soft", "trace"]},
+          "size": {"type": "number", "minimum": 0, "maximum": 1},
+          "x": {"type": "number"},
+          "y": {"type": "number"},
+          "summary": {"type": "string"},
+          "project": {"type": "string"},
+          "anchor_id": {"type": "string"},
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "observation", "source_ids"],
+              "properties": {
+                "id": {"type": "string"},
+                "observation": {"type": "string"},
+                "source_ids": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "title"],
+              "properties": {
+                "id": {"type": "string"},
+                "title": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "kind", "distance", "strength"],
+        "properties": {
+          "source": {"type": "string"},
+          "target": {"type": "string"},
+          "kind": {"type": "string"},
+          "distance": {"type": "number"},
+          "strength": {"type": "number"}
+        }
+      }
+    },
+    "anchors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "nodes", "galaxies", "g", "role", "prominence", "x", "y"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "kind": {"type": "string"},
+          "nodes": {"type": "array", "items": {"type": "string"}},
+          "galaxies": {"type": "array", "items": {"type": "string"}},
+          "g": {"type": ["string", "null"]},
+          "role": {"const": "provenance"},
+          "prominence": {"enum": ["low", "medium"]},
+          "x": {"type": "number"},
+          "y": {"type": "number"},
+          "phaseOffset": {"type": "number"}
+        }
+      }
+    },
+    "galaxies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "x", "y", "mass", "morphology", "dominance", "anchor", "primary_nodes", "secondary_nodes"],
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "x": {"type": "number"},
+          "y": {"type": "number"},
+          "mass": {"type": "number"},
+          "morphology": {"type": "string"},
+          "dominance": {"type": "number"},
+          "anchor": {"type": "string"},
+          "primary_nodes": {"type": "array", "items": {"type": "string"}},
+          "secondary_nodes": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "motifs": {"type": "array"}
+  }
+}
