@@ -4,7 +4,31 @@
 
 目标不是得到一个“准确率 92%”之类的数字，而是持续攻击模型最容易犯错的地方。
 
-## 测试循环
+## 当前主评测：Clean-room real-user audit
+
+Recognition Hardening 阶段优先使用：
+
+```text
+Frozen raw sources
+    ↓
+Clean-room Runner（只运行当前 Skill）
+    ↓
+结构化结果
+
+Frozen raw sources
+    ↓
+Independent External Auditor
+    ↓
+独立 source-only judgment
+    ↓
+与 Runner 输出比较
+```
+
+完整协议见 [`../docs/clean-room-evaluation.md`](../docs/clean-room-evaluation.md)，真实案例存放在 [`clean-room/`](clean-room/)。
+
+重点不是 Runner 和 Auditor 是否生成完全一样的节点，而是：是否越界、是否漏掉代表性主题、归因是否可靠、Anchor 是否真实、Galaxy 是否具有个人结构。
+
+## 历史测试循环
 
 ```text
 构造极端案例
@@ -29,7 +53,7 @@ Recognition / Attribution / Structure / Distillation / Visual
 
 - `B-independent-developer`：真实独立开发者，测试模型会不会保守过头；
 - `C-learning-heavy-student`：学习证据很多但项目少，测试会不会生成空图；
-- `D-one-project-specialist`：一个项目很深，测试会不会把依赖树当成本人知识树；
+- `D-one-project-specialist`：一个项目很深，测试会不会把依赖树当本人知识树；
 - `E-broad-generalist`：方向很多，测试结构和首屏预算；
 - `F-low-public-trace`：公开痕迹少，测试非 GitHub 证据能否工作；
 - `G-ai-heavy-high-judgment`：AI 深度实现，但用户真实承担需求、判断与验收，测试会不会把人类贡献抹掉；
@@ -60,3 +84,5 @@ must_not:
 ```
 
 它测试的是原则，而不是固定文案。
+
+真实 clean-room 案例不把 Auditor 输出暴露给 Runner；失败案例也必须保留并在规则变化后 rerun。
