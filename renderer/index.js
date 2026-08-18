@@ -8,8 +8,13 @@ export {
 
 export {
   drawKnowledgeStar,
-  secondaryLayerVisibility,
 } from './star-renderer.js';
+
+export {
+  OVERVIEW_VISIBILITY,
+  computeOverviewVisibilityPlan,
+  overviewPresenceForNode,
+} from './overview-visibility.js';
 
 export {
   stellarTemperatureForId,
@@ -46,6 +51,7 @@ export {
   SEMANTIC_ZOOM,
   CAMERA_INVARIANTS,
   secondaryReveal,
+  nodeSemanticVisibility,
   nextWheelScale,
   pointerZoomCorrection,
   semanticPeel,

@@ -12,6 +12,7 @@ class RendererContractTests(unittest.TestCase):
             "physics.js",
             "star-renderer.js",
             "stellar-color.js",
+            "overview-visibility.js",
             "identity-core-physics.js",
             "identity-core-renderer.js",
             "background-field.js",
@@ -47,6 +48,17 @@ class RendererContractTests(unittest.TestCase):
             "arcOffset",
         ]:
             self.assertIn(token, text)
+
+    def test_overview_density_is_adaptive_and_not_fixed_to_28(self):
+        text = (RENDERER / "overview-visibility.js").read_text(encoding="utf-8")
+        for token in [
+            "computeOverviewVisibilityPlan",
+            "areaPerStar: 30000",
+            "modeledCount: nodes.length",
+            "density is never competence",
+        ]:
+            self.assertIn(token, text)
+        self.assertNotIn("overview_node_count = 28", text)
 
     def test_stellar_temperature_is_visual_only(self):
         text = (RENDERER / "stellar-color.js").read_text(encoding="utf-8")
@@ -101,13 +113,17 @@ class RendererContractTests(unittest.TestCase):
         self.assertNotIn("warm_dust", text)
         self.assertNotIn("soft_band", text)
 
-    def test_semantic_zoom_preserves_camera_invariants(self):
+    def test_semantic_zoom_preserves_camera_invariants_and_natural_reveal(self):
         text = (RENDERER / "semantic-zoom.js").read_text(encoding="utf-8")
         for token in [
             "inspectNodeRecenters: false",
             "zoomOutRecenters: false",
             "identityCoreOwnsReset: true",
-            "secondaryRevealStart: 1.22",
+            "galaxyFocusRequiredForSecondaryReveal: false",
+            "nodeSemanticVisibility",
+            "secondaryRevealStart: 1.04",
+            "traceRevealStart: 1.28",
+            "overviewMaxScale: 2.10",
             "detailExitScale: 1.43",
             "galaxyExitScale: 1.12",
         ]:
