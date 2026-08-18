@@ -114,6 +114,33 @@ The Scene Composer may choose exact coordinates, palette values, force parameter
 
 Codex owns semantic visual choices. The renderer stack owns exact presentation mechanics.
 
+### Canonical renderer is a hard product boundary
+
+Personalization may change the person's accepted Knowledge Nodes, Galaxy structure, relative visual importance, Project Anchors, bounded composition choice, accepted Identity Core family, field family, and other parameters explicitly present in the Visual/Scene contracts.
+
+Personalization must **not** rewrite or approximate the accepted product language. The following belong to the canonical renderer and are invariant across users unless the renderer itself is deliberately revised and regression-tested:
+
+- Knowledge Star point-light grammar, halo/core/corona detail and stellar rendering;
+- relation-line treatment;
+- Project Anchor form and provenance links;
+- responsive world fitting and central Identity Core clearance;
+- camera easing, Galaxy navigation, pointer-centered zoom and zoom-out peeling;
+- overview/Galaxy/node label hierarchy;
+- Identity Presence behavior;
+- detail-card presentation;
+- pure-black negative space and ambient background behavior;
+- hover/selection emphasis and rare environmental meteor behavior.
+
+Generated interactive output must use `renderer/runtime.js`, `renderer/shell.css`, and the renderer modules copied by `harness/build_site.py`. The repository preview uses the same runtime. Do not create page-local replacements for camera, stars, physics, labels, links, Core, background, zoom, Anchor, details, or animation just because a standalone file is convenient.
+
+Different people should have different **universe structure**, not different frontend quality.
+
+### Static output rule
+
+Do not handcraft an SVG knowledge graph as a substitute for the canonical renderer. A generic `circle + line + text` SVG is not a Knowledge Constellation render.
+
+If a static preview is requested, capture PNG/WebP from the canonical rendered page. SVG is allowed only if a dedicated renderer backend exists that preserves the same accepted visual contract; otherwise omit SVG rather than approximate it.
+
 ## Completion behavior
 
 The normal user-facing result is the **interactive constellation**, not a folder of intermediate JSON files. Unless the user explicitly asks for analysis artifacts only, do not stop after Pass D.
@@ -128,7 +155,7 @@ When the repository runtime is available:
 
 If the host exposes a separate semantic-runner process, `harness/e2e.py` may drive the entire loop through its runner adapter. If it does not, Codex itself remains the semantic Runner: use `pipeline.py next`, write the requested `output.json` inside that isolated workspace, then use `pipeline.py validate` until the Pass is accepted or its repair budget is exhausted.
 
-Never replace a failed semantic Pass with a handcrafted Scene or page-local inferred nodes just to finish rendering.
+Never replace a failed semantic Pass with a handcrafted Scene, SVG, or page-local inferred nodes just to finish rendering.
 
 ## Calibration
 The first passive result must be useful without asking questions. Optional later calibration is split into:
