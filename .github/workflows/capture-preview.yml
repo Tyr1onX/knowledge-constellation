@@ -74,13 +74,18 @@ jobs:
             -loop 0 assets/preview.gif
           ls -lh assets/preview.gif
 
-      - name: Commit preview
+      - name: Commit preview on latest main
         run: |
+          cp assets/preview.gif /tmp/knowledge-constellation-preview.gif
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin main
+          git reset --hard origin/main
+          mkdir -p assets
+          cp /tmp/knowledge-constellation-preview.gif assets/preview.gif
           git add assets/preview.gif
           if git diff --cached --quiet; then
             exit 0
           fi
           git commit -m "docs: refresh renderer preview gif"
-          git push
+          git push origin HEAD:main
