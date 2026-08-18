@@ -1,0 +1,1 @@
+{"anchors":[{"id":"A1","kind":"learning_trajectory","label":"my-first-project starter exercise","nodes":["N1"]}],"relations":[],"motifs":[],"galaxies":[{"id":"G1","label":"JavaScript 入门练习","anchor":"A1","primary_nodes":["N1"],"secondary_nodes":[]}],"distillation":{"primary_nodes":["N1"],"secondary_nodes":[]}}

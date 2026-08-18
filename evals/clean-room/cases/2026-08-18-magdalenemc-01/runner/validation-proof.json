@@ -1,0 +1,6 @@
+{
+  "validator": "harness/verify_eval_case.py",
+  "pass": true,
+  "verification_scope": ["evidence", "model", "structure", "visual"],
+  "note": "Persisted artifacts are replay-validated by tests/test_eval_integrity.py in repository CI."
+}
