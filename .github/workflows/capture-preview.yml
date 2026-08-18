@@ -27,20 +27,21 @@ jobs:
           python -m pip install playwright
           python -m playwright install --with-deps chromium
 
-      - name: Start local preview
+      - name: Capture renderer frames
         run: |
+          set -e
           python -m http.server 8000 --bind 127.0.0.1 > /tmp/kc-preview-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+
           for i in {1..50}; do
             if curl -fsS http://127.0.0.1:8000/ > /dev/null; then
-              exit 0
+              break
             fi
             sleep 0.2
           done
-          cat /tmp/kc-preview-server.log
-          exit 1
+          curl -fsS http://127.0.0.1:8000/ > /dev/null || { cat /tmp/kc-preview-server.log; exit 1; }
 
-      - name: Capture renderer frames
-        run: |
           mkdir -p .preview-frames assets
           cat > /tmp/capture_preview.py <<'PY'
           from playwright.sync_api import sync_playwright
