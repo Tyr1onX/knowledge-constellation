@@ -1,0 +1,39 @@
+{
+  "seed": "kc:cleanroom:v3:devdanzin:2026-08-18",
+  "identity": {
+    "family": "pulsar",
+    "label": "devdanzin",
+    "monogram": "D",
+    "avatar": null,
+    "presence": {
+      "mode": "brief_intro",
+      "subtitle": "由模糊测试、复现验证与上游协作形成的知识星图"
+    }
+  },
+  "composition": {
+    "archetype": "dominant_core_satellites",
+    "asymmetry": 0.41,
+    "openness": 0.55,
+    "dominant_axis": "diagonal"
+  },
+  "field": {
+    "density": "sparse",
+    "dust_family": "cold_filament",
+    "temperature_bias": "cool_neutral"
+  },
+  "stars": {
+    "family": "subtle_point",
+    "temperature_variation": "medium"
+  },
+  "motion": {
+    "temperament": "balanced"
+  },
+  "anchors": [
+    {"id":"A1","role":"provenance","prominence":"medium","galaxies":["G1"]},
+    {"id":"A2","role":"provenance","prominence":"medium","galaxies":["G2"]}
+  ],
+  "galaxies": [
+    {"id":"G1","mass":0.95,"morphology":"compact","dominance":0.96},
+    {"id":"G2","mass":0.82,"morphology":"elongated","dominance":0.80}
+  ]
+}
