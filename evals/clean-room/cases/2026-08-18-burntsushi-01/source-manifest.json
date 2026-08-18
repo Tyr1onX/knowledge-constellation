@@ -1,0 +1,19 @@
+{
+  "case_id":"2026-08-18-burntsushi-01",
+  "subject":{"id":"BurntSushi","label":"BurntSushi"},
+  "snapshot_time":"2026-08-18T12:38:00+08:00",
+  "sources":[
+    {"id":"S1","kind":"repository_inventory","observation":"Owned non-fork repositories include ripgrep, jiff, memchr, fst, rust-csv, quickcheck, walkdir and other Rust tools/libraries."},
+    {"id":"S2","kind":"repository_readme","repo":"BurntSushi/ripgrep","observation":"ripgrep is a cross-platform recursive regex search tool with extensive benchmark analysis, Unicode support, filtering, multiple search strategies and optional PCRE2."},
+    {"id":"S3","kind":"repository_readme","repo":"BurntSushi/jiff","observation":"Jiff is a Rust datetime library emphasizing hard-to-misuse APIs, correctness, timezone/DST handling, explicit design rationale, conservative dependencies and long-term API stability."},
+    {"id":"S4","kind":"direct_commit","repo":"BurntSushi/jiff","observation":"A 2026-08-07 commit authored and committed by BurntSushi fixes test feature-unification coverage after a virtual-workspace change and explains the testing intent."},
+    {"id":"S5","kind":"repository_readme","repo":"BurntSushi/memchr","observation":"memchr provides heavily optimized byte/string-search primitives using SIMD/SWAR and multiple substring algorithms, with extensive handwritten, exhaustive-style, property, fuzz and benchmark testing."},
+    {"id":"S6","kind":"repository_metadata","observation":"ripgrep, jiff and memchr are owned repositories under BurntSushi; ownership is project-level provenance and not sole-authorship proof for every contribution."}
+  ],
+  "scope_boundaries":[
+    "Owned Rust repositories plus direct maintenance evidence support substantial Rust project practice, not Rust compiler/language-internals mastery.",
+    "ripgrep depending on regex/PCRE2/crossbeam does not attribute implementation of those dependencies to the subject.",
+    "Performance claims are strongest inside search/text tooling and should not be generalized to arbitrary systems domains.",
+    "Jiff README contains explicit first-person design/maintenance rationale, but contributor work must not be collapsed into sole authorship."
+  ]
+}
