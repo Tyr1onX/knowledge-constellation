@@ -12,11 +12,9 @@ Knowledge Constellation 是一个 **Codex Skill**。
 
 ## 使用
 
-1. 安装本仓库的 [`SKILL.md`](SKILL.md)。
-2. 把关于你的资料交给 Codex。
-3. 告诉 Codex：**“使用 Knowledge Constellation，为我生成知识星图。”**
+把这个仓库地址发给 Codex，告诉它：**“帮我安装这个 Skill。”**
 
-剩下的交给 Codex。
+安装后，把关于你的资料交给 Codex，再告诉它：**“使用 Knowledge Constellation，为我生成知识星图。”** 剩下的交给 Codex。
 
 ## 星图
 
