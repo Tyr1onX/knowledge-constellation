@@ -1,0 +1,1 @@
+{"case_id":"2026-08-18-karpathy-02","target":"karpathy","protocol_version":"kc.cleanroom.v2","verdict":"PASS","critical_inflation":0,"material_warnings":[],"counts_toward_ten_user_gate":true,"anchor_identity_handoff":"PASS","saturated":true,"regression_fixed":"truthful_one_node_galaxies"}
