@@ -82,6 +82,8 @@ A technology can strongly represent the person's current work while independent 
 ### Galaxy is a personal theme, not a syllabus category
 Prefer a real project, recurring contribution stream, learning trajectory, long-running goal, or repeated context. Avoid default Frontend / Backend / Database buckets unless the person's evidence genuinely forms them.
 
+A Galaxy does **not** need multiple Knowledge Nodes merely to look substantial. Multi-node Galaxies are preferred when the evidence really forms a cluster, but a one-node Galaxy is valid for an isolated, representative experience/theme. Never fabricate a companion node, merge unrelated Anchors, or invent an umbrella theme to satisfy layout or schema shape.
+
 ### Cross-cutting Motif is allowed
 Not every important idea should own a Galaxy. A repeated goal, provenance pattern, working mode, or cross-cutting theme may be represented as a Motif that references existing nodes without becoming a Knowledge Star or forcing unrelated nodes into a synthetic cluster.
 
@@ -95,7 +97,7 @@ Read only the Source inputs. Produce normalized Evidence objects. Each must stat
 Read accepted Evidence. Create bounded, dimension-specific Claims, then Knowledge Nodes. Possible dimensions: exposure, understanding, implementation, independence, judgment, troubleshooting, transfer, participation, learning-state, recency, representativeness. Preserve known, unknown, boundary, evidence, confidence, resolution, and representativeness. Do not complete a taxonomy. Node labels themselves are claims about what belongs to the person: do not hide a mixed human/agent attribution problem inside an over-broad label. For action-bearing Claims, `attribution_evidence` must name the cited Evidence that justifies assigning the action to the person.
 
 ## Pass C — Structure and Distillation
-Create Anchors, evidence-backed Relations, optional cross-cutting Motifs, Galaxies, and primary / secondary layers. Use the removal test: if removing a node barely changes who this looks like, it probably belongs deeper. One primary Galaxy per accepted Knowledge Node; Motifs do not own nodes and may cross Galaxies. A `trajectory` Relation must carry explicit temporal evidence.
+Create Anchors, evidence-backed Relations, optional cross-cutting Motifs, Galaxies, and primary / secondary layers. Use the removal test: if removing a node barely changes who this looks like, it probably belongs deeper. One primary Galaxy per accepted Knowledge Node; Motifs do not own nodes and may cross Galaxies. A truthful one-node Galaxy is allowed when no second node is justified. A `trajectory` Relation must carry explicit temporal evidence.
 
 ## Pass D — Personal Visual Model
 Translate the accepted input identity, Recognition Model, and Structure into visual semantics such as composition archetype, identity core family, identity presence, Galaxy mass, Anchor presence, asymmetry, openness, field density, dust morphology, motion temperament, presence, resolution, and activity. Preserve every accepted Structure Anchor as visual provenance; do not recreate or rename Anchor semantics in this pass. Do not output raw CSS or rewrite renderer implementation. Visual importance must not upgrade capability truth.
