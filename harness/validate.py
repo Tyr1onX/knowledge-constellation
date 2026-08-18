@@ -119,6 +119,8 @@ def semantic_errors(stage, data, up):
 
         if duplicates([a["id"] for a in data.get("anchors", [])]):
             errors.append("duplicate anchor ids")
+        if duplicates([m["id"] for m in data.get("motifs", [])]):
+            errors.append("duplicate motif ids")
         if duplicates([g["id"] for g in data.get("galaxies", [])]):
             errors.append("duplicate galaxy ids")
 
@@ -127,13 +129,34 @@ def semantic_errors(stage, data, up):
             if unknown:
                 errors.append(f"{a['id']}: anchor contains unknown nodes {sorted(unknown)}")
 
+        for m in data.get("motifs", []):
+            unknown_nodes = set(m.get("nodes", [])) - node_ids
+            if unknown_nodes:
+                errors.append(f"{m['id']}: motif contains unknown nodes {sorted(unknown_nodes)}")
+            unknown_evidence = set(m.get("evidence", [])) - evidence_ids
+            if unknown_evidence:
+                errors.append(f"{m['id']}: motif contains unknown evidence {sorted(unknown_evidence)}")
+
         for r in data.get("relations", []):
             if r["source"] not in node_ids or r["target"] not in node_ids:
                 errors.append(f"relation {r['source']}->{r['target']}: unknown node")
             if r["source"] == r["target"]:
                 errors.append(f"relation {r['source']}->{r['target']}: self relation is invalid")
-            if not r.get("evidence") or set(r.get("evidence", [])) - evidence_ids:
+            relation_evidence = set(r.get("evidence", []))
+            if not relation_evidence or relation_evidence - evidence_ids:
                 errors.append(f"relation {r['source']}->{r['target']}: invalid evidence")
+            if r.get("kind") == "trajectory":
+                basis = r.get("temporal_basis") or {}
+                earlier = set(basis.get("earlier_evidence", []))
+                later = set(basis.get("later_evidence", []))
+                if not earlier or not later:
+                    errors.append(f"relation {r['source']}->{r['target']}: trajectory requires earlier and later evidence")
+                if (earlier | later) - evidence_ids:
+                    errors.append(f"relation {r['source']}->{r['target']}: temporal basis contains unknown evidence")
+                if earlier & later:
+                    errors.append(f"relation {r['source']}->{r['target']}: earlier/later evidence must be distinct")
+                if not (earlier | later).issubset(relation_evidence):
+                    errors.append(f"relation {r['source']}->{r['target']}: temporal evidence must also appear in relation evidence")
 
         for g in data.get("galaxies", []):
             if g["anchor"] not in anchors:
@@ -164,10 +187,43 @@ def semantic_errors(stage, data, up):
             errors.append("distillation.primary_nodes must equal the union of Galaxy primary_nodes")
 
     elif stage == "visual":
-        galaxy_ids = {g["id"] for g in up["structure"].get("galaxies", [])}
+        structure = up["structure"]
+        galaxy_ids = {g["id"] for g in structure.get("galaxies", [])}
         visual_ids = {g["id"] for g in data.get("galaxies", [])}
         if galaxy_ids != visual_ids:
             errors.append("visual galaxies must exactly match accepted structure galaxies")
+
+        expected_label = up.get("input", {}).get("subject", {}).get("label")
+        if expected_label and data.get("identity", {}).get("label") != expected_label:
+            errors.append("visual identity.label must exactly match input subject.label")
+
+        structure_anchor_ids = {a["id"] for a in structure.get("anchors", [])}
+        visual_anchors = data.get("anchors", [])
+        visual_anchor_ids = [a.get("id") for a in visual_anchors]
+        if duplicates(visual_anchor_ids):
+            errors.append("duplicate visual anchor ids")
+        if set(visual_anchor_ids) != structure_anchor_ids:
+            errors.append("visual anchors must exactly match accepted structure anchors")
+
+        node_to_galaxy = {}
+        for g in structure.get("galaxies", []):
+            for nid in g.get("primary_nodes", []) + g.get("secondary_nodes", []):
+                node_to_galaxy[nid] = g["id"]
+        structure_anchors = {a["id"]: a for a in structure.get("anchors", [])}
+        for va in visual_anchors:
+            aid = va.get("id")
+            if aid not in structure_anchors:
+                continue
+            expected_galaxies = {
+                node_to_galaxy[nid]
+                for nid in structure_anchors[aid].get("nodes", [])
+                if nid in node_to_galaxy
+            }
+            actual_galaxies = set(va.get("galaxies", []))
+            if actual_galaxies - galaxy_ids:
+                errors.append(f"{aid}: visual anchor references unknown galaxy")
+            if actual_galaxies != expected_galaxies:
+                errors.append(f"{aid}: visual anchor galaxies must follow accepted node membership")
 
         def walk(x, path="$"):
             if isinstance(x, dict):

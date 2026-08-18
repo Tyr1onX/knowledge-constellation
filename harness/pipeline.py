@@ -34,7 +34,7 @@ STAGE_META = {
         "prompt": ROOT / "prompts" / "pass-d-visual.md",
         "schema": ROOT / "contracts" / "visual.schema.json",
         "output": "visual.json",
-        "needs": ["model", "structure"],
+        "needs": ["input", "model", "structure"],
     },
 }
 

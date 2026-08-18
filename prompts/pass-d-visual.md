@@ -1,8 +1,12 @@
 # Pass D — Personal Visual Model
 
-Read `SKILL.md`, accepted `model.json`, accepted `structure.json`, and `contracts/visual.schema.json`. Produce only `visual.json` matching the schema.
+Read `SKILL.md`, accepted `input.json`, accepted `model.json`, accepted `structure.json`, and `contracts/visual.schema.json`. Produce only `visual.json` matching the schema.
 
-Decide semantic visual parameters: deterministic scene seed, Identity Core family, composition archetype, asymmetry, openness, dominant axis, field density/dust/temperature, motion temperament, and each Galaxy's relative mass/morphology/dominance. The person's structure should influence the first-screen silhouette. Do not output coordinates, raw CSS, Canvas/WebGL code, or HTML. Do not include Evidence, Claims, confidence text, known/unknown/boundary or other Recognition truth fields. Visual drama must never upgrade capability truth. Do not read test baselines or prior expected answers.
+Decide semantic visual parameters: deterministic scene seed, Identity Core family, identity presence, composition archetype, asymmetry, openness, dominant axis, field density/dust/temperature, motion temperament, every accepted Anchor's visual provenance role, and each Galaxy's relative mass/morphology/dominance. The person's structure should influence the first-screen silhouette. Do not output coordinates, raw CSS, Canvas/WebGL code, or HTML. Do not include Evidence, Claims, confidence text, known/unknown/boundary or other Recognition truth fields. Visual drama must never upgrade capability truth. Do not read test baselines or prior expected answers.
+
+`identity.label` must come from `input.json.subject.label`; do not recover identity from node labels or invent a persona. `identity.presence` controls only the brief product-level identity introduction described by the schema.
+
+Every Structure Anchor must appear exactly once in `visual.anchors` using the same id. Do not rename or reinterpret Anchor semantics here. The visual Anchor only selects low/medium provenance presence and lists the Galaxies that its accepted nodes actually belong to. Project Anchor is not a Knowledge Star, skill badge, competence signal, or new claim.
 
 ## Identity Core rules
 

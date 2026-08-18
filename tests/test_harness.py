@@ -67,6 +67,21 @@ class HarnessTests(unittest.TestCase):
         self.assertIn("forbidden_runtime_inputs", pipeline)
         self.assertNotIn("cmd_render", pipeline)
 
+    def test_recognition_hardening_contracts_are_executable(self):
+        structure_schema = json.loads((ROOT / "contracts" / "structure.schema.json").read_text(encoding="utf-8"))
+        visual_schema = json.loads((ROOT / "contracts" / "visual.schema.json").read_text(encoding="utf-8"))
+        pipeline = (ROOT / "harness" / "pipeline.py").read_text(encoding="utf-8")
+        validator = (ROOT / "harness" / "validate.py").read_text(encoding="utf-8")
+
+        self.assertIn("motifs", structure_schema["required"])
+        relation_schema = structure_schema["properties"]["relations"]["items"]
+        self.assertIn("temporal_basis", relation_schema["properties"])
+        self.assertIn("anchors", visual_schema["required"])
+        self.assertIn("presence", visual_schema["properties"]["identity"]["required"])
+        self.assertIn('"needs": ["input", "model", "structure"]', pipeline)
+        self.assertIn("visual anchors must exactly match accepted structure anchors", validator)
+        self.assertIn("trajectory requires earlier and later evidence", validator)
+
     def test_isolated_evidence_pass_and_repair(self):
         with tempfile.TemporaryDirectory() as td:
             td = Path(td)
