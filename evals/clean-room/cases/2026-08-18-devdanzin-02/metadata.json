@@ -1,0 +1,21 @@
+{
+  "case_id": "2026-08-18-devdanzin-02",
+  "target": {
+    "handle": "devdanzin",
+    "profile_url": "https://github.com/devdanzin"
+  },
+  "snapshot_time": "2026-08-18T11:32:00+08:00",
+  "source_snapshot_from_case": "2026-08-18-devdanzin-01",
+  "knowledge_constellation_sha": "2f0e22dc1d134336f56d74818b648b7f7438dc6e",
+  "runner": {
+    "model": "GPT-5.6 Sol",
+    "configuration": "Recognition hardening v2: attribution-preserving node labels + motifs + temporal trajectory gate + Anchor handoff",
+    "isolation_level": "emulated",
+    "note": "Regression rerun over the exact frozen source scope from case 01. Runner output must be frozen before the second external audit."
+  },
+  "auditor": {
+    "model": "GPT-5.6 Sol",
+    "status": "pending_at_runner_freeze"
+  },
+  "status": "runner_frozen_pending_audit"
+}
