@@ -1,0 +1,56 @@
+{
+  "version": "kc.scene.v1",
+  "seed": "kc:preview:Tyr1onX:accepted-baseline",
+  "subject": {"id": "Tyr1onX", "label": "Tyr1onX", "language": "zh-CN", "scope": "Renderer baseline preview"},
+  "viewport": {"width": 1000, "height": 720},
+  "identity": {"family": "monogram", "label": "Tyr1onX", "title": "Tyr1onX", "subtitle": "由作品、学习与工程实践生长出的知识星图", "source": "Knowledge Constellation", "monogram": "TY", "x": 500, "y": 360, "presence": {"mode": "brief_intro", "subtitle": "由作品、学习与工程实践生长出的知识星图"}},
+  "composition": {"archetype": "three_islands", "asymmetry": 0.48, "openness": 0.72, "dominant_axis": "horizontal"},
+  "field": {"density": "sparse", "dust_family": "cold_filament", "temperature_bias": "cool_neutral"},
+  "stars": {"family": "subtle_point", "temperature_variation": "medium"},
+  "motion": {"temperament": "balanced"},
+  "nodes": [
+    {"id":"oss-p","name":"开源参与","en":"Open-source Participation","g":"oss","layer":"primary","kind":"core","size":0.98,"x":215,"y":230,"summary":"持续进入真实开源项目并完成贡献流程，形成稳定而可追溯的工程活动。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
+    {"id":"pr","name":"GitHub / PR","en":"Pull Request Workflow","g":"oss","layer":"primary","kind":"normal","size":0.90,"x":320,"y":305,"summary":"PR、CI、Review、修改与合并反复出现在实际协作中。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
+    {"id":"test","name":"测试与验证","en":"Testing & Validation","g":"oss","layer":"primary","kind":"normal","size":0.84,"x":165,"y":345,"summary":"测试、回归、CI 与真实环境验证持续围绕项目和贡献出现。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
+    {"id":"conc","name":"并发","en":"Concurrency","g":"oss","layer":"secondary","kind":"soft","size":0.52,"x":365,"y":205,"summary":"并发、CAS 等概念进入过真实贡献场景。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
+    {"id":"ci","name":"CI","en":"Continuous Integration","g":"oss","layer":"secondary","kind":"trace","size":0.46,"x":120,"y":265,"summary":"自动化检查和跨环境验证是协作流程的一部分。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
+
+    {"id":"product","name":"产品迭代","en":"Product Iteration","g":"desktop","layer":"primary","kind":"core","size":0.98,"x":665,"y":220,"summary":"长期维护的桌面课表产品形成持续迭代、测试与发布轨迹。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
+    {"id":"tauri","name":"Tauri","en":"Tauri","g":"desktop","layer":"primary","kind":"soft","size":0.82,"x":825,"y":215,"summary":"Tauri 是课刻长期存在的桌面应用技术环境。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
+    {"id":"rust","name":"Rust","en":"Rust","g":"desktop","layer":"primary","kind":"soft","size":0.86,"x":665,"y":355,"summary":"Rust 持续存在于桌面项目和部分工程协作场景。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
+    {"id":"ts","name":"TypeScript","en":"TypeScript","g":"desktop","layer":"primary","kind":"soft","size":0.80,"x":810,"y":340,"summary":"TypeScript 高频存在于项目的前端与交互层。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
+    {"id":"ocr","name":"本地 OCR","en":"Local OCR","g":"desktop","layer":"secondary","kind":"normal","size":0.54,"x":875,"y":285,"summary":"截图识别、结构恢复与 Windows 本地组件构成项目的重要实践。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
+
+    {"id":"webn","name":"Web / 网络基础","en":"Web / Network Fundamentals","g":"web","layer":"primary","kind":"soft","size":0.94,"x":420,"y":565,"summary":"Web、HTTP、网络与安全基础形成一条持续学习主线。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
+    {"id":"browser","name":"浏览器渲染","en":"Browser Rendering","g":"web","layer":"primary","kind":"normal","size":0.88,"x":580,"y":540,"summary":"DOM、CSSOM、Layout、Paint 与 Composite 构成连续的浏览器基础学习轨迹。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
+    {"id":"js","name":"JavaScript / DOM","en":"JavaScript / DOM","g":"web","layer":"primary","kind":"soft","size":0.90,"x":525,"y":665,"summary":"JavaScript 与 DOM 处在当前持续补全的学习主线上。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
+    {"id":"http","name":"HTTP","en":"HTTP","g":"web","layer":"secondary","kind":"normal","size":0.50,"x":350,"y":645,"summary":"方法、状态码、缓存与协议演进被逐步串联起来。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
+    {"id":"render-pipe","name":"渲染流水线","en":"Layout / Paint / Composite","g":"web","layer":"secondary","kind":"trace","size":0.44,"x":590,"y":700,"summary":"渲染流水线作为更细的知识层在放大后逐渐显现。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]}
+  ],
+  "relations": [
+    {"source":"oss-p","target":"pr","kind":"practice","distance":92,"strength":0.18},
+    {"source":"oss-p","target":"test","kind":"repeated_context","distance":105,"strength":0.15},
+    {"source":"pr","target":"conc","kind":"practice","distance":88,"strength":0.10},
+    {"source":"test","target":"ci","kind":"practice","distance":82,"strength":0.10},
+    {"source":"product","target":"tauri","kind":"co_occurrence","distance":106,"strength":0.15},
+    {"source":"product","target":"rust","kind":"co_occurrence","distance":116,"strength":0.14},
+    {"source":"product","target":"ts","kind":"co_occurrence","distance":108,"strength":0.14},
+    {"source":"tauri","target":"ocr","kind":"practice","distance":84,"strength":0.09},
+    {"source":"webn","target":"browser","kind":"trajectory","distance":112,"strength":0.16},
+    {"source":"browser","target":"js","kind":"trajectory","distance":112,"strength":0.16},
+    {"source":"webn","target":"http","kind":"practice","distance":92,"strength":0.10},
+    {"source":"browser","target":"render-pipe","kind":"practice","distance":86,"strength":0.09},
+    {"source":"test","target":"product","kind":"repeated_context","distance":305,"strength":0.012}
+  ],
+  "anchors": [
+    {"id":"a-oss","name":"开源协作","kind":"contribution_stream","nodes":["oss-p","pr","test","conc","ci"],"galaxies":["oss"],"g":"oss","role":"provenance","prominence":"medium","x":255,"y":155,"phaseOffset":0.4},
+    {"id":"a-desktop","name":"课刻","kind":"project","nodes":["product","tauri","rust","ts","ocr"],"galaxies":["desktop"],"g":"desktop","role":"provenance","prominence":"medium","x":760,"y":155,"phaseOffset":1.3},
+    {"id":"a-web","name":"Learning","kind":"learning_trajectory","nodes":["webn","browser","js","http","render-pipe"],"galaxies":["web"],"g":"web","role":"provenance","prominence":"medium","x":500,"y":490,"phaseOffset":2.1}
+  ],
+  "galaxies": [
+    {"id":"oss","name":"开源参与与工程流转","x":270,"y":255,"mass":0.86,"morphology":"compact","dominance":0.88,"anchor":"a-oss","primary_nodes":["oss-p","pr","test"],"secondary_nodes":["conc","ci"],"color":[171,201,235]},
+    {"id":"desktop","name":"课刻与桌面产品","x":730,"y":270,"mass":0.94,"morphology":"elongated","dominance":0.96,"anchor":"a-desktop","primary_nodes":["product","tauri","rust","ts"],"secondary_nodes":["ocr"],"color":[213,190,232]},
+    {"id":"web","name":"Web 基础补全","x":500,"y":590,"mass":0.82,"morphology":"stream","dominance":0.82,"anchor":"a-web","primary_nodes":["webn","browser","js"],"secondary_nodes":["http","render-pipe"],"color":[178,222,214]}
+  ],
+  "motifs": []
+}

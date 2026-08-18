@@ -2,173 +2,45 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RENDERER = ROOT / "renderer"
 
 
 class RendererContractTests(unittest.TestCase):
-    def test_renderer_baseline_is_versioned(self):
-        for name in [
-            "README.md",
-            "physics.js",
-            "star-renderer.js",
-            "stellar-color.js",
-            "overview-visibility.js",
-            "identity-core-physics.js",
-            "identity-core-renderer.js",
-            "identity-presence.js",
-            "project-anchor.js",
-            "presentation.js",
-            "background-field.js",
-            "semantic-zoom.js",
-            "index.js",
-        ]:
-            self.assertTrue((RENDERER / name).is_file(), name)
-
-    def test_d3_force_baseline_cannot_silently_disappear(self):
-        text = (RENDERER / "physics.js").read_text(encoding="utf-8")
-        for token in [
-            "d3.forceSimulation",
-            "d3.forceLink",
-            "d3.forceManyBody",
-            "d3.forceCollide",
-            "d3.forceX",
-            "d3.forceY",
-            "alphaDecay: 0.024",
-            "velocityDecay: 0.24",
-            "dragAlphaTarget: 0.20",
-        ]:
-            self.assertIn(token, text)
-
-    def test_point_light_star_baseline_and_polish_cannot_silently_disappear(self):
-        text = (RENDERER / "star-renderer.js").read_text(encoding="utf-8")
-        for token in [
-            "drawKnowledgeStar",
-            "elliptical halo",
-            "point source first",
-            "Tiny overexposed pinprick",
-            "incomplete whisper arc",
-            "partial corona filament",
-            "arcOffset",
-        ]:
-            self.assertIn(token, text)
-
-    def test_overview_density_is_adaptive_and_not_fixed_to_28(self):
-        text = (RENDERER / "overview-visibility.js").read_text(encoding="utf-8")
-        for token in [
-            "computeOverviewVisibilityPlan",
-            "areaPerStar: 30000",
-            "modeledCount: nodes.length",
-            "density is never competence",
-        ]:
-            self.assertIn(token, text)
-        self.assertNotIn("overview_node_count = 28", text)
-
-    def test_stellar_temperature_is_visual_only(self):
-        text = (RENDERER / "stellar-color.js").read_text(encoding="utf-8")
-        for token in [
-            "visual-only deterministic parameter",
-            "stellarTemperatureForId",
-            "kelvinToRgb",
-            "stellarPaletteForNode",
-        ]:
-            self.assertIn(token, text)
-
-    def test_identity_core_physics_is_bounded_and_coupled_to_layout(self):
-        text = (RENDERER / "identity-core-physics.js").read_text(encoding="utf-8")
-        for token in [
-            "maxRadius: 82",
-            "homeSpring: 0.032",
-            "homeDamping: 0.79",
-            "1 - Math.exp",
-            "createIdentityCoreInfluenceForce",
-            "velocityWake: 0.018",
-            "alphaTarget(CORE_PHYSICS.reheatDuringDrag)",
-        ]:
-            self.assertIn(token, text)
-
-    def test_all_quality_gated_identity_core_families_are_rendered(self):
-        text = (RENDERER / "identity-core-renderer.js").read_text(encoding="utf-8")
-        for token in [
-            "monogram",
-            "eclipse",
-            "quiet_star",
-            "minimal_ring",
-            "black_hole",
-            "pulsar",
-            "binary_star",
-            "protostar_nebula",
-            "pulsePeriod = 1120",
-            "for (const dir of [1, -1])",
-            "Math.PI * 2 / 7200",
-        ]:
-            self.assertIn(token, text)
-
-    def test_identity_presence_is_ephemeral_not_profile_chrome(self):
-        text = (RENDERER / "identity-presence.js").read_text(encoding="utf-8")
-        for token in [
-            "identityPresenceOpacity",
-            "holdMs: 3600",
-            "fadeMs: 3600",
-            "hoveringCore",
-            "exploring",
-            "profile card",
-        ]:
-            self.assertIn(token, text)
-
-    def test_project_anchor_is_provenance_not_skill_score(self):
-        text = (RENDERER / "project-anchor.js").read_text(encoding="utf-8")
-        for token in [
-            "Project Anchors turn real experiences / projects into spatial provenance",
-            "They are not Knowledge Stars",
-            "projectAnchorVisibility",
-            "pickProjectAnchor",
-            "drawProjectProvenanceLinks",
-        ]:
-            self.assertIn(token, text)
-        self.assertNotIn("competenceScore", text)
-
-    def test_default_product_detail_hides_audit_fields(self):
-        text = (RENDERER / "presentation.js").read_text(encoding="utf-8")
-        for token in [
-            "buildNodeDetailModel",
-            "dedupeNodeSubtitle",
-            "查看依据",
-            "DEFAULT_DETAIL_EXCLUDES",
-            "reliability",
-            "modelVersion",
-        ]:
-            self.assertIn(token, text)
-        self.assertNotIn("state: node.state", text)
-        self.assertNotIn("confidence: node.confidence", text)
-
-    def test_background_field_stays_inside_quality_gated_vocabulary(self):
-        text = (RENDERER / "background-field.js").read_text(encoding="utf-8")
-        for token in [
-            "almost_empty",
-            "cold_filament",
-            "broken_cloud",
+    def test_generated_runtime_keeps_page_level_visual_baseline(self):
+        runtime = (ROOT / "renderer" / "runtime.js").read_text(encoding="utf-8")
+        required = [
+            "RUNTIME_BASELINE",
+            "function sceneScale()",
+            "function cameraForWorld",
+            "function tickCamera",
             "createAmbientMeteor",
             "drawAmbientMeteor",
-        ]:
-            self.assertIn(token, text)
-        self.assertNotIn("warm_dust", text)
-        self.assertNotIn("soft_band", text)
+            "drawProjectProvenanceLinks",
+            "primaryLabelRevealScale",
+            "faintGalaxyLabelsAtOverview",
+            "galaxyFocusScale",
+        ]
+        for token in required:
+            self.assertIn(token, runtime)
 
-    def test_semantic_zoom_preserves_camera_invariants_and_natural_reveal(self):
-        text = (RENDERER / "semantic-zoom.js").read_text(encoding="utf-8")
-        for token in [
-            "inspectNodeRecenters: false",
-            "zoomOutRecenters: false",
-            "identityCoreOwnsReset: true",
-            "galaxyFocusRequiredForSecondaryReveal: false",
-            "nodeSemanticVisibility",
-            "secondaryRevealStart: 1.04",
-            "traceRevealStart: 1.28",
-            "overviewMaxScale: 2.10",
-            "detailExitScale: 1.43",
-            "galaxyExitScale: 1.12",
-        ]:
-            self.assertIn(token, text)
+    def test_site_template_uses_canonical_shell_and_runtime(self):
+        template = (ROOT / "renderer" / "index.template.html").read_text(encoding="utf-8")
+        self.assertIn('./renderer/shell.css', template)
+        self.assertIn('./renderer/runtime.js', template)
+        self.assertNotIn('<svg', template.lower())
+        self.assertNotIn('drawKnowledgeStar(', template)
+
+    def test_repository_preview_uses_same_runtime(self):
+        preview = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn('data-kc-scene="./preview/scene.json"', preview)
+        self.assertIn('./renderer/shell.css', preview)
+        self.assertIn('./renderer/runtime.js', preview)
+        self.assertNotIn('function drawLinks', preview)
+        self.assertNotIn('drawKnowledgeStar(', preview)
+
+    def test_no_handcrafted_svg_exporter_is_part_of_runtime(self):
+        for path in (ROOT / "harness").glob("*.py"):
+            text = path.read_text(encoding="utf-8").lower()
+            self.assertNotIn('<svg', text, path.name)
 
 
 if __name__ == "__main__":

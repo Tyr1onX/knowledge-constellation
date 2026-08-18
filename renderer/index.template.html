@@ -5,23 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <title>Knowledge Constellation</title>
-  <style>
-    :root{font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#dce6f1;background:#01030a}
-    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#01030a}
-    button,summary{font:inherit} #universe{display:block;width:100vw;height:100vh;touch-action:none;background:#01030a}
-    #fatal{position:fixed;inset:24px auto auto 24px;z-index:20;max-width:min(560px,calc(100vw - 48px));padding:12px 14px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(7,10,16,.88);color:#b9c6d4;font-size:12px;line-height:1.6}
-    .tooltip{position:fixed;z-index:10;pointer-events:none;transform:translate(12px,12px);padding:7px 9px;border:1px solid rgba(255,255,255,.055);border-radius:8px;background:rgba(5,8,14,.82);backdrop-filter:blur(12px);opacity:0;transition:opacity .12s ease}.tooltip.show{opacity:1}
-    .tooltip strong{display:block;font-size:10px;font-weight:560;color:#dce5ef}.tooltip small{display:block;margin-top:2px;max-width:240px;font-size:8px;line-height:1.45;color:#708094}
-    .detail-card{position:fixed;z-index:12;top:18px;right:18px;width:min(390px,calc(100vw - 36px));max-height:calc(100vh - 36px);overflow:auto;padding:24px 22px 20px;border:1px solid rgba(255,255,255,.055);border-radius:16px;background:linear-gradient(180deg,rgba(8,12,19,.91),rgba(5,8,14,.84));box-shadow:0 18px 70px rgba(0,0,0,.32);backdrop-filter:blur(18px);opacity:0;transform:translateX(12px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}.detail-card.show{opacity:1;transform:none;pointer-events:auto}
-    .close{position:absolute;right:12px;top:10px;width:27px;height:27px;border:0;background:transparent;color:#566576;font-size:20px;cursor:pointer}.close:hover{color:#bac6d2}
-    .galaxy{padding-right:28px;color:#667487;font-size:9px;letter-spacing:.08em} h2{margin:9px 0 0;font-size:21px;line-height:1.3;font-weight:560;color:#e7edf5}.subtitle{margin-top:5px;font-size:9px;color:#718095}
-    .project-row{margin-top:8px;font-size:10px;color:#8492a3}.project-row::before{content:"来自 ";color:#586575}.summary{margin:16px 0 0;font-size:12px;line-height:1.82;color:#b6c2cf}
-    .related-block{margin-top:19px;padding-top:15px;border-top:1px solid rgba(255,255,255,.055)}.section-label{margin-bottom:9px;font-size:9px;letter-spacing:.11em;color:#667386}.related-list{display:flex;flex-wrap:wrap;gap:6px}
-    .related-chip{border:1px solid rgba(255,255,255,.055);border-radius:999px;padding:6px 9px;background:rgba(255,255,255,.018);color:#8f9cad;font-size:9px;cursor:pointer;transition:.15s ease}.related-chip:hover{color:#d2dce7;background:rgba(255,255,255,.052);border-color:rgba(255,255,255,.095)}
-    details{margin-top:18px;padding-top:13px;border-top:1px solid rgba(255,255,255,.055)} details summary{list-style:none;cursor:pointer;font-size:10px;color:#6f7d90;user-select:none}details summary::-webkit-details-marker{display:none}details summary::after{content:"  ·  +";color:#465263}details[open] summary::after{content:"  ·  −"}
-    .evidence-body{padding-top:13px}.evidence-item{margin-top:7px;padding:8px 9px;border:1px solid rgba(255,255,255,.035);border-radius:8px;background:rgba(255,255,255,.015);font-size:9px;line-height:1.6;color:#8391a3}.sources{margin-top:12px;padding-top:8px;border-top:1px solid rgba(255,255,255,.04)}.source-item{padding:5px 0;font-size:8.5px;color:#647286}.footnote{margin:10px 0 0;font-size:9px;line-height:1.6;color:#566273}
-    @media(max-width:720px){.detail-card{top:auto;right:12px;bottom:12px;left:12px;width:auto;max-height:48vh;border-radius:14px;padding:20px 18px 17px}} @media(prefers-reduced-motion:reduce){.detail-card,.tooltip{transition:none}}
-  </style>
+  <link rel="stylesheet" href="./renderer/shell.css">
 </head>
 <body>
   <canvas id="universe" aria-label="Interactive Knowledge Constellation"></canvas>
@@ -29,8 +13,11 @@
   <div class="tooltip" id="tooltip"><strong id="tooltip-title"></strong><small id="tooltip-subtitle"></small></div>
   <aside class="detail-card" id="detail-card">
     <button class="close" id="detail-close" aria-label="关闭">×</button>
-    <div class="galaxy" id="detail-galaxy"></div><h2 id="detail-title"></h2><div class="subtitle" id="detail-subtitle"></div>
-    <div class="project-row" id="detail-project-row"><span id="detail-project"></span></div><p class="summary" id="detail-summary"></p>
+    <div class="galaxy" id="detail-galaxy"></div>
+    <h2 id="detail-title"></h2>
+    <div class="subtitle" id="detail-subtitle"></div>
+    <div class="project-row" id="detail-project-row"><span id="detail-project"></span></div>
+    <p class="summary" id="detail-summary"></p>
     <div class="related-block" id="detail-related-block"><div class="section-label">相关</div><div class="related-list" id="detail-related"></div></div>
     <details id="detail-disclosure"><summary id="detail-evidence-label">查看依据</summary><div class="evidence-body"><div id="detail-evidence"></div><div class="sources" id="detail-sources"></div><p class="footnote" id="detail-evidence-footnote"></p></div></details>
   </aside>

@@ -1,4 +1,5 @@
 import importlib.util
+import math
 import unittest
 from pathlib import Path
 
@@ -17,12 +18,31 @@ def sample():
     return input_data, evidence, model, structure, visual
 
 
+def layout_fixture(archetype="asymmetric_chain", openness=.65):
+    structure = {
+        "galaxies": [
+            {"id": f"g{i}", "label": f"G{i}", "anchor": f"a{i}", "primary_nodes": [], "secondary_nodes": []}
+            for i in range(4)
+        ]
+    }
+    visual = {
+        "seed": "kc:layout:test",
+        "composition": {"archetype": archetype, "asymmetry": .72, "openness": openness, "dominant_axis": "diagonal"},
+        "galaxies": [
+            {"id": f"g{i}", "mass": .65, "morphology": "compact", "dominance": .7}
+            for i in range(4)
+        ],
+    }
+    return visual, structure
+
+
 class SceneComposerTests(unittest.TestCase):
     def test_sparse_scene_stays_sparse_and_exact(self):
         args = sample(); scene = compose_scene.compose_scene(*args)
         self.assertEqual("kc.scene.v1", scene["version"])
         self.assertEqual(1, len(scene["nodes"])); self.assertEqual(1, len(scene["anchors"])); self.assertEqual(1, len(scene["galaxies"])); self.assertEqual([], scene["relations"])
         self.assertEqual("Example", scene["identity"]["label"]); self.assertEqual("Project A", scene["nodes"][0]["project"]); self.assertEqual("core", scene["nodes"][0]["kind"])
+        self.assertEqual([171, 201, 235], scene["galaxies"][0]["color"])
         self.assertEqual([], compose_scene.validate_scene_semantics(scene, args[0], args[2], args[3]))
 
     def test_composition_is_deterministic(self):
@@ -35,6 +55,32 @@ class SceneComposerTests(unittest.TestCase):
     def test_scene_does_not_surface_audit_chrome_by_default(self):
         node = compose_scene.compose_scene(*sample())["nodes"][0]
         self.assertNotIn("confidence", node); self.assertNotIn("unknown", node); self.assertNotIn("next_step", node)
+
+    def test_all_quality_gated_archetypes_keep_identity_core_clear(self):
+        cx, cy = compose_scene.WORLD_WIDTH / 2, compose_scene.WORLD_HEIGHT / 2
+        for archetype in compose_scene.ARCHETYPE_POINTS:
+            visual, structure = layout_fixture(archetype)
+            centers = compose_scene.galaxy_centers(visual, structure)
+            for point in centers.values():
+                self.assertGreaterEqual(math.hypot(point["x"] - cx, point["y"] - cy), compose_scene.CORE_CLEARANCE - 1, archetype)
+
+    def test_asymmetric_chain_is_bent_not_center_diagonal(self):
+        visual, structure = layout_fixture("asymmetric_chain")
+        centers = list(compose_scene.galaxy_centers(visual, structure).values())
+        self.assertGreater(max(p["x"] for p in centers) - min(p["x"] for p in centers), 430)
+        self.assertGreater(max(p["y"] for p in centers) - min(p["y"] for p in centers), 150)
+        # The middle pair must not both sit close to the Identity Core.
+        cx, cy = compose_scene.WORLD_WIDTH / 2, compose_scene.WORLD_HEIGHT / 2
+        near = [p for p in centers if math.hypot(p["x"] - cx, p["y"] - cy) < compose_scene.CORE_CLEARANCE + 35]
+        self.assertLessEqual(len(near), 1)
+
+    def test_openness_changes_spacing_without_changing_semantics(self):
+        compact_visual, structure = layout_fixture("three_islands", openness=0)
+        open_visual, _ = layout_fixture("three_islands", openness=1)
+        compact = compose_scene.galaxy_centers(compact_visual, structure)
+        opened = compose_scene.galaxy_centers(open_visual, structure)
+        self.assertNotEqual(compact, opened)
+        self.assertEqual(set(compact), set(opened))
 
 
 if __name__ == "__main__":
