@@ -1,3 +1,8 @@
+---
+name: knowledge-constellation
+description: Build an evidence-grounded personal knowledge universe from GitHub, projects, resumes, learning records, pull requests, notes, and other user-provided or public material. Use when the user asks to understand, visualize, or generate a personal knowledge constellation; preserve attribution and never inflate dependencies, participation, learning, or AI-assisted work into mastery.
+---
+
 # Knowledge Constellation Skill
 
 ## Purpose
