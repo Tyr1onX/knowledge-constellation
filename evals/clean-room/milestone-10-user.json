@@ -1,0 +1,41 @@
+{
+  "milestone": "recognition-hardening-10-user",
+  "protocol_version": "kc.cleanroom.v2",
+  "accepted_cases": [
+    {"target":"simonw","case":"2026-08-18-simonw-02","role":"strong independent multi-project developer","over_conservatism_test":true},
+    {"target":"devdanzin","case":"2026-08-18-devdanzin-04","role":"explicit AI-assisted bug-finding and validation workflow"},
+    {"target":"BurntSushi","case":"2026-08-18-burntsushi-01","role":"performance-sensitive Rust tools and libraries"},
+    {"target":"yyx990803","case":"2026-08-18-yyx990803-01","role":"framework core design plus project stewardship"},
+    {"target":"sharkdp","case":"2026-08-18-sharkdp-01","role":"focused CLI tools plus language design"},
+    {"target":"tiangolo","case":"2026-08-18-tiangolo-01","role":"AI-assisted project-family maintenance and human validation"},
+    {"target":"sindresorhus","case":"2026-08-18-sindresorhus-01","role":"many focused packages plus curation inflation trap"},
+    {"target":"karpathy","case":"2026-08-18-karpathy-02","role":"LLM training, teaching, low-level implementation and explicit agent research split"},
+    {"target":"heloa-net","case":"2026-08-18-heloa-net-01","role":"learning-heavy public footprint"},
+    {"target":"magdalenemc","case":"2026-08-18-magdalenemc-01","role":"extremely sparse and ambiguous public footprint"}
+  ],
+  "gate": {
+    "distinct_users": 10,
+    "required_verdict": "PASS",
+    "critical_inflation": 0,
+    "material_warnings": 0,
+    "anchor_identity_handoff": "PASS",
+    "requires_over_conservatism_counterexample": true,
+    "requires_ci_green": true
+  },
+  "generalized_fixes": [
+    "executable clean-room eval protocol v2 and replay verifier",
+    "attribution must survive node-label compression",
+    "action-bearing claims require explicit attribution evidence",
+    "AI/collaboration may be Motif/provenance rather than capability",
+    "trajectory relations require source-grounded temporal basis",
+    "Pass C Anchors and exact identity must survive into Pass D",
+    "truthful one-node Galaxies are allowed; no fabricated companion nodes",
+    "learning-state evidence remains visible without being upgraded to mastery",
+    "sparse evidence may legitimately produce a tiny universe"
+  ],
+  "known_limitations": [
+    "All ten milestone users are evaluated from public GitHub evidence; non-GitHub sources still need a comparable real-user gate.",
+    "Runner/Auditor isolation is mostly emulated in this environment rather than separate-process blind execution.",
+    "Source snapshots are deliberately sampled and bounded, not exhaustive biographies or complete contribution histories."
+  ]
+}
