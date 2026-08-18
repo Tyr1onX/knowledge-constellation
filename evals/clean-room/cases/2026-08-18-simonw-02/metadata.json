@@ -1,0 +1,10 @@
+{
+  "case_id": "2026-08-18-simonw-02",
+  "protocol_version": "kc.cleanroom.v2",
+  "validation_mode": "harness",
+  "target": {"handle": "simonw", "profile_url": "https://github.com/simonw"},
+  "source_snapshot_from_case": "2026-08-18-simonw-01",
+  "knowledge_constellation_sha": "c0fe2d062bb9b08e230a5f26163cd817467bc68a",
+  "runner": {"model": "GPT-5.6 Sol", "isolation_level": "emulated", "status": "frozen_pending_audit"},
+  "status": "runner_frozen_pending_audit"
+}
