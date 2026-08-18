@@ -1,0 +1,12 @@
+{
+  "case_id": "2026-08-18-devdanzin-04",
+  "target": "devdanzin",
+  "protocol_version": "kc.cleanroom.v2",
+  "verdict": "PASS",
+  "critical_inflation": 0,
+  "material_warnings": [],
+  "counts_toward_ten_user_gate": true,
+  "anchor_identity_handoff": "PASS",
+  "saturated": true,
+  "notes": "AI-assisted provenance remains explicit while documented human reproduction, validation and source-checking roles survive; Rust/fusil/linked-fix boundaries remain intact."
+}
