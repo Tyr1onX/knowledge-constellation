@@ -2,31 +2,24 @@
 
 [中文版](README.md)
 
-> Give Codex material about you, and let it turn that material into your own knowledge universe.
+> Give Codex the material that represents you, and let it turn that material into a personal knowledge universe you can explore and grow over time.
 
-![Knowledge Constellation visual preview](assets/preview.svg)
+### [Open the interactive preview →](https://tyr1onx.github.io/knowledge-constellation/)
 
 Knowledge Constellation is a **Codex Skill**.
 
-Instead of asking you to list your skills or assign yourself scores, it reads the real traces you leave behind — what you built, learned, explored, and worked through — and turns them into a personal knowledge constellation.
+It reads real material such as your GitHub activity, projects, resume, learning notes, pull requests, and other records, then turns what it understands into a personal knowledge constellation.
 
 ## Use it
 
-1. Install [`SKILL.md`](SKILL.md) from this repository.
-2. Give Codex material about you: GitHub activity, projects, a resume, learning notes, pull requests, notes, or anything else that helps describe your work and learning.
-3. Tell Codex: **“Use Knowledge Constellation to generate my knowledge map.”**
+1. Install this repository's [`SKILL.md`](SKILL.md).
+2. Give Codex material about you.
+3. Tell Codex: **“Use Knowledge Constellation to generate my knowledge constellation.”**
 
 Codex handles the rest.
 
-You do not need to manually build a tech stack, score your abilities, prepare JSON, or run the generation pipeline yourself.
+## The constellation
 
-## What you get
+**Stars** represent knowledge and experience, **galaxies** bring related themes together, and **project anchors** show where those parts of the universe came from.
 
-- **Stars** represent knowledge and experience.
-- **Galaxies** naturally group related areas.
-- **Project anchors** show where that knowledge came from.
-- **Zooming in** gradually reveals finer details and relationships.
-
-Your constellation can keep growing as you provide new material.
-
-> The preview is based on the repository's existing Tyr1onX sample and the current Renderer visual baseline.
+You can drag, zoom, and explore the scene. Finer knowledge and relationships gradually appear as you move closer, and the universe can keep growing as new material is added.
