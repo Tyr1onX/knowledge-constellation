@@ -1,0 +1,23 @@
+{
+  "protocol_version": "kc.cleanroom.v2",
+  "recognition_hardening": {
+    "distinct_fresh_users_completed": 10,
+    "completed_users": [
+      "simonw",
+      "devdanzin",
+      "BurntSushi",
+      "yyx990803",
+      "sharkdp",
+      "tiangolo",
+      "sindresorhus",
+      "karpathy",
+      "heloa-net",
+      "magdalenemc"
+    ],
+    "unresolved_critical_inflation": 0,
+    "strong_independent_developer_attribution_case": "BurntSushi",
+    "anchor_identity_handoff": "PASS",
+    "renderer_baseline": "preserved",
+    "final_ci_verification": "pending"
+  }
+}
