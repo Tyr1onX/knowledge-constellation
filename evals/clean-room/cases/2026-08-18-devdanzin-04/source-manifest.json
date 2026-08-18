@@ -1,0 +1,24 @@
+{
+  "case_id": "2026-08-18-devdanzin-04",
+  "subject": {"id": "devdanzin", "label": "devdanzin"},
+  "snapshot_time": "2026-08-18T11:32:00+08:00",
+  "sources": [
+    {"id":"S1","kind":"profile_readme","url":"https://github.com/devdanzin/devdanzin/blob/main/README.md","observation":"Self-description centers Python, bug finding, tool building, lafleur/labeille authorship, fusil maintenance and long CPython contribution/triage history."},
+    {"id":"S2","kind":"repository_inventory","observation":"Owned non-fork repositories include fuzzing, CPython review/findings and RustPython-targeted audit repositories; names are discovery only."},
+    {"id":"S3","kind":"repository_readme","repo":"devdanzin/labeille","observation":"Real PyPI test-suite runner for target CPython builds with resolve/run/bisect, benchmarks, free-threading and extension compatibility workflows."},
+    {"id":"S4","kind":"repository_readme","repo":"devdanzin/lafleur","observation":"Coverage-guided evolutionary fuzzer for CPython JIT with JIT-specific mutators, adaptive scheduling, campaign aggregation and crash triage."},
+    {"id":"S5","kind":"repository_readme","repo":"devdanzin/fusil","observation":"Explicit revival of Victor Stinner's fuzzing framework; active scope centers Python fuzzing while legacy non-Python fuzzers are not claimed."},
+    {"id":"S6","kind":"repository_readme","repo":"devdanzin/reported-bugs-catalog","observation":"Catalog reports many distinct bugs across external projects and explicitly discloses that catalog/tooling were assembled with Claude Code."},
+    {"id":"S7","kind":"repository_readme","repo":"devdanzin/cpython-review-toolkit","observation":"Claude Code plugin for CPython C review with multiple agents, detectors, campaign slicing and reproduction workflows."},
+    {"id":"S8","kind":"repository_readme","repo":"devdanzin/cpython-oom-findings","observation":"OOM findings include reproducers/backtraces/root-cause writeups; disclosure says Claude Code works alongside the maintainer and the maintainer reviews/re-reproduces every finding before disclosure."},
+    {"id":"S9","kind":"repository_readme","repo":"devdanzin/cpython-tsan-findings","observation":"TSan triage/dedupe repository was newly stood up and explicitly had no catalogued findings yet at snapshot."},
+    {"id":"S10","kind":"external_issue","url":"https://github.com/python/cpython/issues/154709","observation":"Subject-authored reversed(dict) OOB crash report with reproducer, path comparison, history analysis and suggested fix; disclosure says reduced/reproduced/drafted with Claude Code assistance."},
+    {"id":"S11","kind":"external_issue","url":"https://github.com/python/cpython/issues/153852","observation":"Subject-authored umbrella issue for 15 free-threading races; Claude Code drafted reports/reduced reproducers, while each reproducer and root cause was re-verified by hand."}
+  ],
+  "scope_boundaries": [
+    "AI assistance is explicit and must not be erased or over-attributed to the human.",
+    "Human reviewing, re-reproduction and source checking remain valid supported roles.",
+    "RustPython appearing as an audit target does not establish Rust mastery.",
+    "Issue authorship does not imply authorship of linked fixes."
+  ]
+}

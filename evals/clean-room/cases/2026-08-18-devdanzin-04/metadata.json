@@ -1,0 +1,10 @@
+{
+  "case_id": "2026-08-18-devdanzin-04",
+  "protocol_version": "kc.cleanroom.v2",
+  "validation_mode": "harness",
+  "target": {"handle": "devdanzin", "profile_url": "https://github.com/devdanzin"},
+  "source_snapshot_from_case": "2026-08-18-devdanzin-01",
+  "knowledge_constellation_sha": "8fccfd28c7d3868bf90db49d23c72b09f452d4cb",
+  "runner": {"model": "GPT-5.6 Sol", "isolation_level": "emulated", "status": "frozen_pending_audit"},
+  "status": "runner_frozen_pending_audit"
+}

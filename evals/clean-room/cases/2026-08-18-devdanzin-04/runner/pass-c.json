@@ -1,0 +1,64 @@
+{
+  "anchors": [
+    {
+      "id": "A1",
+      "kind": "recurring_activity_stream",
+      "label": "CPython 稳健性与上游问题流",
+      "nodes": ["N1", "N3", "N4", "N6", "N7", "N10", "N11"]
+    },
+    {
+      "id": "A2",
+      "kind": "project_toolchain",
+      "label": "lafleur / labeille / fusil 模糊测试工具链",
+      "nodes": ["N2", "N5", "N8", "N9"]
+    }
+  ],
+  "relations": [
+    {"source":"N1","target":"N3","kind":"repeated_context","evidence":["E8","E10","E11"]},
+    {"source":"N3","target":"N4","kind":"practice","evidence":["E8","E10","E11"]},
+    {"source":"N4","target":"N11","kind":"practice","evidence":["E8","E10","E11"]},
+    {"source":"N1","target":"N10","kind":"repeated_context","evidence":["E10","E11","E12"]},
+    {"source":"N6","target":"N1","kind":"repeated_context","evidence":["E11"]},
+    {"source":"N7","target":"N1","kind":"repeated_context","evidence":["E8"]},
+    {"source":"N2","target":"N5","kind":"practice","evidence":["E2","E5"]},
+    {"source":"N2","target":"N8","kind":"practice","evidence":["E4"]},
+    {"source":"N2","target":"N9","kind":"practice","evidence":["E5","E6"]},
+    {"source":"N5","target":"N8","kind":"repeated_context","evidence":["E4","E5"]}
+  ],
+  "motifs": [
+    {
+      "id": "M1",
+      "label": "AI-assisted reduction / review workflow",
+      "kind": "work_mode",
+      "nodes": ["N3", "N4", "N9", "N10", "N11"],
+      "evidence": ["E6", "E7", "E8", "E10", "E11"]
+    },
+    {
+      "id": "M2",
+      "label": "Python 生态可靠性",
+      "kind": "goal",
+      "nodes": ["N1", "N2", "N8", "N9", "N10"],
+      "evidence": ["E1", "E2", "E6", "E13"]
+    }
+  ],
+  "galaxies": [
+    {
+      "id": "G1",
+      "label": "CPython 稳健性与上游分诊",
+      "anchor": "A1",
+      "primary_nodes": ["N1", "N3", "N4", "N10"],
+      "secondary_nodes": ["N6", "N7", "N11"]
+    },
+    {
+      "id": "G2",
+      "label": "lafleur / labeille / fusil 模糊测试工具链",
+      "anchor": "A2",
+      "primary_nodes": ["N2", "N5", "N9"],
+      "secondary_nodes": ["N8"]
+    }
+  ],
+  "distillation": {
+    "primary_nodes": ["N1", "N3", "N4", "N10", "N2", "N5", "N9"],
+    "secondary_nodes": ["N6", "N7", "N11", "N8"]
+  }
+}
