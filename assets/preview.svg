@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Knowledge Constellation visual preview</title>
+  <desc id="desc">A dark personal knowledge universe built from the Tyr1onX sample, with a central identity core and three surrounding knowledge galaxies.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="72%">
+      <stop offset="0" stop-color="#0b0d12"/>
+      <stop offset="0.62" stop-color="#030405"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.12" stop-color="#f7f8ff" stop-opacity="0.98"/>
+      <stop offset="0.42" stop-color="#cfd6ff" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#7f8cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warmStar" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.16" stop-color="#fff9ee"/>
+      <stop offset="0.4" stop-color="#ffd9a0" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#ffc36b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coolStar" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.18" stop-color="#eef6ff"/>
+      <stop offset="0.42" stop-color="#a9c9ff" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#74a5ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur12"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="blur5"><feGaussianBlur stdDeviation="5"/></filter>
+    <filter id="blur2"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g fill="#ffffff">
+    <circle cx="78" cy="91" r="1" opacity="0.24"/><circle cx="164" cy="156" r="0.8" opacity="0.18"/><circle cx="245" cy="72" r="1.1" opacity="0.2"/>
+    <circle cx="342" cy="121" r="0.7" opacity="0.25"/><circle cx="478" cy="64" r="0.8" opacity="0.16"/><circle cx="554" cy="113" r="1" opacity="0.22"/>
+    <circle cx="692" cy="74" r="0.8" opacity="0.17"/><circle cx="804" cy="119" r="1" opacity="0.2"/><circle cx="932" cy="65" r="0.7" opacity="0.18"/>
+    <circle cx="1086" cy="126" r="1.1" opacity="0.22"/><circle cx="1134" cy="233" r="0.8" opacity="0.2"/><circle cx="66" cy="292" r="0.7" opacity="0.16"/>
+    <circle cx="166" cy="394" r="0.9" opacity="0.2"/><circle cx="272" cy="562" r="0.7" opacity="0.2"/><circle cx="421" cy="601" r="1" opacity="0.2"/>
+    <circle cx="733" cy="596" r="0.8" opacity="0.19"/><circle cx="864" cy="626" r="1" opacity="0.18"/><circle cx="1034" cy="559" r="0.8" opacity="0.21"/>
+    <circle cx="1154" cy="456" r="0.7" opacity="0.18"/>
+  </g>
+
+  <g stroke="#b8c4dc" stroke-opacity="0.11" stroke-width="1">
+    <path d="M590 333 C505 286 424 231 333 205"/>
+    <path d="M598 343 C718 273 822 250 931 230"/>
+    <path d="M602 354 C674 434 738 493 821 522"/>
+    <path d="M333 205 C278 194 233 221 191 251"/>
+    <path d="M333 205 C370 173 407 158 445 164"/>
+    <path d="M931 230 C994 217 1040 244 1074 281"/>
+    <path d="M931 230 C898 185 854 169 810 177"/>
+    <path d="M821 522 C883 536 930 519 972 490"/>
+    <path d="M821 522 C776 557 730 573 683 563"/>
+  </g>
+
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" fill="#d8deea">
+    <text x="264" y="135" font-size="18" opacity="0.76">开源参与与工程流转</text>
+    <text x="852" y="153" font-size="18" opacity="0.76">课刻与桌面产品</text>
+    <text x="746" y="617" font-size="18" opacity="0.76">Web 基础补全</text>
+  </g>
+
+  <g>
+    <circle cx="600" cy="338" r="64" fill="url(#core)" opacity="0.38" filter="url(#blur12)"/>
+    <circle cx="600" cy="338" r="32" fill="url(#core)" opacity="0.74" filter="url(#blur5)"/>
+    <circle cx="600" cy="338" r="9" fill="#ffffff"/>
+    <circle cx="600" cy="338" r="20" fill="none" stroke="#dce3ff" stroke-opacity="0.42" stroke-width="0.8"/>
+    <circle cx="600" cy="338" r="29" fill="none" stroke="#a9b7ff" stroke-opacity="0.15" stroke-width="0.7" stroke-dasharray="18 11"/>
+    <text x="600" y="386" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#e7ebf4" opacity="0.84">Tyr1onX</text>
+  </g>
+
+  <g>
+    <circle cx="333" cy="205" r="31" fill="url(#coolStar)" opacity="0.34" filter="url(#blur5)"/>
+    <circle cx="333" cy="205" r="15" fill="url(#coolStar)"/><circle cx="333" cy="205" r="2.4" fill="#fff"/>
+    <circle cx="191" cy="251" r="19" fill="url(#coolStar)"/><circle cx="191" cy="251" r="2" fill="#fff"/>
+    <circle cx="445" cy="164" r="16" fill="url(#warmStar)"/><circle cx="445" cy="164" r="1.8" fill="#fff"/>
+    <circle cx="285" cy="307" r="11" fill="url(#warmStar)" opacity="0.8"/><circle cx="285" cy="307" r="1.4" fill="#fff"/>
+    <text x="333" y="235" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#f0f3f8">开源参与</text>
+    <text x="191" y="279" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#cbd2df">GitHub / PR</text>
+    <text x="445" y="191" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#cbd2df">测试与验证</text>
+  </g>
+
+  <g>
+    <circle cx="931" cy="230" r="29" fill="url(#warmStar)" opacity="0.34" filter="url(#blur5)"/>
+    <circle cx="931" cy="230" r="15" fill="url(#warmStar)"/><circle cx="931" cy="230" r="2.4" fill="#fff"/>
+    <circle cx="1074" cy="281" r="18" fill="url(#coolStar)"/><circle cx="1074" cy="281" r="1.9" fill="#fff"/>
+    <circle cx="810" cy="177" r="16" fill="url(#warmStar)"/><circle cx="810" cy="177" r="1.7" fill="#fff"/>
+    <circle cx="1012" cy="355" r="12" fill="url(#coolStar)" opacity="0.86"/><circle cx="1012" cy="355" r="1.4" fill="#fff"/>
+    <circle cx="864" cy="323" r="10" fill="url(#warmStar)" opacity="0.78"/><circle cx="864" cy="323" r="1.2" fill="#fff"/>
+    <text x="931" y="261" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#f0f3f8">产品迭代</text>
+    <text x="1074" y="310" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#cbd2df">Tauri</text>
+    <text x="810" y="204" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#cbd2df">Rust</text>
+    <text x="1012" y="380" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#aeb7c6">TypeScript</text>
+  </g>
+
+  <g>
+    <circle cx="821" cy="522" r="30" fill="url(#coolStar)" opacity="0.34" filter="url(#blur5)"/>
+    <circle cx="821" cy="522" r="15" fill="url(#coolStar)"/><circle cx="821" cy="522" r="2.4" fill="#fff"/>
+    <circle cx="972" cy="490" r="18" fill="url(#warmStar)"/><circle cx="972" cy="490" r="1.9" fill="#fff"/>
+    <circle cx="683" cy="563" r="17" fill="url(#coolStar)"/><circle cx="683" cy="563" r="1.8" fill="#fff"/>
+    <circle cx="913" cy="582" r="10" fill="url(#coolStar)" opacity="0.72"/><circle cx="913" cy="582" r="1.2" fill="#fff"/>
+    <text x="821" y="553" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" fill="#f0f3f8">Web / 网络</text>
+    <text x="972" y="519" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#cbd2df">浏览器渲染</text>
+    <text x="683" y="592" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" fill="#cbd2df">JavaScript / DOM</text>
+  </g>
+
+  <g fill="#dfe5ef" opacity="0.5" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11">
+    <rect x="454" y="252" width="6" height="6" transform="rotate(45 457 255)" fill="#c8d0df" opacity="0.6"/>
+    <text x="468" y="260">外部开源贡献</text>
+    <rect x="766" y="340" width="6" height="6" transform="rotate(45 769 343)" fill="#c8d0df" opacity="0.6"/>
+    <text x="780" y="348">课刻</text>
+    <rect x="626" y="486" width="6" height="6" transform="rotate(45 629 489)" fill="#c8d0df" opacity="0.6"/>
+    <text x="640" y="494">Learning</text>
+  </g>
+</svg>
