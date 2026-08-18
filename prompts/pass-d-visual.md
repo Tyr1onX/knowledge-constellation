@@ -2,7 +2,9 @@
 
 Read `SKILL.md`, accepted `input.json`, accepted `model.json`, accepted `structure.json`, and `contracts/visual.schema.json`. Produce only `visual.json` matching the schema.
 
-Decide semantic visual parameters: deterministic scene seed, Identity Core family, identity presence, composition archetype, asymmetry, openness, dominant axis, field density/dust/temperature, motion temperament, every accepted Anchor's visual provenance role, and each Galaxy's relative mass/morphology/dominance. The person's structure should influence the first-screen silhouette. Do not output coordinates, raw CSS, Canvas/WebGL code, or HTML. Do not include Evidence, Claims, confidence text, known/unknown/boundary or other Recognition truth fields. Visual drama must never upgrade capability truth. Do not read test baselines or prior expected answers.
+Decide semantic visual parameters: deterministic scene seed, Identity Core family, identity presence, composition archetype, asymmetry, openness, dominant axis, field density/dust/temperature, motion temperament, every accepted Anchor's visual provenance role, and each Galaxy's relative mass/morphology/dominance. The person's structure should influence the first-screen silhouette. Do not output coordinates, raw CSS, Canvas/WebGL code, SVG, or HTML. Do not include Evidence, Claims, confidence text, known/unknown/boundary or other Recognition truth fields. Visual drama must never upgrade capability truth. Do not read test baselines or prior expected answers.
+
+These choices are **bounded parameters inside one accepted renderer**, not permission to redesign the product for each user. Knowledge Star appearance, relation-line treatment, Project Anchor form, responsive world fitting, camera easing, zoom behavior, label hierarchy, Identity Presence, detail-card styling, pure-black negative space, ambient background mechanics, hover/selection behavior and meteor behavior are renderer-owned invariants. Different users may have different universe structures and accepted parameter values; they must not receive different-quality frontends.
 
 `identity.label` must come from `input.json.subject.label`; do not recover identity from node labels or invent a persona. `identity.presence` controls only the brief product-level identity introduction described by the schema.
 
@@ -28,6 +30,14 @@ Prefer the family that best fits the global scene geometry and overview readabil
 Do not use the deterministic seed to choose the Identity Core family. Do not invent family-specific decorations or rendering instructions. Renderer owns the astronomical detail and must enforce the one-subject rule: one Core family has one primary visual subject, with auxiliary elements strictly subordinate.
 
 Detailed renderer-side constraints live in `docs/identity-core-visual-grammar.md`; this prompt contains the semantic rules required for Pass D and must remain usable in an isolated workspace.
+
+## Composition rules
+
+Choose only among the quality-gated archetypes in the schema. Archetypes express a macro silhouette, not literal graph coordinates. The Scene Composer will keep the Identity Core clear, apply bounded openness/asymmetry/axis adjustments, and let the canonical physics settle the result.
+
+Never use an archetype to force Galaxies into a straight line through the Identity Core. Do not invent extra Galaxies or move a Knowledge Node to another Galaxy merely to make the layout look fuller or more symmetrical.
+
+`asymmetry`, `openness`, and `dominant_axis` should describe the accepted personal structure, but keep them moderate unless the structure strongly supports an extreme. They are layout controls, not personality descriptors.
 
 ## Background Field rules
 
