@@ -1,0 +1,4 @@
+interface:
+  display_name: "Knowledge Constellation"
+  short_description: "从 GitHub、项目、简历和学习记录生成可探索的个人知识宇宙"
+  default_prompt: "使用 $knowledge-constellation 根据我提供的真实资料生成一片可探索的个人知识星图。"
