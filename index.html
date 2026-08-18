@@ -20,8 +20,16 @@ canvas.dragging{cursor:grabbing}
 .card{position:fixed;z-index:10;right:20px;top:20px;width:min(318px,calc(100vw - 40px));padding:18px 18px 17px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(180deg,rgba(9,14,23,.84),rgba(4,8,14,.91));box-shadow:0 26px 86px rgba(0,0,0,.38);backdrop-filter:blur(24px);opacity:0;transform:translateY(-7px) scale(.987);pointer-events:none;transition:.18s ease}
 .card.show{opacity:1;transform:none;pointer-events:auto}
 .close{position:absolute;right:10px;top:9px;width:28px;height:28px;border:0;border-radius:50%;background:transparent;color:#667487;cursor:pointer;font-size:15px}.close:hover{background:rgba(255,255,255,.045);color:#dfe8f2}
-.eyebrow{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#68778a}.card h2{margin:8px 28px 2px 0;font-size:19px;font-weight:580}.en{font-size:9px;color:#718095}.card p{margin:14px 0 0;font-size:11px;line-height:1.75;color:#b5c0ce}.from{margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.055);font-size:9px;color:#738297}.repo{position:fixed;right:22px;bottom:18px;z-index:5;color:rgba(141,157,179,.34);text-decoration:none;font-size:8px;letter-spacing:.08em;transition:color .2s}.repo:hover{color:rgba(205,218,234,.72)}
-@media(max-width:720px){.brand{left:16px;top:15px}.hint{left:17px;bottom:14px}.repo{right:16px;bottom:14px}.card{left:12px;right:12px;top:auto;bottom:12px;width:auto}}
+.eyebrow{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:#68778a}.card h2{margin:8px 28px 2px 0;font-size:19px;font-weight:580}.en{font-size:9px;color:#718095}.card p{margin:14px 0 0;font-size:11px;line-height:1.75;color:#b5c0ce}.from{margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.055);font-size:9px;color:#738297}
+.repo{position:fixed;right:22px;bottom:18px;z-index:5;color:rgba(141,157,179,.34);text-decoration:none;font-size:8px;letter-spacing:.08em;transition:color .2s}.repo:hover{color:rgba(205,218,234,.72)}
+.preview-toggle{position:fixed;right:20px;bottom:43px;z-index:13;border:1px solid rgba(255,255,255,.075);border-radius:999px;padding:7px 10px;background:rgba(6,10,17,.60);backdrop-filter:blur(14px);color:rgba(174,190,210,.58);font:500 8px/1 Inter,"PingFang SC",sans-serif;letter-spacing:.09em;cursor:pointer;transition:.18s ease}.preview-toggle:hover,.preview-toggle[aria-expanded="true"]{color:rgba(226,235,245,.88);border-color:rgba(255,255,255,.13);background:rgba(8,13,21,.78)}
+.preview-lab{position:fixed;right:20px;bottom:78px;z-index:12;width:248px;padding:13px;border:1px solid rgba(255,255,255,.075);border-radius:15px;background:linear-gradient(180deg,rgba(8,13,21,.88),rgba(4,8,14,.91));box-shadow:0 24px 70px rgba(0,0,0,.30);backdrop-filter:blur(24px);opacity:0;transform:translateY(6px) scale(.985);pointer-events:none;transition:.17s ease}
+.preview-lab.open{opacity:1;transform:none;pointer-events:auto}
+.preview-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}.preview-head b{font-size:9px;font-weight:560;letter-spacing:.10em;color:rgba(220,230,242,.70)}.preview-reset{border:0;background:transparent;color:rgba(126,144,166,.54);font-size:8px;cursor:pointer;padding:2px 0}.preview-reset:hover{color:rgba(204,217,232,.82)}
+.preview-field{display:grid;grid-template-columns:52px 1fr;align-items:center;gap:8px;margin-top:8px}.preview-field label{font-size:8px;color:rgba(128,145,165,.66)}.preview-field select{width:100%;border:1px solid rgba(255,255,255,.07);border-radius:9px;background:rgba(255,255,255,.025);color:rgba(213,224,236,.82);font-size:9px;padding:7px 8px;outline:none}.preview-field select:focus{border-color:rgba(170,196,225,.22)}.preview-field option{background:#0a0f18;color:#d8e2ee}
+.preview-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}.preview-action{border:1px solid rgba(255,255,255,.07);border-radius:9px;background:rgba(255,255,255,.025);color:rgba(174,191,211,.72);font-size:8.5px;padding:8px 6px;cursor:pointer;transition:.15s ease}.preview-action:hover{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.045);color:rgba(226,235,245,.9)}
+.preview-note{margin-top:9px;font-size:7.5px;line-height:1.55;color:rgba(105,122,143,.46)}
+@media(max-width:720px){.brand{left:16px;top:15px}.hint{left:17px;bottom:14px}.repo{right:16px;bottom:14px}.card{left:12px;right:12px;top:auto;bottom:12px;width:auto}.preview-toggle{right:16px;top:15px;bottom:auto}.preview-lab{right:16px;top:52px;bottom:auto;width:min(248px,calc(100vw - 32px))}}
 </style>
 </head>
 <body>
@@ -38,6 +46,17 @@ canvas.dragging{cursor:grabbing}
   <div class="from" id="from"></div>
 </aside>
 <a class="repo" href="https://github.com/Tyr1onX/knowledge-constellation" target="_blank" rel="noreferrer">VIEW ON GITHUB ↗</a>
+<button class="preview-toggle" id="preview-toggle" type="button" aria-expanded="false" aria-controls="preview-lab">预览</button>
+<section class="preview-lab" id="preview-lab" aria-label="Renderer preview controls">
+  <div class="preview-head"><b>RENDERER PREVIEW</b><button class="preview-reset" id="preview-reset" type="button">恢复默认</button></div>
+  <div class="preview-field"><label for="core-family">核心</label><select id="core-family"></select></div>
+  <div class="preview-field"><label for="background-family">背景</label><select id="background-family"></select></div>
+  <div class="preview-actions">
+    <button class="preview-action" id="trigger-meteor" type="button">触发流星</button>
+    <button class="preview-action" id="random-preview" type="button">随机预览</button>
+  </div>
+  <div class="preview-note">这里展示的是当前 Renderer 已实现的视觉能力；切换只影响预览，不改变知识模型。</div>
+</section>
 
 <script type="module">
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
@@ -58,11 +77,13 @@ import {
   endIdentityCoreDrag,
   updateIdentityCoreBody,
   createIdentityCoreInfluenceForce,
+  IDENTITY_CORE_FAMILIES,
   drawIdentityCore,
   drawIdentityPresence,
   drawProjectAnchor,
   drawProjectProvenanceLinks,
   pickProjectAnchor,
+  BACKGROUND_FAMILIES,
   createBackgroundField,
   drawBackgroundField,
   createAmbientMeteor,
@@ -73,8 +94,20 @@ const canvas=document.getElementById('sky');
 const ctx=canvas.getContext('2d');
 const tooltip=document.getElementById('tooltip');
 const card=document.getElementById('card');
+const previewToggle=document.getElementById('preview-toggle');
+const previewLab=document.getElementById('preview-lab');
+const coreFamilySelect=document.getElementById('core-family');
+const backgroundFamilySelect=document.getElementById('background-family');
 const DPR=Math.min(window.devicePixelRatio||1,2);
 const started=performance.now();
+
+const CORE_LABELS={
+  monogram:'Monogram',eclipse:'Eclipse',quiet_star:'Quiet Star',minimal_ring:'Minimal Ring',
+  black_hole:'Black Hole',pulsar:'Pulsar',binary_star:'Binary Star',protostar_nebula:'Protostar Nebula',
+};
+const BACKGROUND_LABELS={almost_empty:'Almost Empty',cold_filament:'Cold Filament',broken_cloud:'Broken Cloud'};
+let coreFamily='monogram';
+let backgroundFamily='cold_filament';
 
 const galaxies=[
   {id:'oss',name:'开源参与与工程流转',x:270,y:255,color:[171,201,235],depth:.96},
@@ -151,6 +184,16 @@ let draggingSpace=false,dragNode=null,dragCore=false,lastPointer={x:0,y:0},point
 let exploring=false;
 let meteor=null;
 let nextMeteorAt=performance.now()+1200;
+
+function populateSelect(select,values,labels){
+  for(const value of values){const option=document.createElement('option');option.value=value;option.textContent=labels[value]||value;select.appendChild(option)}
+}
+function syncPreviewControls(){coreFamilySelect.value=coreFamily;backgroundFamilySelect.value=backgroundFamily}
+function triggerDemoMeteor(){const now=performance.now();meteor=createAmbientMeteor(now,true);nextMeteorAt=now+18000}
+function randomItem(values){return values[Math.floor(Math.random()*values.length)]}
+populateSelect(coreFamilySelect,IDENTITY_CORE_FAMILIES,CORE_LABELS);
+populateSelect(backgroundFamilySelect,BACKGROUND_FAMILIES,BACKGROUND_LABELS);
+syncPreviewControls();
 
 function resize(){
   W=innerWidth;H=innerHeight;
@@ -276,7 +319,7 @@ function tickCamera(){
 }
 function render(now){
   tickCamera();updateIdentityCoreBody(coreBody);
-  drawBackgroundField(ctx,field,now-started,{width:W,height:H,family:'cold_filament',alpha:1});
+  drawBackgroundField(ctx,field,now-started,{width:W,height:H,family:backgroundFamily,alpha:1});
   drawGalaxyLabels();
   drawLinks();
 
@@ -305,13 +348,26 @@ function render(now){
   }
 
   const cp=coreScreen();
-  drawIdentityCore(ctx,'monogram',now-started,{x:cp.x,y:cp.y,radius:24*Math.max(.86,view.scale),monogram:'TY',viewScale:view.scale});
+  drawIdentityCore(ctx,coreFamily,now-started,{x:cp.x,y:cp.y,radius:24*Math.max(.86,view.scale),monogram:'TY',viewScale:view.scale});
   drawIdentityPresence(ctx,identity,{corePoint:cp,viewScale:view.scale,elapsedMs:now-started,hoveringCore:hoverCore,exploring});
 
   if(!meteor&&now>=nextMeteorAt){meteor=createAmbientMeteor(now,nextMeteorAt-started<3000);nextMeteorAt=now+16000+Math.random()*13000}
   if(meteor&&!drawAmbientMeteor(ctx,meteor,now,W,H))meteor=null;
   requestAnimationFrame(render);
 }
+
+previewToggle.addEventListener('click',()=>{
+  const open=!previewLab.classList.contains('open');
+  previewLab.classList.toggle('open',open);previewToggle.setAttribute('aria-expanded',String(open));
+});
+coreFamilySelect.addEventListener('change',()=>{coreFamily=coreFamilySelect.value;exploring=true});
+backgroundFamilySelect.addEventListener('change',()=>{backgroundFamily=backgroundFamilySelect.value;exploring=true});
+document.getElementById('trigger-meteor').addEventListener('click',()=>{triggerDemoMeteor();exploring=true});
+document.getElementById('random-preview').addEventListener('click',()=>{
+  coreFamily=randomItem(IDENTITY_CORE_FAMILIES);backgroundFamily=randomItem(BACKGROUND_FAMILIES);syncPreviewControls();triggerDemoMeteor();exploring=true;
+});
+document.getElementById('preview-reset').addEventListener('click',()=>{coreFamily='monogram';backgroundFamily='cold_filament';syncPreviewControls();exploring=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&previewLab.classList.contains('open')){previewLab.classList.remove('open');previewToggle.setAttribute('aria-expanded','false')}});
 
 canvas.addEventListener('pointermove',e=>{
   pointer={x:e.clientX,y:e.clientY};
