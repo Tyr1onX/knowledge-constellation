@@ -34,7 +34,7 @@ canvas.dragging{cursor:grabbing}
 </head>
 <body>
 <canvas id="sky" aria-label="Interactive Knowledge Constellation"></canvas>
-<div class="brand"><b>KNOWLEDGE CONSTELLATION</b><span>renderer-backed live preview</span></div>
+<div class="brand"><b>KNOWLEDGE CONSTELLATION</b><span>基于真实渲染器的交互预览</span></div>
 <div class="hint" id="hint">拖动空间 · 拖动星体 · 滚轮缩放 · 点击中心返回全景</div>
 <div class="tooltip" id="tooltip"><strong></strong><small></small></div>
 <aside class="card" id="card">
@@ -45,17 +45,17 @@ canvas.dragging{cursor:grabbing}
   <p id="summary"></p>
   <div class="from" id="from"></div>
 </aside>
-<a class="repo" href="https://github.com/Tyr1onX/knowledge-constellation" target="_blank" rel="noreferrer">VIEW ON GITHUB ↗</a>
+<a class="repo" href="https://github.com/Tyr1onX/knowledge-constellation" target="_blank" rel="noreferrer">在 GitHub 查看 ↗</a>
 <button class="preview-toggle" id="preview-toggle" type="button" aria-expanded="false" aria-controls="preview-lab">预览</button>
-<section class="preview-lab" id="preview-lab" aria-label="Renderer preview controls">
-  <div class="preview-head"><b>RENDERER PREVIEW</b><button class="preview-reset" id="preview-reset" type="button">恢复默认</button></div>
+<section class="preview-lab" id="preview-lab" aria-label="视觉预览控制">
+  <div class="preview-head"><b>视觉预览</b><button class="preview-reset" id="preview-reset" type="button">恢复默认</button></div>
   <div class="preview-field"><label for="core-family">核心</label><select id="core-family"></select></div>
   <div class="preview-field"><label for="background-family">背景</label><select id="background-family"></select></div>
   <div class="preview-actions">
     <button class="preview-action" id="trigger-meteor" type="button">触发流星</button>
     <button class="preview-action" id="random-preview" type="button">随机预览</button>
   </div>
-  <div class="preview-note">这里展示的是当前 Renderer 已实现的视觉能力；切换只影响预览，不改变知识模型。</div>
+  <div class="preview-note">这里展示的是当前渲染器已经实现的视觉能力；切换只影响预览，不改变知识模型。</div>
 </section>
 
 <script type="module">
@@ -102,10 +102,10 @@ const DPR=Math.min(window.devicePixelRatio||1,2);
 const started=performance.now();
 
 const CORE_LABELS={
-  monogram:'Monogram',eclipse:'Eclipse',quiet_star:'Quiet Star',minimal_ring:'Minimal Ring',
-  black_hole:'Black Hole',pulsar:'Pulsar',binary_star:'Binary Star',protostar_nebula:'Protostar Nebula',
+  monogram:'字母徽记',eclipse:'日食',quiet_star:'静谧恒星',minimal_ring:'极简光环',
+  black_hole:'黑洞',pulsar:'脉冲星',binary_star:'双星',protostar_nebula:'原恒星星云',
 };
-const BACKGROUND_LABELS={almost_empty:'Almost Empty',cold_filament:'Cold Filament',broken_cloud:'Broken Cloud'};
+const BACKGROUND_LABELS={almost_empty:'近乎空白',cold_filament:'冷色纤维',broken_cloud:'碎云'};
 let coreFamily='monogram';
 let backgroundFamily='cold_filament';
 
