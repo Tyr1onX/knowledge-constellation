@@ -1,0 +1,1 @@
+{"case_id":"2026-08-18-karpathy-01","protocol_version":"kc.cleanroom.v2","validation_mode":"harness","target":{"handle":"karpathy","profile_url":"https://github.com/karpathy"},"knowledge_constellation_sha":"a201d275e5fa9ca68bf3ce048ba3d8037338a30b","runner":{"model":"GPT-5.6 Sol","isolation_level":"emulated","status":"frozen_pending_audit"},"status":"runner_frozen_pending_audit"}
