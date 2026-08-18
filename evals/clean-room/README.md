@@ -1,8 +1,8 @@
 # Clean-room real-user evals
 
-这里保存 Recognition Hardening 阶段的真实陌生用户隔离评测。
+这里保存当前 Recognition 回归需要的真人隔离评测。`main` 只保留**仍参与当前 gate 的 accepted / replayable case**；已经被后续 rerun 取代的中间版本留在 Git 历史中，不继续占据当前树。
 
-每个案例使用独立目录：
+每个 case 的基本结构：
 
 ```text
 cases/<case-id>/
@@ -13,24 +13,30 @@ cases/<case-id>/
     pass-b.json
     pass-c.json
     pass-d.json
-    validation-log.md
-    runner-summary.md
+    validation-proof.json
   audit/
     source-only-notes.md
     comparison.md
     verdict.json
 ```
 
-完整协议见 [`../../docs/clean-room-evaluation.md`](../../docs/clean-room-evaluation.md)。
+完整方法见 [`../../docs/clean-room-evaluation.md`](../../docs/clean-room-evaluation.md)，可执行规则见 [`protocol-v2.md`](protocol-v2.md)。
 
-## 纪律
+## 当前 gate
 
-- Runner 不得读取本目录的 Audit / expected / previous verdict；
-- Auditor 理想上在看到 Runner 输出前先完成 source-only notes；
-- Runner 与 Auditor 使用同一 frozen source snapshot；
-- 不要求两边生成相同节点，只比较证据边界、代表性、归因、Anchor、Galaxy 与 Distillation；
-- 同一会话模拟必须在 metadata 中写 `isolation_level: emulated`；
-- 真正独立进程 / 新会话写 `isolation_level: independent`；
-- 失败案例不删除，规则更新后追加 rerun。
+[`milestone-10-user.json`](milestone-10-user.json) 是 Recognition Hardening 的 accepted 10-user baseline。CI / regression 只应把其中列出的 case 当作这一里程碑的正式集合。
 
-第一轮目标不是追求漂亮分数，而是积累稳定失败模式。
+验证单个 v2 case：
+
+```bash
+python harness/verify_eval_case.py evals/clean-room/cases/<case-id>
+```
+
+## 隔离纪律
+
+- Runner 只读取当前 Skill、当前 Pass prompt/schema、允许的 upstream output 与 frozen sources；
+- Runner 不得读取其他人的 case、历史 verdict、Auditor notes、tests 或 expected；
+- Auditor 尽量先基于 frozen sources 形成 source-only notes，再看 Runner 输出；
+- 同会话模拟必须标记 `emulated`，真正独立进程 / 新会话才标记 `independent`；
+- 规则修复应产生新的 rerun，并通过回归证明没有把旧案例改坏；
+- superseded / failed run 依然可由 Git 历史追溯，但不需要永久堆在 `main`。
