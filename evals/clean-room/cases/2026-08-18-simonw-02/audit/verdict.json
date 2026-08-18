@@ -1,0 +1,13 @@
+{
+  "case_id": "2026-08-18-simonw-02",
+  "target": "simonw",
+  "protocol_version": "kc.cleanroom.v2",
+  "verdict": "PASS",
+  "critical_inflation": 0,
+  "material_warnings": [],
+  "counts_toward_ten_user_gate": true,
+  "over_conservatism_test": "PASS",
+  "anchor_identity_handoff": "PASS",
+  "saturated": true,
+  "notes": "Canonical v2 rerun preserves strong bounded project stewardship and direct sqlite-utils implementation evidence without sole-authorship, provider-mastery, SQLite-internals or model-research inflation."
+}
