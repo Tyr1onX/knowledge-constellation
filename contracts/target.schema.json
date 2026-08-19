@@ -15,7 +15,9 @@
           "id": {"type": "string", "minLength": 1},
           "label": {"type": "string", "minLength": 1},
           "kind": {"enum": ["knowledge", "practice", "experience", "eligibility"]},
-          "dimension": {"type": ["string", "null"]},
+          "dimension": {
+            "enum": [null, "exposure", "understanding", "implementation", "independence", "judgment", "troubleshooting", "transfer", "participation"]
+          },
           "expectation": {"enum": ["required", "preferred", "contextual"]},
           "source_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
           "rationale": {"type": "string", "minLength": 1},
