@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "goal_id", "requirements"],
+  "properties": {
+    "version": {"const": "kc.target.v1"},
+    "goal_id": {"type": "string", "minLength": 1},
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "kind", "dimension", "expectation", "source_ids", "rationale", "ambiguity"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "label": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["knowledge", "practice", "experience", "eligibility"]},
+          "dimension": {"type": ["string", "null"]},
+          "expectation": {"enum": ["required", "preferred", "contextual"]},
+          "source_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "rationale": {"type": "string", "minLength": 1},
+          "ambiguity": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
