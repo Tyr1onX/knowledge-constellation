@@ -30,5 +30,6 @@
 - [`milestones/v0.4-recognition-hardening-10-user.md`](milestones/v0.4-recognition-hardening-10-user.md) — 10-user Recognition Hardening gate。
 - [`milestones/v0.5-e2e-runtime-foundation.md`](milestones/v0.5-e2e-runtime-foundation.md) — E2E Runner / Scene / Runtime 基础。
 - [`milestones/v0.6-blind-codex-visual-validation.md`](milestones/v0.6-blind-codex-visual-validation.md) — 一句话 blind Codex 生成与人工视觉验收 checkpoint。
+- [`milestones/v0.7-goal-gap-foundation.md`](milestones/v0.7-goal-gap-foundation.md) — Goal → Target → Gap → Next 1–3 Steps 的实现 checkpoint，等待真人语义验收。
 
 > 当文档与代码或契约发生冲突时，优先级为：`SKILL.md` → `contracts/` / `prompts/` → 当前 Harness / Renderer → 本目录说明文档。
