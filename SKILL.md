@@ -157,6 +157,14 @@ If the host exposes a separate semantic-runner process, `harness/e2e.py` may dri
 
 Never replace a failed semantic Pass with a handcrafted Scene, SVG, or page-local inferred nodes just to finish rendering.
 
+### Repository preview is demo-only
+
+`preview/scene.json`, the repository Pages preview, accepted showcase outputs, eval cases, historical generated HTML, and other pre-rendered subject results are **not runtime semantic inputs and are never valid substitutes for a new run**.
+
+Even when the requested subject happens to be the repository owner or otherwise matches a showcased subject, do not reuse, copy, point at, or deliver the repository preview Scene as that person's result. A new request must produce a new accepted `input → evidence → model → structure → visual → scene` chain from the materials gathered for that request.
+
+A generated `index.html` must load the current run's local `scene.json`; a generated share page must embed the current run's Scene. It must not reference `preview/scene.json` remotely or locally. Reusing the canonical renderer is required; reusing a prior subject Scene is forbidden.
+
 ## Calibration
 The first passive result must be useful without asking questions. Optional later calibration is split into:
 1. Truth Calibration — who did what, independence, understanding.
@@ -186,7 +194,7 @@ Goal + target-side sources
 
 Pass E must model the target from the stated goal and target-side sources only. It must not read the person's current Recognition Model. Otherwise the system can silently move the goalposts toward what the person already knows.
 
-If the user provides a specific job description, use it as a primary target source. If the goal is broad and the environment allows current public research, gather a small set of high-quality, current target-side sources and normalize them into `contracts/goal-input.schema.json`. Do not turn generic associations such as “backend usually uses X” into requirements without source support.
+If the user provides a specific job description, use it as a primary target source. If the goal is broad and the environment allows current public research, gather a small set of high-quality, current target-side sources and normalize them into `contracts/goal-input.schema.json`. Prefer exact internship/campus role descriptions over adjacent full-time or social-recruitment roles; use adjacent roles only as explicitly contextual evidence, never to silently raise an internship target bar. Do not turn generic associations such as “backend usually uses X” into requirements without source support.
 
 ### Gap is evidence coverage, not a deficit score
 
@@ -217,6 +225,8 @@ Eligibility constraints such as degree, location, work authorization, or availab
 Planning never upgrades current capability truth. A plan may say what to do next; only new Source / Evidence entering a later Recognition revision can change the Current Universe.
 
 Use `harness/goal_pipeline.py` for isolated Pass E/F/G execution, or `harness/goal_e2e.py` when a separate semantic runner is available. Follow `skill/GOAL_ORCHESTRATION.md` and the target/gap/plan contracts.
+
+When repository runtime is available, a user-facing Goal/Gap answer must be derived from an accepted `target.json`, `gap.json`, and `plan.json` produced by that pipeline. Do not skip the pipeline and improvise a roadmap directly in prose. Internal JSON need not be shown to the user, but it must exist as the auditable basis of the answer.
 
 At the current product stage, Goal / Gap results remain a semantic companion to the accepted constellation. Do not modify the canonical Renderer to visualize a Target Universe until the Target/Gap/Plan semantics pass human validation.
 
