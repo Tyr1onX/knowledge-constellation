@@ -69,6 +69,22 @@ Use `harness/recalibrate.py` to create this revision when the repository runtime
 
 Truth corrections and identity/representativeness corrections are semantically different: feedback such as “AI did this part” may constrain attribution and capability Claims; feedback such as “this project matters more to me” may change representativeness and display priority but cannot upgrade capability truth.
 
+## Runtime isolation
+
+Repository previews and showcases are product/demo outputs, not generation inputs.
+
+Forbidden runtime semantic inputs include:
+- `preview/scene.json`;
+- repository Pages preview HTML;
+- accepted showcase/generated subject HTML;
+- eval cases and audit outputs;
+- historical generated Scenes or other subjects' outputs;
+- any prior Scene that happens to match the requested subject.
+
+A fresh request must build a fresh accepted chain from the gathered material. Reusing the canonical renderer is required; reusing a previous subject Scene is forbidden.
+
+Generated `index.html` must load the current run's local `scene.json`. A share page must embed the current run's Scene. Neither may point to `preview/scene.json`.
+
 ## Gold isolation
 
 Test-only baselines may exist under `tests/baselines/`, but they are forbidden runtime inputs. The Codex execution packet must never include or reference them. They are used only after a completed run for external acceptance comparison.
@@ -77,4 +93,4 @@ Test-only baselines may exist under `tests/baselines/`, but they are forbidden r
 
 For each semantic pass, the harness materializes a new workspace that contains only the files that pass may read. A normal generation workspace contains the root `SKILL.md`, this orchestration contract, the current prompt, the current schema, and the accepted upstream JSON required by that pass. Repair workspaces may additionally contain the rejected previous candidate and validation errors.
 
-Codex writes `output.json` in that workspace. The harness copies that output into the candidate slot and validates it. Historical examples, test expectations, gold baselines, and other-subject fixtures are not semantic inputs.
+Codex writes `output.json` in that workspace. The harness copies that output into the candidate slot and validates it. Historical examples, repository previews, test expectations, gold baselines, and other-subject fixtures are not semantic inputs.
