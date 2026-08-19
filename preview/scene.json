@@ -1,56 +1,1021 @@
 {
   "version": "kc.scene.v1",
-  "seed": "kc:preview:Tyr1onX:accepted-baseline",
-  "subject": {"id": "Tyr1onX", "label": "Tyr1onX", "language": "zh-CN", "scope": "Renderer baseline preview"},
-  "viewport": {"width": 1000, "height": 720},
-  "identity": {"family": "monogram", "label": "Tyr1onX", "title": "Tyr1onX", "subtitle": "由作品、学习与工程实践生长出的知识星图", "source": "Knowledge Constellation", "monogram": "TY", "x": 500, "y": 360, "presence": {"mode": "brief_intro", "subtitle": "由作品、学习与工程实践生长出的知识星图"}},
-  "composition": {"archetype": "three_islands", "asymmetry": 0.48, "openness": 0.72, "dominant_axis": "horizontal"},
-  "field": {"density": "sparse", "dust_family": "cold_filament", "temperature_bias": "cool_neutral"},
-  "stars": {"family": "subtle_point", "temperature_variation": "medium"},
-  "motion": {"temperament": "balanced"},
+  "seed": "kc:Tyr1onX:github:2026-08-19:v1",
+  "subject": {
+    "id": "Tyr1onX",
+    "label": "栖白 · Tyr1onX",
+    "language": "zh-CN",
+    "scope": "GitHub evidence · 2026-08-19"
+  },
+  "viewport": {
+    "width": 1200,
+    "height": 860
+  },
+  "identity": {
+    "family": "monogram",
+    "label": "Tyr1onX",
+    "title": "栖白 · Tyr1onX",
+    "subtitle": "产品工程 · 开源协作 · Web 学习 · Agent 工具 · 程序化表达",
+    "source": "GitHub @Tyr1onX",
+    "monogram": "TY",
+    "x": 600,
+    "y": 430,
+    "presence": {
+      "mode": "brief_intro",
+      "subtitle": "由真实项目、学习记录与开源贡献生长出的知识星图"
+    }
+  },
+  "composition": {
+    "archetype": "sparse_archipelago",
+    "asymmetry": 0.64,
+    "openness": 0.74,
+    "dominant_axis": "diagonal"
+  },
+  "field": {
+    "density": "sparse",
+    "dust_family": "cold_filament",
+    "temperature_bias": "cool_neutral"
+  },
+  "stars": {
+    "family": "subtle_point",
+    "temperature_variation": "medium"
+  },
+  "motion": {
+    "temperament": "balanced"
+  },
   "nodes": [
-    {"id":"oss-p","name":"开源参与","en":"Open-source Participation","g":"oss","layer":"primary","kind":"core","size":0.98,"x":215,"y":230,"summary":"持续进入真实开源项目并完成贡献流程，形成稳定而可追溯的工程活动。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
-    {"id":"pr","name":"GitHub / PR","en":"Pull Request Workflow","g":"oss","layer":"primary","kind":"normal","size":0.90,"x":320,"y":305,"summary":"PR、CI、Review、修改与合并反复出现在实际协作中。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
-    {"id":"test","name":"测试与验证","en":"Testing & Validation","g":"oss","layer":"primary","kind":"normal","size":0.84,"x":165,"y":345,"summary":"测试、回归、CI 与真实环境验证持续围绕项目和贡献出现。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
-    {"id":"conc","name":"并发","en":"Concurrency","g":"oss","layer":"secondary","kind":"soft","size":0.52,"x":365,"y":205,"summary":"并发、CAS 等概念进入过真实贡献场景。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
-    {"id":"ci","name":"CI","en":"Continuous Integration","g":"oss","layer":"secondary","kind":"trace","size":0.46,"x":120,"y":265,"summary":"自动化检查和跨环境验证是协作流程的一部分。","project":"开源协作","anchor_id":"a-oss","evidence":[],"sources":[]},
-
-    {"id":"product","name":"产品迭代","en":"Product Iteration","g":"desktop","layer":"primary","kind":"core","size":0.98,"x":665,"y":220,"summary":"长期维护的桌面课表产品形成持续迭代、测试与发布轨迹。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
-    {"id":"tauri","name":"Tauri","en":"Tauri","g":"desktop","layer":"primary","kind":"soft","size":0.82,"x":825,"y":215,"summary":"Tauri 是课刻长期存在的桌面应用技术环境。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
-    {"id":"rust","name":"Rust","en":"Rust","g":"desktop","layer":"primary","kind":"soft","size":0.86,"x":665,"y":355,"summary":"Rust 持续存在于桌面项目和部分工程协作场景。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
-    {"id":"ts","name":"TypeScript","en":"TypeScript","g":"desktop","layer":"primary","kind":"soft","size":0.80,"x":810,"y":340,"summary":"TypeScript 高频存在于项目的前端与交互层。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
-    {"id":"ocr","name":"本地 OCR","en":"Local OCR","g":"desktop","layer":"secondary","kind":"normal","size":0.54,"x":875,"y":285,"summary":"截图识别、结构恢复与 Windows 本地组件构成项目的重要实践。","project":"课刻","anchor_id":"a-desktop","evidence":[],"sources":[]},
-
-    {"id":"webn","name":"Web / 网络基础","en":"Web / Network Fundamentals","g":"web","layer":"primary","kind":"soft","size":0.94,"x":420,"y":565,"summary":"Web、HTTP、网络与安全基础形成一条持续学习主线。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
-    {"id":"browser","name":"浏览器渲染","en":"Browser Rendering","g":"web","layer":"primary","kind":"normal","size":0.88,"x":580,"y":540,"summary":"DOM、CSSOM、Layout、Paint 与 Composite 构成连续的浏览器基础学习轨迹。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
-    {"id":"js","name":"JavaScript / DOM","en":"JavaScript / DOM","g":"web","layer":"primary","kind":"soft","size":0.90,"x":525,"y":665,"summary":"JavaScript 与 DOM 处在当前持续补全的学习主线上。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
-    {"id":"http","name":"HTTP","en":"HTTP","g":"web","layer":"secondary","kind":"normal","size":0.50,"x":350,"y":645,"summary":"方法、状态码、缓存与协议演进被逐步串联起来。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]},
-    {"id":"render-pipe","name":"渲染流水线","en":"Layout / Paint / Composite","g":"web","layer":"secondary","kind":"trace","size":0.44,"x":590,"y":700,"summary":"渲染流水线作为更细的知识层在放大后逐渐显现。","project":"Learning","anchor_id":"a-web","evidence":[],"sources":[]}
+    {
+      "id": "oss-core",
+      "name": "开源协作",
+      "en": "Open-source Collaboration",
+      "g": "oss",
+      "layer": "primary",
+      "kind": "core",
+      "size": 0.97,
+      "x": 215,
+      "y": 235,
+      "summary": "持续进入真实开源项目的 Issue / PR / Review / CI 流程；这里表达的是可追溯参与与工程行为，不把合并次数直接等同于独立能力。",
+      "project": "开源协作",
+      "anchor_id": "a-oss",
+      "evidence": [
+        {
+          "id": "e-oss-core",
+          "observation": "个人主页明确将开源协作列为持续活动，并列出多项外部已合并 PR。",
+          "source_ids": [
+            "profile"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "profile",
+          "title": "Tyr1onX GitHub Profile README"
+        }
+      ]
+    },
+    {
+      "id": "pr-flow",
+      "name": "PR / Review 流程",
+      "en": "Pull Request Workflow",
+      "g": "oss",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.89,
+      "x": 330,
+      "y": 300,
+      "summary": "PR 描述、范围控制、测试证据、维护者反馈与后续修正反复出现在实际协作中。",
+      "project": "开源协作",
+      "anchor_id": "a-oss",
+      "evidence": [
+        {
+          "id": "e-pr-flow",
+          "observation": "多项外部 PR 保留了问题、根因、范围、测试与后续修正记录。",
+          "source_ids": [
+            "oss1271",
+            "oss1284",
+            "avenx1050"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "oss1271",
+          "title": "Fmarzochi/EGC PR #1271 · exactly-once session delivery"
+        },
+        {
+          "id": "oss1284",
+          "title": "Fmarzochi/EGC PR #1284 · chaos harness cleanup"
+        },
+        {
+          "id": "avenx1050",
+          "title": "Avenx-JS/avenx-js PR #1050 · custom HTTP headers"
+        }
+      ]
+    },
+    {
+      "id": "repro-debug",
+      "name": "复现与故障定位",
+      "en": "Reproduction & Debugging",
+      "g": "oss",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.91,
+      "x": 160,
+      "y": 350,
+      "summary": "从失败现象建立可重复条件，再收敛到更小的根因；这一模式在并发、QQ 导出与诊断保留问题中多次出现。",
+      "project": "开源协作",
+      "anchor_id": "a-oss",
+      "evidence": [
+        {
+          "id": "e-repro",
+          "observation": "EGC #1271 保留并发重复投递的 deterministic reproducer；QCE #635/#636 也记录了对旧 fallback 失效原因的重新诊断。",
+          "source_ids": [
+            "oss1271",
+            "qce635",
+            "qce636"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "oss1271",
+          "title": "Fmarzochi/EGC PR #1271 · exactly-once session delivery"
+        },
+        {
+          "id": "qce635",
+          "title": "shuakami/qq-chat-exporter PR #635 · local DB streaming"
+        },
+        {
+          "id": "qce636",
+          "title": "shuakami/qq-chat-exporter PR #636 · device export fallback"
+        }
+      ]
+    },
+    {
+      "id": "regression-ci",
+      "name": "回归测试与 CI",
+      "en": "Regression Testing & CI",
+      "g": "oss",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.87,
+      "x": 315,
+      "y": 175,
+      "summary": "新增或加强回归测试，并用多环境 CI 验证修复边界，是多项贡献的稳定组成部分。",
+      "project": "开源协作",
+      "anchor_id": "a-oss",
+      "evidence": [
+        {
+          "id": "e-reg-ci",
+          "observation": "EGC #1271/#1284、Avenx #1050 均将回归覆盖与 CI 作为验收证据。",
+          "source_ids": [
+            "oss1271",
+            "oss1284",
+            "avenx1050"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "oss1271",
+          "title": "Fmarzochi/EGC PR #1271 · exactly-once session delivery"
+        },
+        {
+          "id": "oss1284",
+          "title": "Fmarzochi/EGC PR #1284 · chaos harness cleanup"
+        },
+        {
+          "id": "avenx1050",
+          "title": "Avenx-JS/avenx-js PR #1050 · custom HTTP headers"
+        }
+      ]
+    },
+    {
+      "id": "concurrency-cas",
+      "name": "并发 / CAS",
+      "en": "Concurrency / CAS",
+      "g": "oss",
+      "layer": "secondary",
+      "kind": "soft",
+      "size": 0.64,
+      "x": 80,
+      "y": 250,
+      "summary": "并发读取、游标比较交换和 SQLite WAL 进入过真实修复场景；这颗星表示有直接实践证据，不延伸为广义并发“精通”。",
+      "project": "EGC #1271",
+      "anchor_id": "a-oss",
+      "evidence": [
+        {
+          "id": "e-cas",
+          "observation": "EGC #1271 记录两个 reader 竞争同一 session cursor，并以 compare-and-swap 解决重复投递。",
+          "source_ids": [
+            "oss1271"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "oss1271",
+          "title": "Fmarzochi/EGC PR #1271 · exactly-once session delivery"
+        }
+      ]
+    },
+    {
+      "id": "cross-project",
+      "name": "跨项目修复",
+      "en": "Cross-project Fixes",
+      "g": "oss",
+      "layer": "secondary",
+      "kind": "trace",
+      "size": 0.6,
+      "x": 370,
+      "y": 390,
+      "summary": "贡献范围不只集中于单一仓库，涉及 CLI HTTP headers、日志诊断与聊天记录导出等不同问题域。",
+      "project": "开源协作",
+      "anchor_id": "a-oss",
+      "evidence": [
+        {
+          "id": "e-cross",
+          "observation": "外部 PR 覆盖 Avenx CLI、EGC diagnostics 与 QQ Chat Exporter 数据读取路径。",
+          "source_ids": [
+            "avenx1050",
+            "oss1303",
+            "qce636"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "avenx1050",
+          "title": "Avenx-JS/avenx-js PR #1050 · custom HTTP headers"
+        },
+        {
+          "id": "oss1303",
+          "title": "Fmarzochi/EGC PR #1303 · diagnostic inflections"
+        },
+        {
+          "id": "qce636",
+          "title": "shuakami/qq-chat-exporter PR #636 · device export fallback"
+        }
+      ]
+    },
+    {
+      "id": "7byte-core",
+      "name": "7BYTE 内容生产系统",
+      "en": "7BYTE Production System",
+      "g": "creative",
+      "layer": "primary",
+      "kind": "core",
+      "size": 0.94,
+      "x": 585,
+      "y": 105,
+      "summary": "把选题、脚本、分镜、动画规格、发布记录与复用规则组织成可持续迭代的内容生产系统。",
+      "project": "7BYTE",
+      "anchor_id": "a-7byte",
+      "evidence": [
+        {
+          "id": "e-7byte-core",
+          "observation": "7BYTE README 将仓库定义为长期 AI 工作上下文、每期独立创作单元和可复用 Motion Design System。",
+          "source_ids": [
+            "byte"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "byte",
+          "title": "7BYTE Content · README"
+        }
+      ]
+    },
+    {
+      "id": "motion-canvas",
+      "name": "Motion Canvas 程序化动画",
+      "en": "Motion Canvas",
+      "g": "creative",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.84,
+      "x": 710,
+      "y": 165,
+      "summary": "关系型、链路型和对比型内容优先使用程序化动画，并以对象连续性帮助观众理解。",
+      "project": "7BYTE",
+      "anchor_id": "a-7byte",
+      "evidence": [
+        {
+          "id": "e-motion",
+          "observation": "7BYTE 固定原则明确动画优先 Motion Canvas，并优先程序化复现 UI。",
+          "source_ids": [
+            "byte"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "byte",
+          "title": "7BYTE Content · README"
+        }
+      ]
+    },
+    {
+      "id": "shot-qa",
+      "name": "镜头设计与视觉 QA",
+      "en": "Shot Design & Visual QA",
+      "g": "creative",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.86,
+      "x": 480,
+      "y": 185,
+      "summary": "镜头动作以解释为目的，跨镜语义对象遵守 owner / lifecycle / matched-geometry，并在最终输出前做关键帧视觉审计。",
+      "project": "7BYTE",
+      "anchor_id": "a-7byte",
+      "evidence": [
+        {
+          "id": "e-shot",
+          "observation": "7BYTE README 明确跨镜对象所有权、连续性和关键帧视觉审计要求。",
+          "source_ids": [
+            "byte"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "byte",
+          "title": "7BYTE Content · README"
+        }
+      ]
+    },
+    {
+      "id": "workflow-memory",
+      "name": "生产经验沉淀",
+      "en": "Production Memory",
+      "g": "creative",
+      "layer": "secondary",
+      "kind": "soft",
+      "size": 0.61,
+      "x": 650,
+      "y": 245,
+      "summary": "将上一期经验、品牌规则、字幕、镜头和封面方法沉淀为后续 Agent 可读取的生产上下文。",
+      "project": "7BYTE",
+      "anchor_id": "a-7byte",
+      "evidence": [
+        {
+          "id": "e-prod-memory",
+          "observation": "7BYTE 要求 Agent 从 AGENTS.md、production workflow、skills 和上一期设计记录恢复上下文。",
+          "source_ids": [
+            "byte"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "byte",
+          "title": "7BYTE Content · README"
+        }
+      ]
+    },
+    {
+      "id": "personal-web",
+      "name": "个人 Web 交互",
+      "en": "Personal Web Interaction",
+      "g": "creative",
+      "layer": "primary",
+      "kind": "soft",
+      "size": 0.78,
+      "x": 515,
+      "y": 265,
+      "summary": "个人站以项目、记录与当前想法为入口，持续关注响应式、主题和轻量交互动效。",
+      "project": "Tyr1onX.github.io",
+      "anchor_id": "a-site",
+      "evidence": [
+        {
+          "id": "e-site",
+          "observation": "个人站 README 明确响应式布局、深浅色主题与轻量滚动动效。",
+          "source_ids": [
+            "site"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "site",
+          "title": "Tyr1onX.github.io · README"
+        }
+      ]
+    },
+    {
+      "id": "transition-stability",
+      "name": "跨页面转场稳定性",
+      "en": "Navigation Transition Stability",
+      "g": "creative",
+      "layer": "secondary",
+      "kind": "trace",
+      "size": 0.57,
+      "x": 755,
+      "y": 255,
+      "summary": "围绕首帧主题、View Transition、BFCache 和到达动画竞争做过专项问题收敛。",
+      "project": "Tyr1onX.github.io",
+      "anchor_id": "a-site",
+      "evidence": [
+        {
+          "id": "e-site-trans",
+          "observation": "个人站 PR #72 记录跨文档首帧闪烁的多因素根因与状态清理策略。",
+          "source_ids": [
+            "site72"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "site72",
+          "title": "Tyr1onX.github.io PR #72 · cross-page first-frame stability"
+        }
+      ]
+    },
+    {
+      "id": "keke-core",
+      "name": "课刻 · 产品迭代",
+      "en": "Keke Product Iteration",
+      "g": "keke",
+      "layer": "primary",
+      "kind": "core",
+      "size": 0.99,
+      "x": 985,
+      "y": 230,
+      "summary": "一个持续维护的 Windows 本地桌面课表产品，围绕导入、时间流展示、桌面行为、数据可靠性与发布不断迭代。",
+      "project": "课刻",
+      "anchor_id": "a-keke",
+      "evidence": [
+        {
+          "id": "e-keke-core",
+          "observation": "课刻 README 描述完整产品目标、Windows 本地优先定位、功能与开发发布规范。",
+          "source_ids": [
+            "keke"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "keke",
+          "title": "课刻 · Desktop Course Widget README"
+        }
+      ]
+    },
+    {
+      "id": "tauri",
+      "name": "Tauri 桌面应用",
+      "en": "Tauri Desktop App",
+      "g": "keke",
+      "layer": "primary",
+      "kind": "soft",
+      "size": 0.86,
+      "x": 1090,
+      "y": 315,
+      "summary": "Tauri 2 是课刻稳定存在的桌面运行环境，涉及窗口、托盘、权限和打包等产品行为。",
+      "project": "课刻",
+      "anchor_id": "a-keke",
+      "evidence": [
+        {
+          "id": "e-tauri",
+          "observation": "课刻技术栈列出 Tauri 2；README 同时记录托盘、开机启动、单实例和窗口适配能力。",
+          "source_ids": [
+            "keke"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "keke",
+          "title": "课刻 · Desktop Course Widget README"
+        }
+      ]
+    },
+    {
+      "id": "rust-local",
+      "name": "Rust 本地后端",
+      "en": "Rust Local Backend",
+      "g": "keke",
+      "layer": "primary",
+      "kind": "soft",
+      "size": 0.9,
+      "x": 910,
+      "y": 360,
+      "summary": "Rust 持续承载课刻本地数据、Tauri 命令、测试与原生 OCR 等实现；星体表示项目实践，不自动推断脱离项目的独立熟练度。",
+      "project": "课刻",
+      "anchor_id": "a-keke",
+      "evidence": [
+        {
+          "id": "e-rust",
+          "observation": "课刻 README 将 Rust 列为技术栈；PR #91 把 OCR 改为进程内 Rust 路径。",
+          "source_ids": [
+            "keke",
+            "keke91"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "keke",
+          "title": "课刻 · Desktop Course Widget README"
+        },
+        {
+          "id": "keke91",
+          "title": "desktop-course-widget PR #91 · in-process Rust OCR"
+        }
+      ]
+    },
+    {
+      "id": "recoverable-data",
+      "name": "可恢复数据事务",
+      "en": "Recoverable Data Transactions",
+      "g": "keke",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.82,
+      "x": 1070,
+      "y": 190,
+      "summary": "针对多文件课表状态写入设计 pending manifest、快照、回滚、启动恢复和幂等请求。",
+      "project": "课刻",
+      "anchor_id": "a-keke",
+      "evidence": [
+        {
+          "id": "e-transaction",
+          "observation": "课刻 PR #67 明确分析多文件部分写入失败链，并实现可恢复文件事务与故障注入测试。",
+          "source_ids": [
+            "keke67"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "keke67",
+          "title": "desktop-course-widget PR #67 · recoverable catalog mutations"
+        }
+      ]
+    },
+    {
+      "id": "local-ocr",
+      "name": "本地 OCR 与结构恢复",
+      "en": "Local OCR & Structure Recovery",
+      "g": "keke",
+      "layer": "secondary",
+      "kind": "normal",
+      "size": 0.67,
+      "x": 1005,
+      "y": 430,
+      "summary": "截图识别从 Python 打包路线转向进程内 Rust OCR，并持续通过真实版式问题修正结构解析。",
+      "project": "课刻",
+      "anchor_id": "a-keke",
+      "evidence": [
+        {
+          "id": "e-ocr1",
+          "observation": "PR #91 将 OCR 方向改为进程内 Rust/MNN。",
+          "source_ids": [
+            "keke91"
+          ]
+        },
+        {
+          "id": "e-ocr2",
+          "observation": "PR #95 记录星期栏、节次、周次、地点等结构误识别的逐轮收敛。",
+          "source_ids": [
+            "keke95"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "keke91",
+          "title": "desktop-course-widget PR #91 · in-process Rust OCR"
+        },
+        {
+          "id": "keke95",
+          "title": "desktop-course-widget PR #95 · structural timetable parsing"
+        }
+      ]
+    },
+    {
+      "id": "security-release",
+      "name": "运行时安全与发布边界",
+      "en": "Runtime & Release Boundaries",
+      "g": "keke",
+      "layer": "secondary",
+      "kind": "normal",
+      "size": 0.65,
+      "x": 1140,
+      "y": 405,
+      "summary": "对窗口权限、Release OCR 编译边界、CSP、CI 只读行为和“自动化能证明什么”做过明确约束。",
+      "project": "课刻",
+      "anchor_id": "a-keke",
+      "evidence": [
+        {
+          "id": "e-sec",
+          "observation": "课刻 PR #93 将 Tauri capability、source-label 检查、CSP 和 CI 行为收敛到明确边界，并说明未验证部分。",
+          "source_ids": [
+            "keke93"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "keke93",
+          "title": "desktop-course-widget PR #93 · Tauri security boundaries"
+        }
+      ]
+    },
+    {
+      "id": "web-network",
+      "name": "Web / 网络基础",
+      "en": "Web & Network Foundations",
+      "g": "learning",
+      "layer": "primary",
+      "kind": "core",
+      "size": 0.96,
+      "x": 235,
+      "y": 650,
+      "summary": "URL/DNS/TCP/TLS/HTTP 等主干已能按学习记录独立解释；这里直接采用学习仓库的状态，而不是从项目依赖反推。",
+      "project": "Learning",
+      "anchor_id": "a-learning",
+      "evidence": [
+        {
+          "id": "e-web",
+          "observation": "Learning 状态表将 URL/DNS、TCP、TLS 与多项 HTTP 主干标记为 understood。",
+          "source_ids": [
+            "learn"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        }
+      ]
+    },
+    {
+      "id": "http-cache",
+      "name": "HTTP / 缓存 / CDN",
+      "en": "HTTP / Cache / CDN",
+      "g": "learning",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.9,
+      "x": 115,
+      "y": 735,
+      "summary": "方法与幂等、状态码、条件缓存、内容哈希、CDN、HTTP/1.1–3 等知识在记录中处于 understood。",
+      "project": "Learning",
+      "anchor_id": "a-learning",
+      "evidence": [
+        {
+          "id": "e-http",
+          "observation": "学习状态表将 HTTP 方法、缓存、CDN、Keep-Alive、HTTP/2、HTTP/3/QUIC 等标记为 understood。",
+          "source_ids": [
+            "learn"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        }
+      ]
+    },
+    {
+      "id": "web-security",
+      "name": "认证与 Web 安全",
+      "en": "Auth & Web Security",
+      "g": "learning",
+      "layer": "primary",
+      "kind": "soft",
+      "size": 0.82,
+      "x": 330,
+      "y": 770,
+      "summary": "Cookie/Session、JWT、XSS/CSRF、Same-Origin/SameSite、CORS 等主干已进入可解释状态。",
+      "project": "Learning",
+      "anchor_id": "a-learning",
+      "evidence": [
+        {
+          "id": "e-websec",
+          "observation": "学习状态表将 Cookie/Session、JWT、XSS/CSRF、Same-Origin/SameSite、CORS 标记为 understood。",
+          "source_ids": [
+            "learn"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        }
+      ]
+    },
+    {
+      "id": "browser-render",
+      "name": "浏览器渲染",
+      "en": "Browser Rendering",
+      "g": "learning",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.92,
+      "x": 355,
+      "y": 610,
+      "summary": "DOM/CSSOM、Layout/Paint/Composite、脚本加载与渲染阻塞等主干已完成第一轮系统学习。",
+      "project": "Learning",
+      "anchor_id": "a-learning",
+      "evidence": [
+        {
+          "id": "e-render",
+          "observation": "2026-08-08 更新明确 Browser Rendering 完成第一轮学习并升级为 understood。",
+          "source_ids": [
+            "learn"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        }
+      ]
+    },
+    {
+      "id": "js-dom",
+      "name": "JavaScript / DOM",
+      "en": "JavaScript / DOM",
+      "g": "learning",
+      "layer": "secondary",
+      "kind": "trace",
+      "size": 0.55,
+      "x": 180,
+      "y": 820,
+      "summary": "当前正在从 const/let、document、querySelector、Element 等最低必要基础继续补全；这颗星保持“学习中”的较轻权重。",
+      "project": "Learning",
+      "anchor_id": "a-learning",
+      "evidence": [
+        {
+          "id": "e-js",
+          "observation": "学习状态表将 const/let 与 document/querySelector/Element 标记为 learning，并写明“当前继续”。",
+          "source_ids": [
+            "learn"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        }
+      ]
+    },
+    {
+      "id": "layout-perf",
+      "name": "布局性能术语",
+      "en": "Layout Performance",
+      "g": "learning",
+      "layer": "secondary",
+      "kind": "trace",
+      "size": 0.45,
+      "x": 420,
+      "y": 835,
+      "summary": "Reflow/Repaint、Forced Synchronous Layout、Layout Thrashing 已理解现象，但术语仍需稳定，因此只作为次级星。",
+      "project": "Learning",
+      "anchor_id": "a-learning",
+      "evidence": [
+        {
+          "id": "e-layout",
+          "observation": "学习状态表将 Reflow/Repaint、Forced Synchronous Layout、Layout Thrashing 保持为 learning。",
+          "source_ids": [
+            "learn"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        }
+      ]
+    },
+    {
+      "id": "agent-skill",
+      "name": "Agent Skill 设计",
+      "en": "Agent Skill Design",
+      "g": "agent",
+      "layer": "primary",
+      "kind": "core",
+      "size": 0.93,
+      "x": 910,
+      "y": 675,
+      "summary": "把可复用的工作规则封装成 Agent/Codex Skill，并通过约束、契约与可执行流程控制输出。",
+      "project": "Knowledge Constellation / Safe Markdown Output",
+      "anchor_id": "a-agent",
+      "evidence": [
+        {
+          "id": "e-skill",
+          "observation": "GitHub 主页将 Knowledge Constellation 与 Safe Markdown Output 作为代表项目；两者都以 Skill 形式封装 Agent 行为。",
+          "source_ids": [
+            "profile",
+            "kc",
+            "safe"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "profile",
+          "title": "Tyr1onX GitHub Profile README"
+        },
+        {
+          "id": "kc",
+          "title": "Knowledge Constellation · SKILL.md"
+        },
+        {
+          "id": "safe",
+          "title": "Safe Markdown Output · README"
+        }
+      ]
+    },
+    {
+      "id": "evidence-attribution",
+      "name": "证据与归因约束",
+      "en": "Evidence & Attribution",
+      "g": "agent",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.88,
+      "x": 1040,
+      "y": 605,
+      "summary": "Knowledge Constellation 明确区分证据、归因、参与、实现与掌握，允许 unknown，并要求更强主张对应更强证据。",
+      "project": "Knowledge Constellation",
+      "anchor_id": "a-agent",
+      "evidence": [
+        {
+          "id": "e-attribution",
+          "observation": "SKILL.md 明确 evidence before inference、artifact is not mastery、participation is not execution 等原则。",
+          "source_ids": [
+            "kc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "kc",
+          "title": "Knowledge Constellation · SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "knowledge-pipeline",
+      "name": "知识建模流水线",
+      "en": "Knowledge Modeling Pipeline",
+      "g": "agent",
+      "layer": "primary",
+      "kind": "normal",
+      "size": 0.84,
+      "x": 1015,
+      "y": 770,
+      "summary": "把原始资料依次规范化为 Evidence、Claims、Nodes、Anchors、Relations、Galaxies、Visual Model，再交给确定性 Scene Composer。",
+      "project": "Knowledge Constellation",
+      "anchor_id": "a-agent",
+      "evidence": [
+        {
+          "id": "e-pipeline",
+          "observation": "Knowledge Constellation 定义 Pass A/B/C/D 与 deterministic Scene Composer 的语义边界。",
+          "source_ids": [
+            "kc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "kc",
+          "title": "Knowledge Constellation · SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "safe-markdown",
+      "name": "Markdown 输出边界",
+      "en": "Safe Markdown Boundaries",
+      "g": "agent",
+      "layer": "secondary",
+      "kind": "soft",
+      "size": 0.61,
+      "x": 845,
+      "y": 805,
+      "summary": "针对嵌套 fenced code blocks 的 fence collision，使用比内容最长反引号序列更长的外层 fence。",
+      "project": "Safe Markdown Output",
+      "anchor_id": "a-agent",
+      "evidence": [
+        {
+          "id": "e-safe",
+          "observation": "Safe Markdown Output README 给出最长反引号序列 + 1 的外层 fence 规则，并明确其适用边界。",
+          "source_ids": [
+            "safe"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "safe",
+          "title": "Safe Markdown Output · README"
+        }
+      ]
+    },
+    {
+      "id": "req-review-validate",
+      "name": "需求 · Review · 验证",
+      "en": "Requirement / Review / Validation",
+      "g": "agent",
+      "layer": "primary",
+      "kind": "soft",
+      "size": 0.86,
+      "x": 810,
+      "y": 615,
+      "summary": "学习记录把 AI Coding 中的需求、review、validation 标记为当前相对优势；GitHub 项目与 PR 中也反复出现范围、验收与实测闭环。",
+      "project": "Learning / GitHub",
+      "anchor_id": "a-agent",
+      "evidence": [
+        {
+          "id": "e-rrv",
+          "observation": "Learning 状态表将 AI Coding 的 Requirement / review / validation 标记为 understood、当前相对优势。",
+          "source_ids": [
+            "learn"
+          ]
+        },
+        {
+          "id": "e-rrv2",
+          "observation": "课刻和外部 PR 描述反复记录 scope、validation 与人工验收边界。",
+          "source_ids": [
+            "keke67",
+            "oss1271"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "learn",
+          "title": "Learning · learning-status.md (2026-08-08)"
+        },
+        {
+          "id": "keke67",
+          "title": "desktop-course-widget PR #67 · recoverable catalog mutations"
+        },
+        {
+          "id": "oss1271",
+          "title": "Fmarzochi/EGC PR #1271 · exactly-once session delivery"
+        }
+      ]
+    }
   ],
   "relations": [
-    {"source":"oss-p","target":"pr","kind":"practice","distance":92,"strength":0.18},
-    {"source":"oss-p","target":"test","kind":"repeated_context","distance":105,"strength":0.15},
-    {"source":"pr","target":"conc","kind":"practice","distance":88,"strength":0.10},
-    {"source":"test","target":"ci","kind":"practice","distance":82,"strength":0.10},
-    {"source":"product","target":"tauri","kind":"co_occurrence","distance":106,"strength":0.15},
-    {"source":"product","target":"rust","kind":"co_occurrence","distance":116,"strength":0.14},
-    {"source":"product","target":"ts","kind":"co_occurrence","distance":108,"strength":0.14},
-    {"source":"tauri","target":"ocr","kind":"practice","distance":84,"strength":0.09},
-    {"source":"webn","target":"browser","kind":"trajectory","distance":112,"strength":0.16},
-    {"source":"browser","target":"js","kind":"trajectory","distance":112,"strength":0.16},
-    {"source":"webn","target":"http","kind":"practice","distance":92,"strength":0.10},
-    {"source":"browser","target":"render-pipe","kind":"practice","distance":86,"strength":0.09},
-    {"source":"test","target":"product","kind":"repeated_context","distance":305,"strength":0.012}
+    {"source": "oss-core", "target": "pr-flow", "kind": "practice", "distance": 105, "strength": 0.18},
+    {"source": "oss-core", "target": "repro-debug", "kind": "repeated_context", "distance": 112, "strength": 0.17},
+    {"source": "pr-flow", "target": "regression-ci", "kind": "practice", "distance": 92, "strength": 0.14},
+    {"source": "repro-debug", "target": "concurrency-cas", "kind": "practice", "distance": 90, "strength": 0.11},
+    {"source": "repro-debug", "target": "cross-project", "kind": "repeated_context", "distance": 105, "strength": 0.1},
+    {"source": "7byte-core", "target": "motion-canvas", "kind": "practice", "distance": 112, "strength": 0.16},
+    {"source": "7byte-core", "target": "shot-qa", "kind": "practice", "distance": 105, "strength": 0.17},
+    {"source": "7byte-core", "target": "workflow-memory", "kind": "repeated_context", "distance": 100, "strength": 0.12},
+    {"source": "personal-web", "target": "transition-stability", "kind": "practice", "distance": 100, "strength": 0.11},
+    {"source": "shot-qa", "target": "personal-web", "kind": "shared_judgment", "distance": 125, "strength": 0.06},
+    {"source": "keke-core", "target": "tauri", "kind": "co_occurrence", "distance": 105, "strength": 0.16},
+    {"source": "keke-core", "target": "rust-local", "kind": "co_occurrence", "distance": 115, "strength": 0.17},
+    {"source": "keke-core", "target": "recoverable-data", "kind": "practice", "distance": 105, "strength": 0.15},
+    {"source": "rust-local", "target": "local-ocr", "kind": "practice", "distance": 90, "strength": 0.12},
+    {"source": "tauri", "target": "security-release", "kind": "practice", "distance": 95, "strength": 0.1},
+    {"source": "recoverable-data", "target": "security-release", "kind": "reliability", "distance": 110, "strength": 0.06},
+    {"source": "web-network", "target": "http-cache", "kind": "concept_cluster", "distance": 105, "strength": 0.16},
+    {"source": "web-network", "target": "web-security", "kind": "concept_cluster", "distance": 115, "strength": 0.13},
+    {"source": "web-network", "target": "browser-render", "kind": "learning_context", "distance": 120, "strength": 0.12},
+    {"source": "browser-render", "target": "js-dom", "kind": "trajectory", "distance": 118, "strength": 0.16},
+    {"source": "browser-render", "target": "layout-perf", "kind": "practice", "distance": 95, "strength": 0.12},
+    {"source": "agent-skill", "target": "evidence-attribution", "kind": "design_principle", "distance": 105, "strength": 0.17},
+    {"source": "agent-skill", "target": "knowledge-pipeline", "kind": "implementation_context", "distance": 108, "strength": 0.16},
+    {"source": "agent-skill", "target": "safe-markdown", "kind": "repeated_context", "distance": 120, "strength": 0.11},
+    {"source": "agent-skill", "target": "req-review-validate", "kind": "working_method", "distance": 108, "strength": 0.14},
+    {"source": "regression-ci", "target": "keke-core", "kind": "repeated_context", "distance": 350, "strength": 0.012},
+    {"source": "req-review-validate", "target": "keke-core", "kind": "repeated_context", "distance": 330, "strength": 0.012},
+    {"source": "req-review-validate", "target": "7byte-core", "kind": "repeated_context", "distance": 330, "strength": 0.01},
+    {"source": "browser-render", "target": "personal-web", "kind": "practice", "distance": 310, "strength": 0.012}
   ],
   "anchors": [
-    {"id":"a-oss","name":"开源协作","kind":"contribution_stream","nodes":["oss-p","pr","test","conc","ci"],"galaxies":["oss"],"g":"oss","role":"provenance","prominence":"medium","x":255,"y":155,"phaseOffset":0.4},
-    {"id":"a-desktop","name":"课刻","kind":"project","nodes":["product","tauri","rust","ts","ocr"],"galaxies":["desktop"],"g":"desktop","role":"provenance","prominence":"medium","x":760,"y":155,"phaseOffset":1.3},
-    {"id":"a-web","name":"Learning","kind":"learning_trajectory","nodes":["webn","browser","js","http","render-pipe"],"galaxies":["web"],"g":"web","role":"provenance","prominence":"medium","x":500,"y":490,"phaseOffset":2.1}
+    {"id": "a-oss", "name": "开源协作", "kind": "contribution_stream", "nodes": ["oss-core", "pr-flow", "repro-debug", "regression-ci", "concurrency-cas", "cross-project"], "galaxies": ["oss"], "g": "oss", "role": "provenance", "prominence": "medium", "x": 225, "y": 135, "phaseOffset": 0.35},
+    {"id": "a-7byte", "name": "7BYTE", "kind": "project", "nodes": ["7byte-core", "motion-canvas", "shot-qa", "workflow-memory"], "galaxies": ["creative"], "g": "creative", "role": "provenance", "prominence": "medium", "x": 600, "y": 35, "phaseOffset": 0.9},
+    {"id": "a-site", "name": "Tyr1onX.github.io", "kind": "project", "nodes": ["personal-web", "transition-stability"], "galaxies": ["creative"], "g": "creative", "role": "provenance", "prominence": "low", "x": 745, "y": 90, "phaseOffset": 1.3},
+    {"id": "a-keke", "name": "课刻", "kind": "project", "nodes": ["keke-core", "tauri", "rust-local", "recoverable-data", "local-ocr", "security-release"], "galaxies": ["keke"], "g": "keke", "role": "provenance", "prominence": "medium", "x": 995, "y": 125, "phaseOffset": 1.65},
+    {"id": "a-learning", "name": "Learning", "kind": "learning_trajectory", "nodes": ["web-network", "http-cache", "web-security", "browser-render", "js-dom", "layout-perf"], "galaxies": ["learning"], "g": "learning", "role": "provenance", "prominence": "medium", "x": 245, "y": 545, "phaseOffset": 2.25},
+    {"id": "a-agent", "name": "Agent Skills", "kind": "project_family", "nodes": ["agent-skill", "evidence-attribution", "knowledge-pipeline", "safe-markdown", "req-review-validate"], "galaxies": ["agent"], "g": "agent", "role": "provenance", "prominence": "medium", "x": 930, "y": 555, "phaseOffset": 2.85}
   ],
   "galaxies": [
-    {"id":"oss","name":"开源参与与工程流转","x":270,"y":255,"mass":0.86,"morphology":"compact","dominance":0.88,"anchor":"a-oss","primary_nodes":["oss-p","pr","test"],"secondary_nodes":["conc","ci"],"color":[171,201,235]},
-    {"id":"desktop","name":"课刻与桌面产品","x":730,"y":270,"mass":0.94,"morphology":"elongated","dominance":0.96,"anchor":"a-desktop","primary_nodes":["product","tauri","rust","ts"],"secondary_nodes":["ocr"],"color":[213,190,232]},
-    {"id":"web","name":"Web 基础补全","x":500,"y":590,"mass":0.82,"morphology":"stream","dominance":0.82,"anchor":"a-web","primary_nodes":["webn","browser","js"],"secondary_nodes":["http","render-pipe"],"color":[178,222,214]}
+    {"id": "oss", "name": "开源协作 · 调试与可靠性", "x": 235, "y": 285, "mass": 0.89, "morphology": "compact", "dominance": 0.9, "anchor": "a-oss", "primary_nodes": ["oss-core", "pr-flow", "repro-debug", "regression-ci"], "secondary_nodes": ["concurrency-cas", "cross-project"], "color": [171, 201, 235]},
+    {"id": "creative", "name": "程序化表达 · 交互与内容", "x": 610, "y": 185, "mass": 0.84, "morphology": "elongated", "dominance": 0.84, "anchor": "a-7byte", "primary_nodes": ["7byte-core", "motion-canvas", "shot-qa", "personal-web"], "secondary_nodes": ["workflow-memory", "transition-stability"], "color": [224, 194, 203]},
+    {"id": "keke", "name": "课刻 · 桌面产品工程", "x": 995, "y": 290, "mass": 0.99, "morphology": "compact", "dominance": 0.99, "anchor": "a-keke", "primary_nodes": ["keke-core", "tauri", "rust-local", "recoverable-data"], "secondary_nodes": ["local-ocr", "security-release"], "color": [213, 190, 232]},
+    {"id": "learning", "name": "Web / 网络基础学习", "x": 260, "y": 715, "mass": 0.88, "morphology": "stream", "dominance": 0.88, "anchor": "a-learning", "primary_nodes": ["web-network", "http-cache", "web-security", "browser-render"], "secondary_nodes": ["js-dom", "layout-perf"], "color": [178, 222, 214]},
+    {"id": "agent", "name": "Agent 工具 · 知识系统", "x": 930, "y": 705, "mass": 0.91, "morphology": "fragmented", "dominance": 0.91, "anchor": "a-agent", "primary_nodes": ["agent-skill", "evidence-attribution", "knowledge-pipeline", "req-review-validate"], "secondary_nodes": ["safe-markdown"], "color": [225, 199, 176]}
   ],
-  "motifs": []
+  "motifs": [
+    {"id": "validation-loop", "name": "验证闭环", "kind": "cross_cutting", "nodes": ["regression-ci", "repro-debug", "recoverable-data", "shot-qa", "req-review-validate"], "summary": "测试、真实环境复核、视觉 QA 与明确验收边界反复穿过不同项目。"},
+    {"id": "ai-assisted-workmode", "name": "AI 辅助工作方式", "kind": "provenance", "nodes": ["agent-skill", "workflow-memory", "req-review-validate"], "summary": "AI/Agent 是持续出现的工作方式与协作上下文；它作为 provenance/motif 存在，而不被单独当作“掌握某项知识”的证明。"}
+  ]
 }
