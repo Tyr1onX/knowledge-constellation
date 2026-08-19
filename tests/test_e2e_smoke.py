@@ -96,8 +96,13 @@ class E2ESmokeTests(unittest.TestCase):
             self.assertEqual("kc.scene.v1", scene["version"])
             self.assertEqual(["N1"], [node["id"] for node in scene["nodes"]])
             self.assertTrue((dist_dir / "index.html").exists())
+            self.assertTrue((dist_dir / "share.html").exists())
             self.assertTrue((dist_dir / "manifest.json").exists())
             self.assertTrue((dist_dir / "renderer" / "runtime.js").exists())
+            share = (dist_dir / "share.html").read_text(encoding="utf-8")
+            self.assertIn("window.__KC_SCENE__", share)
+            self.assertIn("/renderer/runtime.js", share)
+            self.assertNotIn("<svg", share.lower())
             self.assertEqual("complete", json.loads((run_dir / "state.json").read_text(encoding="utf-8"))["status"])
 
 
