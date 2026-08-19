@@ -119,6 +119,9 @@ def semantic_errors(stage, data, upstream):
             if unknown:
                 errors.append(f"{priority.get('id')}: unknown requirement ids {sorted(unknown)}")
                 continue
+            repeated = pids & used_requirements
+            if repeated:
+                errors.append(f"{priority.get('id')}: requirement ids already covered by an earlier priority {sorted(repeated)}")
             used_requirements |= pids
             eligibility = sorted(rid for rid in pids if requirements[rid].get("kind") == "eligibility")
             if eligibility:
@@ -136,6 +139,21 @@ def semantic_errors(stage, data, upstream):
             errors.append(f"unknown deferred requirement ids {sorted(unknown_deferred)}")
         if deferred & used_requirements:
             errors.append(f"requirements cannot be both priority and deferred: {sorted(deferred & used_requirements)}")
+        invalid_deferred = {
+            rid for rid in deferred
+            if rid in gap_by_requirement and gap_by_requirement[rid].get("status") in {"supported", "not_applicable"}
+        }
+        if invalid_deferred:
+            errors.append(f"supported/not_applicable requirements should not be deferred: {sorted(invalid_deferred)}")
+
+        actionable = {
+            rid for rid, requirement in requirements.items()
+            if requirement.get("kind") != "eligibility"
+            and gap_by_requirement.get(rid, {}).get("status") in {"partial", "unresolved", "not_observed"}
+        }
+        unaccounted = actionable - used_requirements - deferred
+        if unaccounted:
+            errors.append(f"every actionable gap must be prioritized or explicitly deferred: {sorted(unaccounted)}")
 
         constraint_ids = [item.get("requirement_id") for item in data.get("non_learning_constraints", [])]
         if duplicates(constraint_ids):
