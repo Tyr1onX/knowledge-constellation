@@ -14,6 +14,10 @@
 - [`knowledge-growth.md`](knowledge-growth.md) — 节点数量、overview density 与自然 Semantic Zoom 规则。
 - [`calibration-loop.md`](calibration-loop.md) — 用户自然语言反馈如何作为新的第一方 Source 进入完整重跑，而不是直接改 Scene。
 
+## Goal / Growth
+
+- [`goal-gap-loop.md`](goal-gap-loop.md) — 从 Current Capability 到目标要求、Gap 与下一步 1–3 个行动的产品闭环。
+
 ## Product / Visual
 
 - [`personal-universe.md`](personal-universe.md) — Identity Presence、Project Anchor 与个人宇宙产品规则。
