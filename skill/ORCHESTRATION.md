@@ -46,6 +46,29 @@ Codex output fails validation
 
 Recommended retry budget: at most 2 repair attempts per pass. If still invalid, preserve the last valid upstream artifact and return a structured failure instead of manufacturing content.
 
+## Calibration loop
+
+After a user has seen an accepted result, natural-language corrections or representativeness feedback must enter as new Source evidence rather than as direct edits to semantic or visual artifacts.
+
+```text
+COMPLETED_RUN
+  + user feedback
+  ↓
+APPEND kind=user_calibration SOURCE
+  ↓
+NEW PASS_A_EVIDENCE
+  ↓
+PASS_B_MODEL → PASS_C_STRUCTURE → PASS_D_VISUAL
+  ↓
+DETERMINISTIC_SCENE_COMPOSER
+  ↓
+RENDER NEW REVISION
+```
+
+Use `harness/recalibrate.py` to create this revision when the repository runtime is available. It starts from the prior run's accepted `input.json`, appends the subject's feedback as a first-party Source, then launches a fresh E2E run. It must never patch the previous accepted Model, Structure, Visual Model, or Scene in place.
+
+Truth corrections and identity/representativeness corrections are semantically different: feedback such as “AI did this part” may constrain attribution and capability Claims; feedback such as “this project matters more to me” may change representativeness and display priority but cannot upgrade capability truth.
+
 ## Gold isolation
 
 Test-only baselines may exist under `tests/baselines/`, but they are forbidden runtime inputs. The Codex execution packet must never include or reference them. They are used only after a completed run for external acceptance comparison.

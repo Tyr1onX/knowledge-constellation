@@ -14,6 +14,8 @@ Send this repository URL to Codex and say: **“Install this Skill for me.”**
 
 After installation, give Codex material about you and say: **“Use Knowledge Constellation to generate my knowledge constellation.”** Codex handles the rest.
 
+If something looks wrong after generation, just tell Codex. Your feedback is added as new first-party evidence and the constellation is recalibrated; you do not need to edit JSON or nodes yourself.
+
 ## The constellation
 
 **Stars** represent knowledge and experience, **galaxies** bring related themes together, and **project anchors** show where those parts of the universe came from.

@@ -12,6 +12,7 @@
 
 - [`clean-room-evaluation.md`](clean-room-evaluation.md) — clean-room Runner + External Auditor 评测协议。
 - [`knowledge-growth.md`](knowledge-growth.md) — 节点数量、overview density 与自然 Semantic Zoom 规则。
+- [`calibration-loop.md`](calibration-loop.md) — 用户自然语言反馈如何作为新的第一方 Source 进入完整重跑，而不是直接改 Scene。
 
 ## Product / Visual
 
@@ -24,6 +25,6 @@
 
 - [`milestones/v0.4-recognition-hardening-10-user.md`](milestones/v0.4-recognition-hardening-10-user.md) — 10-user Recognition Hardening gate。
 - [`milestones/v0.5-e2e-runtime-foundation.md`](milestones/v0.5-e2e-runtime-foundation.md) — E2E Runner / Scene / Runtime 基础。
-- [`milestones/v0.6-blind-codex-visual-validation.md`](milestones/v0.6-blind-codex-visual-validation.md) — 新 Codex 使用自然一句话完成安装、生成并通过人工视觉验收的 checkpoint。
+- [`milestones/v0.6-blind-codex-visual-validation.md`](milestones/v0.6-blind-codex-visual-validation.md) — 一句话 blind Codex 生成与人工视觉验收 checkpoint。
 
 > 当文档与代码或契约发生冲突时，优先级为：`SKILL.md` → `contracts/` / `prompts/` → 当前 Harness / Renderer → 本目录说明文档。
