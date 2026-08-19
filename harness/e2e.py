@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PIPELINE = ROOT / "harness" / "pipeline.py"
 COMPOSER = ROOT / "harness" / "compose_scene.py"
 BUILDER = ROOT / "harness" / "build_site.py"
+DELIVERY_VERIFIER = ROOT / "harness" / "verify_delivery.py"
 
 
 def run_json(cmd, *, cwd=None, env=None):
@@ -109,6 +110,17 @@ def build_site(scene, dist_dir):
         raise RuntimeError("Site builder failed")
 
 
+def verify_delivery(run_dir, dist_dir):
+    accepted_input = run_dir / "accepted" / "input.json"
+    proc, payload = run_json([
+        sys.executable, str(DELIVERY_VERIFIER),
+        "--input", str(accepted_input),
+        "--dist", str(dist_dir),
+    ])
+    if proc.returncode != 0:
+        raise RuntimeError("Delivery verification failed:\n" + json.dumps(payload, ensure_ascii=False, indent=2))
+
+
 def main():
     ap = argparse.ArgumentParser(description="Run Knowledge Constellation from accepted raw input to an interactive v0.1 site.")
     ap.add_argument("--input", required=True, help="Input JSON matching contracts/input.schema.json")
@@ -128,6 +140,7 @@ def main():
     semantic_loop(run_dir, args.runner_command)
     scene = compose(run_dir, dist_dir)
     build_site(scene, dist_dir)
+    verify_delivery(run_dir, dist_dir)
     print(json.dumps({
         "status": "complete",
         "run": str(run_dir),
