@@ -1,6 +1,6 @@
 ---
 name: knowledge-constellation
-description: Build an evidence-grounded personal knowledge universe from GitHub, projects, resumes, learning records, pull requests, notes, and other user-provided or public material. Use when the user asks to understand, visualize, or generate a personal knowledge constellation; preserve attribution and never inflate dependencies, participation, learning, or AI-assisted work into mastery.
+description: Build an evidence-grounded personal knowledge universe from GitHub, projects, resumes, learning records, pull requests, notes, and other user-provided or public material. Use when the user asks to understand, visualize, generate, calibrate, or grow a personal knowledge constellation, or compare current evidence against a concrete goal; preserve attribution and never inflate dependencies, participation, learning, or AI-assisted work into mastery.
 ---
 
 # Knowledge Constellation Skill
@@ -162,6 +162,63 @@ The first passive result must be useful without asking questions. Optional later
 1. Truth Calibration — who did what, independence, understanding.
 2. Identity Calibration — what feels most representative.
 Identity Calibration may alter representativeness and display priority, but must not upgrade capability Claims.
+
+User feedback should enter as new first-party Source material and trigger a fresh Recognition revision. Do not patch Model, Structure, Visual, or Scene directly just to satisfy the feedback.
+
+## Goal / Gap mode
+
+After a useful Current Universe exists, the user may state a concrete goal in ordinary language, for example:
+
+> “我想找 Linux / C++ 后端实习。”
+
+Goal planning is a **second semantic pipeline**, not a rewrite of the Current Universe.
+
+```text
+Completed Current Recognition
++
+Goal + target-side sources
+→ Pass E Target Model
+→ Pass F Current-to-Target Gap
+→ Pass G Next 1–3 Steps
+```
+
+### Target independence
+
+Pass E must model the target from the stated goal and target-side sources only. It must not read the person's current Recognition Model. Otherwise the system can silently move the goalposts toward what the person already knows.
+
+If the user provides a specific job description, use it as a primary target source. If the goal is broad and the environment allows current public research, gather a small set of high-quality, current target-side sources and normalize them into `contracts/goal-input.schema.json`. Do not turn generic associations such as “backend usually uses X” into requirements without source support.
+
+### Gap is evidence coverage, not a deficit score
+
+Pass F compares accepted Target Requirements against accepted current Evidence / Claims / Nodes.
+
+Use:
+- `supported` when current evidence materially supports the requirement;
+- `partial` when a real foothold exists but the target asks for stronger depth, dimension, context, or transfer;
+- `unresolved` when current material cannot decide;
+- `not_observed` when the available material contains no direct evidence;
+- `not_applicable` only when the target requirement does not apply after source-grounded interpretation.
+
+`not_observed` means **not observed in the available evidence**, never “the person cannot do it”. Do not invent missing-skill Claims or new current Knowledge Nodes inside the Gap pass.
+
+### Next step is not a generic roadmap
+
+Pass G returns only **1–3 priorities**. Each priority must connect:
+- one or more accepted target requirements;
+- an existing evidence-backed foothold when one exists;
+- a concrete action;
+- an explanation of why it deserves attention now;
+- observable future evidence that would demonstrate progress.
+
+Do not produce a complete curriculum merely because many target requirements exist. Lower-priority items may remain deferred.
+
+Eligibility constraints such as degree, location, work authorization, or availability are not learning topics. Surface unresolved eligibility separately under `non_learning_constraints`.
+
+Planning never upgrades current capability truth. A plan may say what to do next; only new Source / Evidence entering a later Recognition revision can change the Current Universe.
+
+Use `harness/goal_pipeline.py` for isolated Pass E/F/G execution, or `harness/goal_e2e.py` when a separate semantic runner is available. Follow `skill/GOAL_ORCHESTRATION.md` and the target/gap/plan contracts.
+
+At the current product stage, Goal / Gap results remain a semantic companion to the accepted constellation. Do not modify the canonical Renderer to visualize a Target Universe until the Target/Gap/Plan semantics pass human validation.
 
 ## Product language
 Internal ids such as S2, E4, or C-rust-exposure are valid for audit files but should not appear on the ordinary product surface.
