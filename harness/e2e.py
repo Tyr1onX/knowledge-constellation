@@ -133,6 +133,7 @@ def main():
         "run": str(run_dir),
         "scene": str(scene),
         "site": str(dist_dir / "index.html"),
+        "share": str(dist_dir / "share.html"),
         "serve": f"{sys.executable} -m http.server 8000 --directory {shlex.quote(str(dist_dir))}",
     }, ensure_ascii=False, indent=2))
 
