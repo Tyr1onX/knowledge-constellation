@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "subject_id", "goal", "target_sources"],
+  "properties": {
+    "version": {"const": "kc.goal-input.v1"},
+    "subject_id": {"type": "string", "minLength": 1},
+    "goal": {
+      "type": "object",
+      "required": ["id", "label", "statement", "constraints"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "statement": {"type": "string", "minLength": 1},
+        "horizon": {"type": ["string", "null"]},
+        "constraints": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "target_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "title", "content"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "uri": {"type": ["string", "null"]},
+          "content": {"type": "string", "minLength": 1},
+          "observed_at": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}
